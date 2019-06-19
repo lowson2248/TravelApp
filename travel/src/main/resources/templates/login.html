@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>ログイン</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+</head>
+<body>
+<div class="content">
+  <p class="title">旅行計画アプリ</p>
+  <div class="main">
+    <div class="btn">
+      <a class="regist" th:href="@{/regist/registEmail}">登録</a>
+      <a class="login" href="login.html">ログイン</a>
+    </div>
+      <p>メールアドレスとパスワードを入力してください！！</p>
+      <form class="form" action="post">
+          <p class="email">Email</p>
+            <p class="email"><input type="text" name="email" placeholder="Email Address" /></p>
+          <p class="password">Password</p>
+            <p class="password"><input type="password" name="password" placeholder="Password" /></p>
+          <p><input type="submit" class="submit" value="ログイン" /></p>
+      </form>
+  </div>
+</div>
+</body>
+</html>
