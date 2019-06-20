@@ -26,7 +26,7 @@ public class Schedule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sc_id", nullable = false, precision = 11)
-	private Integer sc_id;
+	private Integer scId;
 	
 	//プロジェクトID
 	@ManyToOne
@@ -35,7 +35,7 @@ public class Schedule {
 	
 	//スケジュール名
 	@Column(name = "sc_name", length = 100, nullable=false)
-	private String sc_name;//max:100
+	private String scName;//max:100
 	
 	//カテゴリID
 	@OneToOne
@@ -46,16 +46,15 @@ public class Schedule {
 	@JsonIgnore
 	@DateTimeFormat(pattern = "MM-dd HH:mm")
 	@Column(name = "start_time",nullable=false)
-	private Date start_time;//日付と日次
+	private Date startTime;//日付と日次
 	
 	//スケジュールの終了時間
 	@JsonIgnore
 	@DateTimeFormat(pattern = "MM-dd HH:mm")
 	@Column(name = "last_time",nullable=false)
-	private Date last_time;//start_timeと同様
+	private Date lastTime;//start_timeと同様
 	
 	//スケジュールの詳細
 	@Column(name = "details", length = 200)
 	private String details;//max:200 default:説明なし
-	
 }

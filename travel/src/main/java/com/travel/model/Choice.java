@@ -24,7 +24,7 @@ public class Choice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "choice_id", nullable = false, precision = 11)
-	private Integer choice_id;
+	private Integer choiceId;
 	
 	//質問のID
 	@ManyToOne
@@ -33,7 +33,7 @@ public class Choice {
 	
 	//選択肢の内容
 	@Column(name = "choice_text", length = 100, nullable=false)
-	private String choice_text;//max:100
+	private String choiceText;//max:100
 	
 	//answerとの紐づけ
 	@JsonIgnore

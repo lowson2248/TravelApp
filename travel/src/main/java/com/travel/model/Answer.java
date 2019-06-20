@@ -23,7 +23,7 @@ public class Answer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "answer_id", nullable = false, precision = 11)
-	private Integer answer_id;
+	private Integer answerId;
 	
 	//質問ID 
 	@OneToOne
