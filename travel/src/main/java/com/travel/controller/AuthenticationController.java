@@ -42,7 +42,7 @@ public class AuthenticationController {
 	@PostMapping("/regist/registUser")
 	public String create(@Validated UserForm form, BindingResult bindingResult) {
 		User user = new User();
-		user.setName(form.getUserName());
+		user.setAccount_name(form.getUserName());
 		return null;
 	}
 	

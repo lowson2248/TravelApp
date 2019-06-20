@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -50,13 +48,15 @@ public class Question {
 	private Date limit_time;//DATETIME
 	
 	//解答期限を過ぎているか判別
-	@Column(name = "ansewr_fin")
-	private boolean ansewr_fin; //default:FALSE
+	@Column(name = "answer_fin")
+	private boolean answer_fin; //default:FALSE
 	
+	//answerとの紐づけ
 	@JsonIgnore
 	@OneToOne(mappedBy = "question")
 	private Answer answer;
 	
+	//choiceとの紐づけ
 	@JsonIgnore
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Choice> choiceList;
