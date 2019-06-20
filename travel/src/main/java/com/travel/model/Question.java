@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,8 +32,9 @@ public class Question {
 	private Integer question_id;
 	
 	//プロジェクトID
-//	@JoinColumn(name = "project_id",nullable=false)
-//	private Integer project_id;//FK
+	@ManyToOne
+	@JoinColumn(name = "project_id",nullable=false)
+	private Project project;//FK
 	
 	//質問名
 	@Column(name = "title", length = 100, nullable=false)
@@ -58,6 +61,6 @@ public class Question {
 	
 	//choiceとの紐づけ
 	@JsonIgnore
-	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "question")
 	private List<Choice> choiceList;
 }

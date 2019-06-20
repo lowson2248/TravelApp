@@ -64,4 +64,8 @@ public class Project {
 	@JsonIgnore
 	@OneToMany(mappedBy = "project")
 	private List<Schedule> scheduleList;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "project")
+	private List<Question> questionList;
 }
