@@ -37,7 +37,7 @@ public class User {
 	
 	
 	//パスワード
-	@Size(min = 1, max = 30, message = "1~30文字で入力してください。")
+	@Size(min = 1, max = 100, message = "1~30文字で入力してください。")
 	@JsonIgnore
 	@Column(name = "password", length = 30, nullable=false)
 	private String password;

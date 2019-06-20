@@ -14,7 +14,7 @@
       <a class="login" href="login.html">ログイン</a>
     </div>
       <p>メールアドレスとパスワードを入力してください！！</p>
-      <form class="form" action="post">
+      <form class="form" method="POST" th:action="@{/login}">
           <p class="email">Email</p>
             <p class="email"><input type="text" name="email" placeholder="Email Address" /></p>
           <p class="password">Password</p>

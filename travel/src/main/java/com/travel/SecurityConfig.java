@@ -2,6 +2,7 @@ package com.travel;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,10 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
+import com.travel.service.LoginUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+	LoginUserDetailsService loginUserDetailsService;
 	//全体に関する設定
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -38,9 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             //ログインに失敗したときのURL
             .failureUrl("/login?error")
             //認証に成功したらアクセスするURL
-//            .defaultSuccessUrl("/customers", true)
+            .defaultSuccessUrl("/regist/regist", true)
             //ログイン画面のhtmlのinputのname属性を見に行っている
-            .usernameParameter("username").passwordParameter("password")
+            .usernameParameter("email").passwordParameter("password")
             .and()
             .logout()
     		//ログアウト成功したときのURL
@@ -52,4 +56,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     	//パスワードをhash化アルゴリズムでhash化
         return new Pbkdf2PasswordEncoder();
     }
+
 }
