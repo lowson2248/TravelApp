@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
     		//"/login.htmlはどのユーザもアクセスできる"
             .antMatchers("/login").permitAll()
-            .antMatchers("/regist/registEmail").permitAll()
+            .antMatchers("/regist/**").permitAll()
             //それ以外のパスにはアクセスできなくする
             .anyRequest().authenticated()
             .and()
