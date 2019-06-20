@@ -37,7 +37,7 @@ VALUES
 
 INSERT IGNORE INTO `users` (`user_id`,`account_name`,`password`,`mailAddress`)
 VALUES
-(1,'travel','travel','meatkun@naruo.jp');
+(1,'travel','5333a2b2c761c931aaf51e6cc2f165dd2fb731cfbfcf8be858e39df99b77f421988963284ff04f78','meatkun@naruo.jp');
 
 
 
