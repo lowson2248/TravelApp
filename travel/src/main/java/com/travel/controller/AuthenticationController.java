@@ -31,6 +31,12 @@ public class AuthenticationController {
 		return modelAndView;
     }
 	
+	@PostMapping("/email/send")
+	public String aaa(String email) {
+		System.out.println("aaaaa");
+		return "regist/regist2";
+	}
+	
 	@GetMapping("/regist/registEmail")
 	public ModelAndView registEmail() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -51,9 +57,16 @@ public class AuthenticationController {
 	    }
 		System.out.println("form = " + form.getUsername() + form.getPassword());
 		User user = new User();
-		user.setMailAddress("rsasaki");
+		user.setMailAddress("travel@tcmobile.jp");
 		user.setAccount_name(form.getUsername());
 		userService.createUser(user, form.getPassword());
 		return "login";
+	}
+	
+	@GetMapping("/project/projectSelect")
+	public ModelAndView moveProject() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("project/projectSelect");
+		return modelAndView;
 	}
 }

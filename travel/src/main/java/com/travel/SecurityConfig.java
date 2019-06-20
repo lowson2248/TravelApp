@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
     		//"/login.htmlはどのユーザもアクセスできる"
             .antMatchers("/login").permitAll()
-            .antMatchers("/regist/**").permitAll()
+            .antMatchers("/regist/registEmail").permitAll()
             //それ以外のパスにはアクセスできなくする
             .anyRequest().authenticated()
             .and()
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             //ログインに失敗したときのURL
             .failureUrl("/login?error")
             //認証に成功したらアクセスするURL
-            .defaultSuccessUrl("/regist/regist", true)
+            .defaultSuccessUrl("/project/projectSelect", true)
             //ログイン画面のhtmlのinputのname属性を見に行っている
             .usernameParameter("email").passwordParameter("password")
             .and()

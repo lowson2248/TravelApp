@@ -23,7 +23,7 @@ public class UserServiceImp implements UserService{
 	
 	public void createUser(User user, String rawPassword) {
 		String encodedPassword = passwordEncoder.encode(rawPassword);
-		user.setPassword(rawPassword);
+		user.setPassword(encodedPassword);
 		userRepository.saveAndFlush(user);
 	}
 }
