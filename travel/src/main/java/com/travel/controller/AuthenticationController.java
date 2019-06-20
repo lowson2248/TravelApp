@@ -1,5 +1,6 @@
 package com.travel.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -10,10 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.travel.model.User;
 import com.travel.model.UserForm;
+import com.travel.service.UserService;
 
 @Controller
 public class AuthenticationController {
 
+	@Autowired
+	UserService userService;
+	
 	@ModelAttribute
     public UserForm setupForm() {
         return new UserForm();
@@ -41,10 +46,14 @@ public class AuthenticationController {
 	}
 	@PostMapping("/regist/registUser")
 	public String create(@Validated UserForm form, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+	        return "login";
+	    }
+		System.out.println("form = " + form.getUsername() + form.getPassword());
 		User user = new User();
-		user.setAccount_name(form.getUserName());
-		return null;
+		user.setMailAddress("rsasaki");
+		user.setAccount_name(form.getUsername());
+		userService.createUser(user, form.getPassword());
+		return "login";
 	}
-	
-	
 }

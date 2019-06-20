@@ -12,8 +12,8 @@ public class UserForm implements Serializable{
 
 	@NotNull
     @Size(min = 1, max = 50)
-    private String userName;
+    private String username;
     @NotNull
     @Size(min = 1, max = 100)
-    private String passWord;
+    private String password;
 }

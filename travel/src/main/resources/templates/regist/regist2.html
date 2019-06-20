@@ -14,8 +14,8 @@
     <a class="login" th:href="@{/login.html}">ログイン</a>
     </div>
       <p>ユーザーネームとパスワードを設定してください</p>
-      <form th:action="post" class="form" method="post">
-          <p>Email</p>
+      <form th:action="@{/regist/registUser}" class="form" method="post">
+          <p>UserName</p>
             <p class="username"><input type="text" name="username" placeholder="Your Name" /></p>
           <p>Password</p>
             <p class="password"><input type="password" name="password" placeholder="Password" /></p>
