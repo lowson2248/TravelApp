@@ -23,15 +23,15 @@ public class Member {
 
 	//権限の指定
 	@Column(name = "auth_id", nullable=false)
-	private Integer auth_id;//FK
+	private Integer authId;//FK
 	
 	
 	//project_idとuser_idの複合主キー
 	@Data
 	public class MemberId implements Serializable {
 	    @JoinColumn(name = "project_id", nullable=false)
-		private Integer project_id;//複合主キー FK
+		private Integer projectId;//複合主キー FK
 	    @JoinColumn(name = "user_id", nullable=false)
-		private Integer user_id;//複合主キー FK
+		private Integer userId;//複合主キー FK
 	}
 }

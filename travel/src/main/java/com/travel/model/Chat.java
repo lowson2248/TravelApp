@@ -28,7 +28,7 @@ public class Chat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "chat_id", nullable = false, precision = 11)
-	private Integer chat_id;
+	private Integer chatId;
 	
 	//プロジェクトID
 	@OneToOne 
@@ -52,5 +52,5 @@ public class Chat {
 	@JsonIgnore
 	@DateTimeFormat(pattern = "YYYY-MM-dd HH:mm")
 	@Column(name = "send_time",nullable=false)
-	private Date send_time;//TimeStamp 日付・時間
+	private Date sendTime;//TimeStamp 日付・時間
 }

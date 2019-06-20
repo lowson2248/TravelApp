@@ -29,7 +29,7 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "question_id", nullable = false, precision = 11)
-	private Integer question_id;
+	private Integer questionId;
 	
 	//プロジェクトID
 	@ManyToOne
@@ -42,17 +42,17 @@ public class Question {
 	
 	//質問の説明
 	@Column(name = "question_detail", length = 100)
-	private String question_detail;//max: 100 default:説明なし
+	private String questionDetail;//max: 100 default:説明なし
 	
 	//設問の解答期限
 	@JsonIgnore
 	@DateTimeFormat(pattern = "MM-dd HH:mm")//年も必要？
 	@Column(name = "limit_time",nullable=false)
-	private Date limit_time;//DATETIME
+	private Date limitTime;//DATETIME
 	
 	//解答期限を過ぎているか判別
 	@Column(name = "answer_fin")
-	private boolean answer_fin; //default:FALSE
+	private boolean answerFin; //default:FALSE
 	
 	//answerとの紐づけ
 	@JsonIgnore

@@ -20,11 +20,11 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id", nullable = false, precision = 11)
-	private Integer category_id;
+	private Integer categoryId;
 	
 	//カテゴリー名
 	@Column(name = "category_name", length = 50, nullable=false)
-	private String category_name;
+	private String categoryName;
 	
 	//スケジュールとの紐づけ
 	@JsonIgnore
