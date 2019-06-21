@@ -9,4 +9,5 @@ import com.travel.model.Chat;
 
 public interface ChatRepository extends JpaRepository<Chat, Integer> {
 	public List<Chat> findAll();
+	public List<Chat> findByChatId(Integer chatId);
 }

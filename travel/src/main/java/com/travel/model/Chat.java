@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -21,7 +22,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name = "chats")
@@ -33,17 +38,14 @@ public class Chat {
 	private Integer chatId;
 	
 	//プロジェクトID
-	@OneToOne 
+	@ManyToOne 
 	@JoinColumn(name = "project_id",nullable=false)
 	private Project project;//FK
 	
 	//ユーザーID
-	@ManyToMany
-	@JoinTable(
-			name = "chuser_id",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "chat_id"))
-	private List<User> userList;//FK
+	@ManyToOne
+	@JoinColumn(name = "user_id",nullable=false)
+	private User user;//FK
 	
 	//チャット内容
 	@Size(min = 1, max = 100)

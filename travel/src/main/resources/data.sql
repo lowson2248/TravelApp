@@ -1,8 +1,8 @@
 INSERT IGNORE INTO `categories` (`category_id`,`category_name`)
 VALUES(1,'食事'),(2,'移動'),(3,'買い物'),(4,'準備'),(5,'レジャー'),(6,'観光'),(7,'就寝'),(8,'その他');
 
-INSERT IGNORE INTO `chats` (`chat_id`,`send_time`,`text`,project_id)
-VALUES(1,'2111-01-01 12:10:10','test',1),(2,'2111-01-01 12:10','test',2),(3,'2111-01-01 12:10','test',4);
+INSERT IGNORE INTO `chats` (`chat_id`,`send_time`,`text`,`project_id`,`user_id`)
+VALUES(1,'2111-01-01 12:10:10','test',1,1),(2,'2111-01-01 12:10','test',2,2),(3,'2111-01-01 12:10','test',2,1);
 
 
 INSERT IGNORE INTO `projects` (`project_id`,`created_date`,`last_date`,`project_name`,`start_date`,`user_id`)
@@ -38,6 +38,3 @@ VALUES
 INSERT IGNORE INTO `users` (`user_id`,`account_name`,`password`,`mailAddress`)
 VALUES
 (1,'travel','travel','meatkun@naruo.jp');
-
-
-

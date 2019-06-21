@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -47,7 +48,7 @@ public class Project {
 	
 	//プロジェクトを作成者のuser_id
 	@JoinColumn(name = "user_id",nullable=false)
-	@OneToOne
+	@ManyToOne
 	private User user;
 	
 	//プロジェクト作成日
@@ -57,8 +58,8 @@ public class Project {
 	
 	//chatとの紐づけ
 	@JsonIgnore
-	@OneToOne(mappedBy = "project")
-	private Chat chat;
+	@OneToMany(mappedBy = "project")
+	private List<Chat> chatList;
 	
 	//scheduleとの紐づけ
 	@JsonIgnore

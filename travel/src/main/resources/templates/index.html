@@ -23,6 +23,9 @@
                     <th>Message</th>
                 </tr>
                 </thead>
+                <div th:each="chat : ${chatList}">
+                <p th:text="${chat.text}"></p>
+                <div>
                 <tbody id="greetings">
                 </tbody>
             </table>
