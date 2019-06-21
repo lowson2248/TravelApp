@@ -65,7 +65,7 @@ public class AuthenticationController {
 		System.out.println("form = " + mailAddress);
 		User user = new User();
 		user.setMailAddress(mailAddress);
-		user.setAccount_name(form.getUsername());
+		user.setAccountName(form.getUsername());
 		userService.createUser(user, form.getPassword());
 		return "login";
 	}
