@@ -49,9 +49,10 @@ public class ProjectController {
 		return mav;
 	}
 	
+	//プロジェクト編集画面表示処理
 	@GetMapping(value = {"/project/edit"})
 	public ModelAndView showEditProject(ModelAndView mav) {
-		mav.setViewName("addProject");
+		mav.setViewName("project/projectEdit");//projectEdit.htmlは未実装
 		return mav;
 	}
 	
