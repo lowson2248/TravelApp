@@ -62,7 +62,8 @@ public class AuthenticationController {
 		if (bindingResult.hasErrors()) {
 	        return "login";
 	    }
-		System.out.println("form = " + mailAddress);
+		
+		//mailAddressが変な奴だとエラーでるのでとりあえずJSでバリデートしてほしい
 		User user = new User();
 		user.setMailAddress(mailAddress);
 		user.setAccountName(form.getUsername());
