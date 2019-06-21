@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.travel.service.LoginUserDetailsService;
 
@@ -43,11 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             //ログインに失敗したときのURL
             .failureUrl("/login?error")
             //認証に成功したらアクセスするURL
-            .defaultSuccessUrl("/project/projectSelect", true)
+            .defaultSuccessUrl("/project/select", true)
             //ログイン画面のhtmlのinputのname属性を見に行っている
             .usernameParameter("email").passwordParameter("password")
             .and()
             .logout()
+            //ログアウトURL
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
     		//ログアウト成功したときのURL
             .logoutSuccessUrl("/login");
     }
