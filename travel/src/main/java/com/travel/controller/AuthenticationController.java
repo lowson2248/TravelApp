@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.travel.model.User;
@@ -18,6 +19,8 @@ public class AuthenticationController {
 
 	@Autowired
 	UserService userService;
+	
+	private String mailAddress;
 	
 	@ModelAttribute
     public UserForm setupForm() {
@@ -44,20 +47,24 @@ public class AuthenticationController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/regist/registUser")
-	public ModelAndView registUser() {
+	@GetMapping(path = "/regist/registUser",params = "mail")
+	public ModelAndView registUser(@RequestParam("mail") String mail) {
+		System.out.println(mail);
+		mailAddress = mail;
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("regist/regist2");
+		
 		return modelAndView;
 	}
-	@PostMapping("/regist/registUser")
-	public String create(@Validated UserForm form, BindingResult bindingResult) {
+	@PostMapping(path = "/regist/registUser")
+	public String create(@Validated UserForm form,
+				BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 	        return "login";
 	    }
-		System.out.println("form = " + form.getUsername() + form.getPassword());
+		System.out.println("form = " + mailAddress);
 		User user = new User();
-		user.setMailAddress("travel@tcmobile.jp");
+		user.setMailAddress(mailAddress);
 		user.setAccount_name(form.getUsername());
 		userService.createUser(user, form.getPassword());
 		return "login";
