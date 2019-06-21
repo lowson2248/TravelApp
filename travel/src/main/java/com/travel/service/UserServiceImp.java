@@ -3,6 +3,7 @@ package com.travel.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,16 @@ public class UserServiceImp implements UserService{
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	BCryptPasswordEncoder passwordEncoder;
 	
 	public void createUser(User user, String rawPassword) {
-		String encodedPassword = passwordEncoder.encode(rawPassword);
-		user.setPassword(encodedPassword);
-		userRepository.saveAndFlush(user);
+//		System.out.println(userRepository.findByMailAddress(user.getMailAddress()));
+		if(userRepository.findByMailAddress(user.getMailAddress()) != null) {
+			System.out.println("もう使ってるよ");
+		}else {
+			String encodedPassword = passwordEncoder.encode(rawPassword);
+			user.setPassword(encodedPassword);
+			userRepository.saveAndFlush(user);
+		}
 	}
 }
