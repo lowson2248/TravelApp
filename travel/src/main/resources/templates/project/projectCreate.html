@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>新規プロジェクト作成</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+</head>
+<div class="project-create">
+  <p class="font">プロジェクト新規作成</p>
+  <form action="post" class="create-form">
+      <p>プロジェクト名</p>
+        <p><input type="text" class="project-name" name="project-name" placeholder="" /></p>
+  <hr>
+      <p>日程</p>
+      <p>始まり</p>
+        <p><input type="date" class="date" name="date" placeholder="" /></p>
+      <p>終わり</p>
+        <p><input type="date" class="date" name="date" placeholder="" /></p>
+  <hr>
+        <p><input type="submit" class="create" value="プロジェクト作成" /></p>
+  </form>
+</div>
+
+</html>
