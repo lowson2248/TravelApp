@@ -60,8 +60,8 @@ public class User {
 	
 	//projectとの紐づけ
 	@JsonIgnore
-	@OneToOne(mappedBy = "user")
-	private Project project;
+	@OneToMany(mappedBy = "user")
+	private List<Project> project;
 	
 	//chatとの紐づけ
 	@JsonIgnore

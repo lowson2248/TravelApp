@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -47,7 +49,7 @@ public class Project {
 	
 	//プロジェクトを作成者のuser_id
 	@JoinColumn(name = "user_id",nullable=false)
-	@OneToOne
+	@ManyToOne
 	private User user;
 	
 	//プロジェクト作成日
