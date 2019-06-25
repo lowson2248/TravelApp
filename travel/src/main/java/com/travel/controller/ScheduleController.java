@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.travel.model.Event;
 import com.travel.model.Schedule;
 
 import lombok.RequiredArgsConstructor;
@@ -19,17 +20,21 @@ public class ScheduleController {
 	
 	@GetMapping("/schedule")
 	public ModelAndView showScedule() {
-		return new ModelAndView("redirect:/scedule/top");
+		return new ModelAndView("redirect:/schedule/top");
 	}
 	
 	@GetMapping("/api/event/all")
 	public String getEvent() {
 		String jsonMessage = null;
         try {
-        	List<Schedule> scheduleList = new ArrayList<>();
-        	
+        	List<Event> events = new ArrayList<>();
+        	Event event = new Event();
+            event.setTitle("first event");
+            event.setStart("2019-06-01");
+            events.add(event);
+            
     		ObjectMapper mapper = new ObjectMapper();
-			jsonMessage =  mapper.writerWithDefaultPrettyPrinter().writeValueAsString(scheduleList);
+			jsonMessage =  mapper.writerWithDefaultPrettyPrinter().writeValueAsString(events);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

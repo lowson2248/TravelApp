@@ -1,7 +1,10 @@
 package com.travel.controller;
 
+import java.security.Principal;
 import java.util.List;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.travel.model.Project;
+import com.travel.model.User;
+import com.travel.service.LoginUserDetails;
 import com.travel.service.ProjectService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 public class ProjectController {
 	
 	private final ProjectService projectServiseImpl;
+	
+	LoginUserDetails userDetail;
 	
 	@GetMapping("/project")
 	public ModelAndView showProject() {

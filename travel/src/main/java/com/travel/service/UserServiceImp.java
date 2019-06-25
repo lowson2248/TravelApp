@@ -22,6 +22,7 @@ public class UserServiceImp implements UserService{
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+	LoginUserDetails userDetail;
 	public void createUser(User user, String rawPassword) {
 //		System.out.println(userRepository.findByMailAddress(user.getMailAddress()));
 		if(userRepository.findByMailAddress(user.getMailAddress()) != null) {

@@ -4,6 +4,20 @@
     <meta charset="utf-8">
     <title>スケジュール一覧</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/schedule.css" />
+    <link rel='stylesheet' th:href="@{/webjars/fullcalendar/3.5.1/dist/fullcalendar.css}" />
+	<script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+	<script th:src="@{/webjars/moment/2.19.1/min/moment.min.js}"></script>
+	<script th:src="@{/webjars/fullcalendar/3.5.1/dist/fullcalendar.js}"></script>
+	<script type="text/javascript">
+	  $(document).ready(function() {
+	    $('#calendar').fullCalendar({
+	      events: {
+	        url : '@{/api/event/all}'
+	      }
+	    });
+	  });
+	</script>
 </head>
 <body>
 <header>
@@ -22,5 +36,7 @@
       </ul>
     </nav>
   </div>
+  <div id='calendar'></div>
 </header>
+</body>
 </html>
