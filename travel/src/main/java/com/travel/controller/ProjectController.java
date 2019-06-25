@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.travel.model.CreateProjectform;
 import com.travel.model.Project;
 import com.travel.service.ProjectService;
 
+import javassist.tools.reflect.CannotCreateException;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -21,6 +23,12 @@ import lombok.RequiredArgsConstructor;
 public class ProjectController {
 	
 	private final ProjectService projectServiseImpl;
+	
+	
+	@ModelAttribute
+	public CreateProjectform create() {
+		return new CreateProjectform();
+	}
 	
 	@GetMapping("/project")
 	public ModelAndView showProject() {
@@ -42,11 +50,12 @@ public class ProjectController {
 	}
 	
 	//プロジェクト新規登録処理
-	@PostMapping(value = {"/project/create"})
-	public ModelAndView saveProject(@ModelAttribute("project") @Validated Project project, ModelAndView mav) {
+	@PostMapping(value = {"/project/createa"})
+	public ModelAndView saveProject(@ModelAttribute("project") @Validated CreateProjectform project, BindingResult result, ModelAndView mav) {
 		
 		mav.setViewName("project/projectSelect");
 		return mav;
+		
 	}
 	
 	//プロジェクト編集画面表示処理

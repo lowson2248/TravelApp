@@ -7,15 +7,16 @@
 </head>
 <div class="project-create">
   <p class="font">プロジェクト新規作成</p>
-  <form action="post" class="create-form">
+  <!-- <form action="post" class="create-form">-->
+<form th:action="@{/project/createa}" th:object="${createProjectform}" class="create-form" method="post">
       <p>プロジェクト名</p>
-        <p><input type="text" class="project-name" name="project-name" placeholder="" /></p>
+        <p><input type="text" class="project-name" name="project-name" placeholder=""   th:field="*{str}"/></p>
   <hr>
       <p>日程</p>
       <p>始まり</p>
-        <p><input type="date" class="date" name="date" placeholder="" /></p>
+        <!--  p><input type="date" class="date" name="date" placeholder="" /></p>
       <p>終わり</p>
-        <p><input type="date" class="date" name="date" placeholder="" /></p>
+        <p><input type="date" class="date" name="date" placeholder="" /></p>-->
   <hr>
         <p><input type="submit" class="create" value="プロジェクト作成" /></p>
   </form>
