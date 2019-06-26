@@ -7,6 +7,6 @@ import com.travel.model.Question;
 
 
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
-
+	public Question findByquestionId(Integer questionId);
 
 }

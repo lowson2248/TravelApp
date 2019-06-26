@@ -6,4 +6,5 @@ import com.travel.model.Choice;
 
 public interface ChoiceRepository extends JpaRepository<Choice, Integer> {
 
+	public Choice findByChoiceId(Integer choiceId);
 }

@@ -1,5 +1,7 @@
 package com.travel.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,16 @@ public class QuestionService {
 	@Autowired
 	QuestionRepository questionRepository;
 	
-	public void findAll() {
-		questionRepository.findAll();
+	public List<Question> findAll() {
+		return questionRepository.findAll();
 	}
 	
 	public void save(Question question) {
 		questionRepository.saveAndFlush(question);
+	}
+	
+	public Question findById(int id) {
+		return questionRepository.findByquestionId(id);
 	}
 
 }

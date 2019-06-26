@@ -56,8 +56,8 @@ public class Question {
 	
 	//answerとの紐づけ
 	@JsonIgnore
-	@OneToOne(mappedBy = "question")
-	private Answer answer;
+	@OneToMany(mappedBy = "question")
+	private List<Answer> answer;
 	
 	//choiceとの紐づけ
 	@JsonIgnore

@@ -18,5 +18,9 @@ public class ChoiceService {
 	public void save(Choice choice) {
 		choiceRepository.saveAndFlush(choice);
 	}
+	
+	public Choice findById(int id) {
+		return choiceRepository.findByChoiceId(id);
+	}
 
 }
