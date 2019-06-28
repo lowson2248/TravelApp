@@ -16,7 +16,7 @@ public interface ProjectService {
 	 * テスト環境用のプロジェクト作成
 	 * （作成者固定）
 	 */
-	public void createProject(String projectName,Date startDate,Date lastDate);
+	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress);
 	
 	/*
 	 * 本番および通常稼働用のプロジェクト作成処理。
