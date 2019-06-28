@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -50,15 +52,16 @@ public class ProjectController {
 	
 	//プロジェクト新規登録処理
 	@PostMapping(value = {"/project/create"})
-	public ModelAndView saveProject(@ModelAttribute("project") @Validated ProjectForm projectForm, BindingResult result, ModelAndView mav) {	
+	public ModelAndView saveProject(@ModelAttribute("project") @Validated ProjectForm projectForm, BindingResult result,@AuthenticationPrincipal UserDetails userDetails, ModelAndView mav) {	
 		
 		/*テスト出力*/
 		System.out.println("プロジェクト名 : " + projectForm.getProjectName());
 		System.out.println("プロジェクト開始日 : " + projectForm.getStartDate());
 		System.out.println("プロジェクト終了日 : " + projectForm.getLastDate());
+		System.out.println("プロジェクト制作者 : " + userDetails.getUsername());
 		
 		//プロジェクトを作成
-		projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate());
+		projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
 		return new ModelAndView("project/projectSelect");
 	}
 	

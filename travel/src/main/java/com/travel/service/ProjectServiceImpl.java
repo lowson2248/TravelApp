@@ -42,7 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
 	 * (制作者はtravel固定)
 	 */
 	@Override
-	public void createProject(String projectName,Date startDate,Date lastDate) {
+	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
 
 		//現在時間取得（作成日のため）
 		Date now = new Date();
@@ -50,7 +50,7 @@ public class ProjectServiceImpl implements ProjectService {
 		//プロジェクト作成処理
 		Project project = new Project();
 		//テストとしてユーザ固定で作成
-		project.setUser(userRepository.findByMailAddress("travel@tcmobile.jp"));
+		project.setUser(userRepository.findByMailAddress(mailAddress));
 		project.setProjectName(projectName);
 		project.setStartDate(startDate);
 		project.setLastDate(lastDate);
