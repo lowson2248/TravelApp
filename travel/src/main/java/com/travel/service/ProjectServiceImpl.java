@@ -6,9 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.travel.model.Member;
 import com.travel.model.Project;
-import com.travel.model.User;
 import com.travel.repository.MemberRepositry;
 import com.travel.repository.ProjectRepository;
 import com.travel.repository.UserRepository;
