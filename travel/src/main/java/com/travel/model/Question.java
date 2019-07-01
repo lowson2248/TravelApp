@@ -1,5 +1,6 @@
 package com.travel.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class Question {
 	//解答期限を過ぎているか判別
 	@Column(name = "answer_fin")
 	private boolean answerFin; //default:FALSE
+
 	
 	//answerとの紐づけ
 	@JsonIgnore
@@ -63,4 +65,7 @@ public class Question {
 	@JsonIgnore
 	@OneToMany(mappedBy = "question")
 	private List<Choice> choiceList;
+	
+	
+
 }

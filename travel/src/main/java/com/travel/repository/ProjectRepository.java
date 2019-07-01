@@ -8,6 +8,6 @@ import com.travel.model.Project;
 
 public interface ProjectRepository extends JpaRepository<Project, Integer>{
 
-	public Project findByProjectId(int projectId);
+	public Project findByProjectId(Integer projectId);
 
 }
