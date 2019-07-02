@@ -51,6 +51,7 @@ public class ProjectController {
 	@GetMapping("/project/select")
 	public ModelAndView showProjectSelect(ModelAndView mav,@AuthenticationPrincipal UserDetails userDetails) {
 		
+		/*ユーザが制作したプロジェクト表示（テスト）*/
 		User user = userRepository.findByMailAddress(userDetails.getUsername());
 		List<Project> projectList = projectRepository.findByUser(user);
 		

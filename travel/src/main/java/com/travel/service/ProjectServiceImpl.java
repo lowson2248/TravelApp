@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travel.model.Member;
-import com.travel.model.Member.MemberId;
 import com.travel.model.Project;
 import com.travel.model.User;
 import com.travel.repository.MemberRepositry;
@@ -47,9 +46,6 @@ public class ProjectServiceImpl implements ProjectService {
 		Project project = new Project();
 		User user = userRepository.findByMailAddress(mailAddress);
 		
-		/*Member member = new Member();
-		MemberId memberId = member.new  MemberId(project.getProjectId(), user.getUserId());*/ 
-		
 		/*プロジェクトへのデータ挿入*/
 		project.setUser(user);
 		project.setProjectName(projectName);
@@ -58,19 +54,12 @@ public class ProjectServiceImpl implements ProjectService {
 		project.setCreateDate(now);
 		projectRepositry.saveAndFlush(project);
 		
-		//UserIｄをとってこようとすると、なぜかnullになる。
-		/*member.setMemberId(memberId);
-		member.setAuthId(1);*/
-		//System.out.println("プロジェクト作成者ID 　"+ member.getMemberId().getUserId() + ": Authment(権限情報)　" +member.getAuthId() );
-		
-		//プロジェクトと最初期メンバー（幹事役のみ）保存
-		projectRepositry.saveAndFlush(project);
-		//memberRepositry.saveAndFlush(member);
-		
-		/*
-		 * 制作者をメンバーとして登録する処理も必要
-		 * MemberRepositoryとMemberService求ム！
-		 * */
+		//メンバーへのデータ挿入
+		Member member = new Member();
+		member.setMemberId(project.getProjectId(), user.getUserId());
+		member.setAuthId(1);
+		memberRepositry.saveAndFlush(member);
+
 	}
 
 	@Override
