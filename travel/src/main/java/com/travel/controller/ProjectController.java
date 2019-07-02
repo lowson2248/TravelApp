@@ -2,7 +2,10 @@ package com.travel.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.travel.model.Member;
+import com.travel.model.Project;
 import com.travel.model.ProjectForm;
+import com.travel.model.User;
+import com.travel.repository.MemberRepositry;
+import com.travel.repository.ProjectRepository;
+import com.travel.repository.UserRepository;
 import com.travel.service.ProjectService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +33,9 @@ import lombok.RequiredArgsConstructor;
 public class ProjectController {
 
 	private final ProjectService projectServise;
+	private final ProjectRepository projectRepository;
+	private final UserRepository userRepository;
+	private final MemberRepositry memberRopository;
 	
 	@ModelAttribute
 	public ProjectForm create() {
@@ -37,7 +49,12 @@ public class ProjectController {
 	
 	//プロジェクト選択画面表示処理(未完)
 	@GetMapping("/project/select")
-	public ModelAndView showProjectSelect(ModelAndView mav) {
+	public ModelAndView showProjectSelect(ModelAndView mav,@AuthenticationPrincipal UserDetails userDetails) {
+		
+		User user = userRepository.findByMailAddress(userDetails.getUsername());
+		List<Project> projectList = projectRepository.findByUser(user);
+		
+		mav.addObject("projectList",projectList);
 		mav.setViewName("project/projectSelect");
 		return mav;
 	}
@@ -62,7 +79,10 @@ public class ProjectController {
 		
 		//プロジェクトを作成
 		projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
-		return new ModelAndView("project/projectSelect");
+		
+		mav.addObject("projectForm",projectForm);
+		mav.setViewName("/project/projectSelect");
+		return mav;
 	}
 	
 	
@@ -73,6 +93,4 @@ public class ProjectController {
 		return mav;
 	}
 	
-	
-
 }
