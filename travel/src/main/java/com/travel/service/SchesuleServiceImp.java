@@ -22,9 +22,6 @@ public class SchesuleServiceImp implements ScheduleService{
 	@Override
 	public List<Schedule> find(Integer projectId) {
 		Optional<Project> selectedProject = projectRepository.findById(projectId);
-		System.out.println(selectedProject.get().getProjectName());
-		selectedProject.get().getScheduleList().forEach(s -> System.out.println(s.getDetails()));
-//		scheduleRepository.findByProject(selectedProject.get());
 		return selectedProject.get().getScheduleList();
 	}
 }

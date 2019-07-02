@@ -29,7 +29,7 @@ public class ScheduleController {
 		return mav;
 	}
 	
-	@GetMapping("/shcedule/detail")
+	@GetMapping("/schedule/detail")
 	public ModelAndView showSceduleDetail(ModelAndView mav) {
 		mav.setViewName("schedule/scheduleDetail");
 		return mav;

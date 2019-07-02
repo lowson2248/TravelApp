@@ -7,8 +7,16 @@ public class Event {
     //カレンダーの開始日付
     private String start;
 
-    //カレンダーの終了日付
+    public String getBackgroundColor() {
+		return backgroundColor;
+	}
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	//カレンダーの終了日付
     private String end;
+    
+    private String backgroundColor;
 
     public String getTitle() {
         return title;
@@ -28,4 +36,5 @@ public class Event {
     public void setEnd(String end) {
         this.end = end;
     }
+    
 }

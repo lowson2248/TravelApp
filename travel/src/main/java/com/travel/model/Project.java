@@ -47,7 +47,7 @@ public class Project {
 	@Column(name = "last_date",nullable=false)
 	private Date lastDate;
 	
-	//プロジェクトを作成者のuser_id
+	//プロジェクト作成者のuser_id
 	@JoinColumn(name = "user_id",nullable=false)
 	@ManyToOne
 	private User user;
@@ -67,6 +67,7 @@ public class Project {
 	@OneToMany(mappedBy = "project")
 	private List<Schedule> scheduleList;
 	
+	//questionとの紐づけ
 	@JsonIgnore
 	@OneToMany(mappedBy = "project")
 	private List<Question> questionList;

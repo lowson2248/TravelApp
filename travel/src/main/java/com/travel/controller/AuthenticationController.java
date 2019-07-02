@@ -27,6 +27,7 @@ public class AuthenticationController {
         return new UserForm();
     }
 	
+	/* ログインフォームへ遷移 */
 	@GetMapping("/login")
     public ModelAndView loginForm() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -34,6 +35,7 @@ public class AuthenticationController {
 		return modelAndView;
     }
 	
+	/* メール送信後に遷移 */
 	@PostMapping("/email/send")
 	public String aaa(String email) {
 		System.out.println("aaaaa");
