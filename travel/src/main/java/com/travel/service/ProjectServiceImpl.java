@@ -89,14 +89,17 @@ public class ProjectServiceImpl implements ProjectService {
 		return null;
 	}
 
+	/*
+	 *  プロジェクト削除
+	 */
 	@Override
 	public void deleteProject(Integer project_id) {
-		// TODO 自動生成されたメソッド・スタブ	
+		projectRepositry.deleteById(project_id);	
 	}
 
 	@Override
 	public void deleteMember(Integer project_id) {
-		// TODO 自動生成されたメソッド・スタブ	
+		memberRepositry.deleteById(project_id);	
 	}	
 
 }
