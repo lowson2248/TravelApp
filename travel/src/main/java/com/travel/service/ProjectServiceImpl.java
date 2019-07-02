@@ -45,7 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
 	 *  プロジェクト新規作成 
 	 */
 	@Override
-	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
+	public int createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
 
 		//現在時間取得（作成日のため）
 		Date now = new Date();
@@ -78,6 +78,7 @@ public class ProjectServiceImpl implements ProjectService {
 		 * 制作者をメンバーとして登録する処理も必要
 		 * MemberRepositoryとMemberService求ム！
 		 * */
+		return project.getProjectId();
 	}
 
 	@Override

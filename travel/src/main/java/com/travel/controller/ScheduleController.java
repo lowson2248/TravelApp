@@ -17,9 +17,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ScheduleController {
 	
-	@GetMapping("/schedule")
+	@GetMapping("{project_id}/schedule")
 	public ModelAndView showScedule() {
-		return new ModelAndView("redirect:/scedule/top");
+		return new ModelAndView("redirect:/{project_id}/scedule/top");
 	}
 	
 	@GetMapping("/api/event/all")
@@ -36,7 +36,7 @@ public class ScheduleController {
 		return jsonMessage;
 	}
 	
-	@GetMapping("/schedule/top")
+	@GetMapping("/{project_id}/schedule/top")
 	public ModelAndView showSceduleTop(ModelAndView mav) {
 		mav.setViewName("schedule/schedule");
 		return mav;
