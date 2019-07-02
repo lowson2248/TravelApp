@@ -65,7 +65,7 @@ public class ProjectController {
 		//プロジェクトを作成
 		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
 		System.out.println("プロジェクトID："+projectId);
-		return new ModelAndView("redirect:/"+projectId+"/schedule")  ;
+		return new ModelAndView("redirect:/project/"+projectId+"/schedule")  ;
 	}
 	
 	
