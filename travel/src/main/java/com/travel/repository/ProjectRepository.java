@@ -10,5 +10,10 @@ import com.travel.model.Project;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
-	//public List<Project> findByProjectid(int projectId);
+	
+	/* プロジェクト検索(ユーザID) */
+	//public List<Project> findProjectsByUserId(int userId);
+	
+	/* プロジェクト検索(プロジェクトID) */
+	//public List<Project> findProjectById(int projectId);
 }
