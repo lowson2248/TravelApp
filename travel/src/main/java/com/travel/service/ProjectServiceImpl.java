@@ -54,8 +54,8 @@ public class ProjectServiceImpl implements ProjectService {
 		Project project = new Project();
 		User user = userRepository.findByMailAddress(mailAddress);
 		
-		Member member = new Member();
-		MemberId memberId = member.new  MemberId(project.getProjectId(), user.getUserId()); 
+		/*Member member = new Member();
+		MemberId memberId = member.new  MemberId(project.getProjectId(), user.getUserId());*/ 
 		
 		/*プロジェクトへのデータ挿入*/
 		project.setUser(user);
@@ -66,16 +66,13 @@ public class ProjectServiceImpl implements ProjectService {
 		projectRepositry.saveAndFlush(project);
 		
 		//UserIｄをとってこようとすると、なぜかnullになる。
-		member.setMemberId(memberId);
-		member.setAuthId(1);
-
-		
-		
-		System.out.println("プロジェクト作成者ID 　"+ member.getMemberId().getUserId() + ": Authment(権限情報)　" +member.getAuthId() );
+		/*member.setMemberId(memberId);
+		member.setAuthId(1);*/
+		//System.out.println("プロジェクト作成者ID 　"+ member.getMemberId().getUserId() + ": Authment(権限情報)　" +member.getAuthId() );
 		
 		//プロジェクトと最初期メンバー（幹事役のみ）保存
 		projectRepositry.saveAndFlush(project);
-		memberRepositry.saveAndFlush(member);
+		//memberRepositry.saveAndFlush(member);
 		
 		/*
 		 * 制作者をメンバーとして登録する処理も必要
