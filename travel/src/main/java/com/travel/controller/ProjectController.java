@@ -1,6 +1,7 @@
 package com.travel.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +19,7 @@ import com.travel.model.Project;
 import com.travel.model.User;
 import com.travel.service.LoginUserDetails;
 import com.travel.service.ProjectService;
+import com.travel.service.ProjectServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +30,7 @@ public class ProjectController {
 	private final ProjectService projectServiseImpl;
 	
 	LoginUserDetails userDetail;
+	ProjectService projectService;
 	
 	@GetMapping("/project")
 	public ModelAndView showProject() {

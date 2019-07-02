@@ -23,24 +23,6 @@ public class ScheduleController {
 		return new ModelAndView("redirect:/schedule/top");
 	}
 	
-	@GetMapping("/api/event/all")
-	public String getEvent() {
-		String jsonMessage = null;
-        try {
-        	List<Event> events = new ArrayList<>();
-        	Event event = new Event();
-            event.setTitle("first event");
-            event.setStart("2019-06-01");
-            events.add(event);
-            
-    		ObjectMapper mapper = new ObjectMapper();
-			jsonMessage =  mapper.writerWithDefaultPrettyPrinter().writeValueAsString(events);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return jsonMessage;
-	}
-	
 	@GetMapping("/schedule/top")
 	public ModelAndView showSceduleTop(ModelAndView mav) {
 		mav.setViewName("schedule/schedule");
@@ -62,6 +44,7 @@ public class ScheduleController {
 	
 	@GetMapping("/schedule/edit")
 	public ModelAndView showSceduleEdit(ModelAndView mav) {
+		System.out.println("aaa");
 		mav.setViewName("schedule/scheduleEdit");
 		return mav;
 	}

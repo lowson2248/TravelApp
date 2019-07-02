@@ -31,7 +31,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Project getOneProject(Integer project_id) {
 		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return projectRepositry.findById(project_id).get();
 	}
 
 	@Override
