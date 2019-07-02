@@ -13,15 +13,10 @@ public interface ProjectService {
 	
 	
 	/* 
-	 * テスト環境用のプロジェクト作成
-	 * （作成者固定）
+	 * プロジェクト作成
 	 */
 	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress);
-	
-	/*
-	 * 本番および通常稼働用のプロジェクト作成処理。
-	 * public void createProject(String projectName,User user,Date startDate,Date lastDate);
-	 */
+
 	public Project updateProject(Project project);
 	public void deleteProject(Integer project_id);
 	public void deleteMember(Integer project_id);

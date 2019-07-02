@@ -6,7 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.travel.model.Member;
+import com.travel.model.Member.MemberId;
 import com.travel.model.Project;
+import com.travel.model.User;
 import com.travel.repository.MemberRepositry;
 import com.travel.repository.ProjectRepository;
 import com.travel.repository.UserRepository;
@@ -38,8 +41,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectRepositry.getOne(project_id);
 	}
 
-	/* テスト環境用プロジェクト新規作成 
-	 * (制作者はtravel固定)
+	/*
+	 *  プロジェクト新規作成 
 	 */
 	@Override
 	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
@@ -49,33 +52,36 @@ public class ProjectServiceImpl implements ProjectService {
 		//現在ログインしているユーザを取得する必要がある。
 		//プロジェクト作成処理
 		Project project = new Project();
-		//テストとしてユーザ固定で作成
-		project.setUser(userRepository.findByMailAddress(mailAddress));
+		User user = userRepository.findByMailAddress(mailAddress);
+		
+		Member member = new Member();
+		MemberId memberId = member.new  MemberId(project.getProjectId(), user.getUserId()); 
+		
+		/*プロジェクトへのデータ挿入*/
+		project.setUser(user);
 		project.setProjectName(projectName);
 		project.setStartDate(startDate);
 		project.setLastDate(lastDate);
 		project.setCreateDate(now);
-		//プロジェクト保存
 		projectRepositry.saveAndFlush(project);
+		
+		//UserIｄをとってこようとすると、なぜかnullになる。
+		member.setMemberId(memberId);
+		member.setAuthId(1);
+
+		
+		
+		System.out.println("プロジェクト作成者ID 　"+ member.getMemberId().getUserId() + ": Authment(権限情報)　" +member.getAuthId() );
+		
+		//プロジェクトと最初期メンバー（幹事役のみ）保存
+		projectRepositry.saveAndFlush(project);
+		memberRepositry.saveAndFlush(member);
 		
 		/*
 		 * 制作者をメンバーとして登録する処理も必要
 		 * MemberRepositoryとMemberService求ム！
 		 * */
 	}
-	
-	/*通常稼働用プロジェクト新規作成 
-	@Override
-	public void createProject(User user,String projectName,Date startDate,Date lastDate) {
-		//プロジェクト作成処理
-		Project project = new Project();
-		project.setUser(user);
-		project.setProjectName(projectName);
-		project.setStartDate(startDate);
-		project.setLastDate(lastDate);
-		//プロジェクト保存
-		projectRepositry.saveAndFlush(project);
-	}*/
 
 	@Override
 	public Project updateProject(Project project) {
