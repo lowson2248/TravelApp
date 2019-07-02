@@ -25,9 +25,9 @@
         <a href="/project/createProject"></a>
       </div>
       
-      <div class="new-create" th:if="projectList!=null" th:each="project : ${projectList}" onclick="window.alert('ムラムラ市村')">
-	      <p th:text="${project.getProjectName()}"></p>
-	      <p>期間 <span th:text="${project.getStartDate()}"></span>~<span th:text="${project.getLastDate()}"></span></p>
+      <div class="new-create" th:if="projectList!=null" th:each="member : ${memberList}" onclick="window.alert('おためしだよ')">
+	      <p th:text="${member.getMemberId().getUserId()}"></p>
+	      <p>期間 <span th:text="おためし"></span>~<span th:text="おためし"></span></p>
 	  </div>
       
     </div>

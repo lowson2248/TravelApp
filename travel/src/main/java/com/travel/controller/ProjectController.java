@@ -51,11 +51,11 @@ public class ProjectController {
 	@GetMapping("/project/select")
 	public ModelAndView showProjectSelect(ModelAndView mav,@AuthenticationPrincipal UserDetails userDetails) {
 		
-		/*ユーザが制作したプロジェクト表示（テスト）*/
+		/*ユーザが参加しているプロジェクトの表示*/
 		User user = userRepository.findByMailAddress(userDetails.getUsername());
-		List<Project> projectList = projectRepository.findByUser(user);
-		
-		mav.addObject("projectList",projectList);
+		List<Member> memberList = memberRopository.findByMemberId_UserId(user.getUserId());
+	
+		mav.addObject("memberList",memberList);
 		mav.setViewName("project/projectSelect");
 		return mav;
 	}

@@ -11,6 +11,6 @@ import com.travel.model.Project;
 public interface MemberRepositry extends JpaRepository<Member, Integer> {	
 	
 	/*メンバーからプロジェクトを逆引き*/
-	public List<Project> findByMemberId_UserId(int userId);
-    public List<Project> findByMemberId_ProjectId(int projectId);
+	public List<Member> findByMemberId_UserId(int userId);
+    public List<Member> findByMemberId_ProjectId(int projectId);
 }
