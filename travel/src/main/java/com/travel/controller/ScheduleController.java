@@ -1,5 +1,6 @@
 package com.travel.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,17 +68,39 @@ public class ScheduleController {
 	
 	@GetMapping("/schedule/edit{id}")
 	public ModelAndView showSceduleEdit(ModelAndView mav, @PathVariable("id") int id) {
-		System.out.println("aaa");
+		ScheduleForm beforeEditForm = new ScheduleForm();
+		Schedule selectSchedule = scheduleService.findOne(id);
+		String day = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getStartTime());
+		String startTime = new SimpleDateFormat("HH:mm").format(selectSchedule.getStartTime());
+		String endTime = new SimpleDateFormat("HH:mm").format(selectSchedule.getLastTime());
+		
+		beforeEditForm.setCateId(selectSchedule.getCategory().getCategoryId());
+		beforeEditForm.setDay(day);
+		beforeEditForm.setStart(startTime);
+		beforeEditForm.setEnd(endTime);
+		beforeEditForm.setText(selectSchedule.getDetails());
+		beforeEditForm.setTitle(selectSchedule.getScName());
+		
+		mav.addObject("editSchedule", beforeEditForm);
 		mav.setViewName("schedule/scheduleEdit");
+		
 		return mav;
 	}
 	
 	@PostMapping(value="/schedule/add") 
 		public ModelAndView scheduleAddCreate(ModelAndView mav, @Validated ScheduleForm addForm ,BindingResult bindingresult ) {
-		System.out.println("aaaaa");
 		System.out.println(addForm.getTitle());
 		mav.setViewName("schedule/schedule");
-		
+		return mav;
+	}
+	
+	@PostMapping(value="/schedule/edit{id}") 
+	public ModelAndView scheduleEdit(ModelAndView mav, @Validated ScheduleForm editForm ,BindingResult bindingresult, @PathVariable("id") int id) {	
+		Schedule schedule = new Schedule();
+		schedule.setScId(id);
+		scheduleService.update(editForm,schedule);
+		mav.setViewName("schedule/schedule");
+	
 		return mav;
 	}
 

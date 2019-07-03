@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.travel.model.Project;
 import com.travel.model.Schedule;
+import com.travel.model.ScheduleForm;
 import com.travel.repository.ProjectRepository;
 import com.travel.repository.ScheduleRepository;
 
@@ -27,5 +28,15 @@ public class SchesuleServiceImp implements ScheduleService{
 	@Override
 	public Schedule findOne(Integer scheduleId) {
 		return scheduleRepository.findById(scheduleId).get();
+	}
+
+	@Override
+	public void update(ScheduleForm scheduleForm, Schedule schedule) {
+		String startTime = scheduleForm.getDay() + " " + scheduleForm.getStart();
+		String endTime = scheduleForm.getDay() + " " + scheduleForm.getEnd();
+		
+		System.out.println(startTime);
+		schedule.setScName(scheduleForm.getTitle());
+		
 	}
 }
