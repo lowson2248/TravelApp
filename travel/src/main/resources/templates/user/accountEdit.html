@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>アカウント編集</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+</head>
+<body>
+<header>
+<div class="test">
+  <div class="head-menu">
+    <p class="menu-title">設定</p>
+    <a class="user" th:href="@{/userEdit}"><img src="../img/user.png"></a>
+  </div>
+  <!--  
+  <div class="side-menu">
+    <nav class="gnav">
+      <ul class="gnav-menu">
+        <li><a href="">スケジュール一覧</a></li>
+        <li><a href="">スケジュール詳細</a></li>
+        <li><a href="">アンケート一覧</a></li>
+        <li><a href="/project/edit">プロジェクト編集</a></li>
+        <li><a href="/logout">ログアウト</a></li>
+      </ul>
+    </nav>
+  </div>
+  -->
+</header>
+  <div class="account-edit">
+    <p class="service">アカウント設定</p>
+    <form th:action="@{/userEdit}" method="post" th:object="${userEditForm}" class="edit-form">
+        <p>ユーザー名変更</p>
+          <p><input type="text"  class="username" name="username" th:field="*{username}" /></p>
+        <p>メールアドレス変更</p>
+          <p><input type="text" class="email" name="email" th:field="*{mailAddress}" /></p>
+        <p>パスワード変更</p>
+          <p><input type="password" class="password" name="password" th:field="*{password}" /></p>
+        <!--p>パスワード変更</p-->
+          <!--p><input type="password" class="password" name="password" /></p-->
+        <p><input type="submit" class="update" value="アカウント更新" /></p>
+        
+    </form>
+    <form th:action="@{/userEdit}" th:method="delete" class="edit-form">
+    	<p><input type="submit" class="delete" value="アカウント削除" /></p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

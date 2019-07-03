@@ -1,5 +1,6 @@
 $(function () {
 
+
   var counter = $('.inputList').length;
   if (counter < 3) {
       $('.micon').fadeOut();
@@ -24,6 +25,7 @@ $(function () {
     };
   });
 
+
   //要素の削除
   $(document).on('click', '#qdel', () => {
     //最後の要素を削除
@@ -33,5 +35,8 @@ $(function () {
       $('.micon').fadeOut();
     };
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 });

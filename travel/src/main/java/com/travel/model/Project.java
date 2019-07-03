@@ -9,11 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,7 +48,7 @@ public class Project {
 	@Column(name = "last_date",nullable=false)
 	private Date lastDate;
 	
-	//プロジェクトを作成者のuser_id
+	//プロジェクト作成者のuser_id
 	@JoinColumn(name = "user_id",nullable=false)
 	@ManyToOne
 	private User user;
@@ -66,6 +68,7 @@ public class Project {
 	@OneToMany(mappedBy = "project")
 	private List<Schedule> scheduleList;
 	
+	//questionとの紐づけ
 	@JsonIgnore
 	@OneToMany(mappedBy = "project")
 	private List<Question> questionList;

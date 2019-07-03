@@ -14,6 +14,7 @@ import com.travel.service.ChatService;
 public class ChatController {
 	@Autowired
 	ChatService chatService;
+/*
 
 	@GetMapping("/")
 	public ModelAndView chat(ModelAndView mav) {
@@ -24,4 +25,5 @@ public class ChatController {
 		mav.setViewName("question/index");
 		return mav;
 	}
+*/
 }

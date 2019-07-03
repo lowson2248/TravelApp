@@ -1,5 +1,6 @@
 package com.travel.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,11 @@ import com.travel.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
-public class UserService {
+public interface UserService {
 	
-	@Autowired
-	UserRepository userRepository;
+	public User findByUserId(int id);
 	
-	public User findByUserId(int id) {
-		return userRepository.findByUserId(id);
-	}
+	public void createUser(User user, String rawPassword);
+	public String upDateUser(String idBymailAddress,String userName,String mailAddress,String password);
+	public void deleteUser(String mailAddress);
 }

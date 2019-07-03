@@ -1,28 +1,32 @@
 package com.travel.service;
 
+import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.travel.model.Member;
 import com.travel.model.Project;
-import com.travel.repository.ProjectRepository;
+import com.travel.model.User;
 
-import lombok.RequiredArgsConstructor;
-
-@Service
-@RequiredArgsConstructor
-public class ProjectService {
+public interface ProjectService {
+	public List<Project> getProjectByUserId(Integer user_id);	
+	public Project getOneProject(Integer project_id);
 	
-	@Autowired
-	private ProjectRepository projectRepository;
-
-	public Project findById(int id){
-		return projectRepository.findByProjectId(id);
-	}
 	
-	public void save(Project project) {
-		projectRepository.saveAndFlush(project);
-	}
+	/* 
+	 * プロジェクト作成
+	 */
+	public int createProject(String projectName,Date startDate,Date lastDate,String mailAddress);
 
+	public Project updateProject(Project project);
+	public void deleteProject(Integer project_id);
+	public void deleteMember(Integer project_id);
+	public Project findById(int id);
+	public void save(Project project);
+	
+	
+	/*public void saveProject(Project project, Member member);
+	public Project getProjectById(int project_id);
+	void deleteProject(Project project_id);
+	void deleteMember(Member project_id);
+	*/
 }
