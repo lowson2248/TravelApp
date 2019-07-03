@@ -38,7 +38,10 @@
         <!--p>パスワード変更</p-->
           <!--p><input type="password" class="password" name="password" /></p-->
         <p><input type="submit" class="update" value="アカウント更新" /></p>
-        <p><input type="submit" class="delete" value="アカウント削除" /></p>
+        
+    </form>
+    <form th:action="@{/userEdit}" th:method="delete" class="edit-form">
+    	<p><input type="submit" class="delete" value="アカウント削除" /></p>
     </form>
   </div>
 </div>

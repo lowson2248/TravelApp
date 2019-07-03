@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +40,12 @@ public class UserController {
 	public ModelAndView editUser(@Validated UserEditForm userEditForm,BindingResult result,@AuthenticationPrincipal UserDetails userDetails) { 
 		String redirect = userService.upDateUser(userDetails.getUsername(),userEditForm.getUsername(),userEditForm.getMailAddress(),userEditForm.getPassword());
 		return new ModelAndView(redirect);
+	}
+	
+	/* ユーザー削除処理 */
+	@DeleteMapping(path = "/userEdit")
+	public ModelAndView deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
+		userService.deleteUser(userDetails.getUsername());
+		return new ModelAndView("/login");
 	}
 }

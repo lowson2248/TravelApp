@@ -64,4 +64,12 @@ public class UserServiceImp implements UserService{
 			return "redirect:/userEdit";
 		}
 	}
+
+	/*
+	 * ユーザー削除処理
+	 */
+	@Override
+	public void deleteUser(String mailAddress) {
+		userRepository.delete(userRepository.findByMailAddress(mailAddress));
+	}
 }
