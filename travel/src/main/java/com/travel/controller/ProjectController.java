@@ -17,8 +17,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -77,7 +79,7 @@ public class ProjectController {
 	
 	
 	//プロジェクト新規登録画面表示処理
-	@GetMapping(value = {"/project/createProject"})
+	@GetMapping(value = {"/project/create"})
 	public ModelAndView showProjectCreate(ModelAndView mav) {
 		mav.addObject("projectForm",create());
 		mav.setViewName("project/projectCreate");
@@ -97,24 +99,27 @@ public class ProjectController {
 		System.out.println("プロジェクト制作者 : " + userDetails.getUsername());
 		
 		//プロジェクトを作成
-		projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
-		
-		/*ユーザが参加しているプロジェクトの表示*/
-		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
-		List<Member>memberList = memberRopository.findByUser(loginUser);
-		
-		mav.addObject("joinList",memberList);
-		/*遷移先は本来なら作成したプロジェクトのスケジュール画面！*/
-		mav.setViewName("/project/projectSelect");
-		return mav;
+		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
+		System.out.println("プロジェクトID："+projectId);
+		mav.addObject("projectForm",projectForm);
+		return new ModelAndView("redirect:/project"+projectId+"/schedule")  ;
 	}
 	
 	
 	//プロジェクト編集画面表示処理
-	@GetMapping(value = {"/project/edit"})
+	@GetMapping(value = {"/project{project_id}/edit"})
 	public ModelAndView showEditProject(ModelAndView mav) {
 		mav.setViewName("project/projectEdit");//projectEdit.htmlは未実装
 		return mav;
 	}
 	
+	/*
+	 *プロジェクト削除処理 
+	 */
+	@DeleteMapping(value = {"/project{project_id}/edit"})
+	public ModelAndView deleteProject(ModelAndView mav,@PathVariable int project_id) {
+		projectServise.deleteProject(project_id);
+		//projectServise.deleteMember(project_id);
+		return new ModelAndView("redirect:/project/select");
+	}
 }

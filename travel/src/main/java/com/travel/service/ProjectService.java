@@ -15,7 +15,7 @@ public interface ProjectService {
 	/* 
 	 * プロジェクト作成
 	 */
-	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress);
+	public int createProject(String projectName,Date startDate,Date lastDate,String mailAddress);
 
 	public Project updateProject(Project project);
 	public void deleteProject(Integer project_id);

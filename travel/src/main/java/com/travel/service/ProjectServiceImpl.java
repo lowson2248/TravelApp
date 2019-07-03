@@ -37,7 +37,7 @@ public class ProjectServiceImpl implements ProjectService {
 	 *  プロジェクト新規作成 
 	 */
 	@Override
-	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
+	public int createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
 
 		//現在時間取得（作成日のため）
 		Date now = new Date();
@@ -54,14 +54,15 @@ public class ProjectServiceImpl implements ProjectService {
 		project.setLastDate(lastDate);
 		project.setCreateDate(now);
 		projectRepositry.saveAndFlush(project);
-		
+
 		//メンバーへのデータ挿入
 		Member member = new Member();
 		member.setProject(project);
 		member.setUser(user);
 		member.setAuthId(1);
 		memberRepositry.saveAndFlush(member);
-		
+
+		return project.getProjectId();
 	}
 	
 
@@ -71,14 +72,17 @@ public class ProjectServiceImpl implements ProjectService {
 		return null;
 	}
 
+	/*
+	 *  プロジェクト削除
+	 */
 	@Override
 	public void deleteProject(Integer project_id) {
-		// TODO 自動生成されたメソッド・スタブ	
+		projectRepositry.deleteById(project_id);	
 	}
 
 	@Override
 	public void deleteMember(Integer project_id) {
-		// TODO 自動生成されたメソッド・スタブ	
+		memberRepositry.deleteById(project_id);		
 	}
 
 	@Override
