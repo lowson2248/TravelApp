@@ -26,20 +26,20 @@
 <div class="scedule-add">
   <p class="font">スケジュール新規追加</p>
     <hr>
-    <form action="post" class="add">
+    <form th:action="@{/schedule/add}" class="add" method="post">
         <p>予定名</p>
-          <p><input type="text" class="scedule-name" name="scedule-name" placeholder="" /></p>
+          <p><input type="text" class="scedule-name"  name="title"  placeholder="" /></p>
     <hr>
         <select name="予定種類" class="scedule-type">
-          <option value="">選択してください</option>
+          <option name="cateId" th:value="1">選択してください</option>
           <option value="">選択してください</option>
           <option value="">選択してください</option>
         </select>
     <hr>
         <p>時間</p>
-          <p><input type="date" class="date" name="date" placeholder="" /></p>
-          <p><input type="time" class="start-time" name="start-time" placeholder="" /></p>
-          <p><input type="time" class="end-time" name="end-time" placeholder="" /></p>
+          <p><input type="date" class="date" name="day" placeholder="" /></p>
+          <p><input type="time" class="start-time" name="start" placeholder="" /></p>
+          <p><input type="time" class="end-time" name="end" placeholder="" /></p>
     <hr>
         <p>イメージ画像</p>
           <p><input type="file" class="project-img"></p>
