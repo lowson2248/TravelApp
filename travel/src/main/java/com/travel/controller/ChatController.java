@@ -21,7 +21,7 @@ public class ChatController {
 		List<Chat> chatList = chatService.findAll();
 		System.out.println("chatList():"+"テキスト:"+chatList.get(0).getText());
 		mav.addObject("chatList",chatList);
-		mav.setViewName("index");
+		mav.setViewName("question/index");
 		return mav;
 	}
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>アンケート編集</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/js/choice.js" th:src="@{/js/choice.js}"></script>
+</head>
+<body>
+<header>
+  <div class="head-menu">
+    <p class="menu-title">設定</p>
+    <a class="user" href=""><img src="images/user.png"></a>
+  </div>
+  <div class="side-menu">
+    <nav class="gnav">
+      <ul class="gnav-menu">
+        <li><a href="">スケジュール一覧</a></li>
+        <li><a href="">スケジュール詳細</a></li>
+        <li><a href="">アンケート一覧</a></li>
+        <li><a href="">プロジェクト編集</a></li>
+        <li><a href="">ログアウト</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="question-edit">
+  <p class="font">アンケート編集</p>
+    <hr>
+    <form method="post" th:action="@{/question/editend/{questionid}(questionid=${question.questionId})}" th:object="${questionEditForm}" class="add">
+        <p>アンケート名</p>
+          <p><input type="text" th:value="${question.title}" name="title" class="question" /></p>
+    <hr>
+        <p>アンケート詳細</p>
+          <p><input type="text" th:value="${question.questionDetail}" name="questionDetail" class="question-data" /></p>
+    <hr>
+        <p>回答期限</p>
+          <p><input type="date" th:value="${#dates.format(question.limitTime, 'yyyy-MM-dd')}" name="limitTime1" class="date" /></p>
+          <p><input type="time" name="limitTime2" class="date" th:value="${#dates.format(question.getLimitTime(), 'HH:mm')}"/></p>
+    <hr>
+        <p>選択肢</p>
+   <!-- <div th:each="c : ${question.choiceList}">
+          <p><input type="text" class="question" name="choiceList"  th:value="${c.choiceText}" /></p>
+         </div --> 
+         
+      <ul id="choiceUl" >
+        <li class="inputList" th:each="c : ${question.choiceList}" >
+          <input type="text" class="choice" name="choiceList" th:value="${c.choiceText}" />
+        </li>
+
+      </ul>
+      
+       
+        <div class="icon icon--plus" id="qadd">
+          <span class="icon__mark"></span>
+        </div>
+        <div class="micon icon--minus" id="qdel">
+          <span class="icon__mark"></span>
+        </div>
+    <hr>
+        <p><input type="submit" class="create" value="更新" /></p>
+
+    </form>
+</div>
+</body>
+</html>

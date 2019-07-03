@@ -1,6 +1,12 @@
 package com.travel.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +23,9 @@ import com.travel.model.Answer;
 import com.travel.model.AnswerForm;
 import com.travel.model.Choice;
 import com.travel.model.Question;
+import com.travel.model.QuestionEditForm;
+import com.travel.repository.ChoiceRepository;
+import com.travel.repository.QuestionRepository;
 import com.travel.service.AnswerService;
 import com.travel.service.ChoiceService;
 import com.travel.service.QuestionService;
@@ -24,7 +33,7 @@ import com.travel.service.UserService;
 
 
 @Controller
-@RequestMapping("/question/{userid}")
+@Transactional
 public class QuestionController {
 	
 	@Autowired
@@ -39,29 +48,44 @@ public class QuestionController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	QuestionRepository questionRepository;
+	
+	@Autowired
+	ChoiceRepository choiceRepository;
+	
+	private int userId;
+		
 	
 	@ModelAttribute
 	public AnswerForm addForm() {
 		return new AnswerForm();
 	}
 	
+	@ModelAttribute
+	public QuestionEditForm editForm() {
+		return new QuestionEditForm();
+	}
+	
 	//アンケート一覧画面
-	@GetMapping
+	@GetMapping("/question/{userid}")
 	public ModelAndView question(ModelAndView mav,@PathVariable("userid") int userId) {
 		System.out.println("Questionベース画面");
 		List<Question> question = questionService.findAll();
+		this.userId = userId;
 		
 		mav.addObject("questionList",question);
 		mav.addObject("userId",userId);
-		mav.setViewName("questionbase");
+		mav.setViewName("question/questionhome");
 
 		return mav;
 	}
+
 	
 	//回答後処理
 	@PostMapping("/answer")
-	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("userid") int userId) {
-		System.out.println("回答処理:選択肢:"+form.getChoiceId()+":userId:"+userId);
+	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav) {
+		//ystem.out.println("回答処理:選択肢:"+form.getChoiceId()+":userId:"+userId);
 		
 		if(!result.hasErrors()) {
 			System.out.println("回答生成");
@@ -69,11 +93,60 @@ public class QuestionController {
 			Choice choice = choiceService.findById(form.getChoiceId());
 			
 			answer.setChoice(choice);
-			answer.setUser(userService.findByUserId(userId));
+			//answer.setUser(userService.findByUserId(userId));
 			answer.setQuestion(choice.getQuestion());
 			answerService.save(answer);
 		}
-		return "redirect:/question/"+userId;
+		return "redirect:/question/";
+	}
+	
+	//アンケート編集画面
+	@GetMapping("/question/edit")
+	public ModelAndView questionEdit(ModelAndView mav) { 
+		System.out.println("Question編集画面");
+		Question question = questionService.findById(2);
+		mav.addObject("userId",userId);
+		mav.addObject("question",question);
+		mav.setViewName("question/questionedit");
+		System.out.println(" 日付："+ question.getLimitTime());
+
+
+		return mav;
+	}
+	
+	//編集後処理
+	@PostMapping("/question/editend/{questionid}")
+	public String questionEdit( @Validated QuestionEditForm form, BindingResult result, ModelAndView mav,@PathVariable("questionid") int questionId) {
+		System.out.println("回答処理");
+
+		if(!result.hasErrors()) {
+			System.out.println("編集処理");
+			Question question = questionService.findById(questionId);
+			
+			//選択肢更新
+			choiceRepository.deleteByQuestion(question);
+			question.getChoiceList().clear();
+			System.out.println("選択肢削除完了");
+			for(String choiceText :form.getChoiceList())choiceService.create(choiceText,questionService.findById(questionId));
+			System.out.println("選択肢登録完了");
+			
+			//日時更新
+			 String data1 = new SimpleDateFormat("yyyy-MM-dd").format(form.getLimitTime1());
+			 String data2 = new SimpleDateFormat("HH:mm").format(form.getLimitTime2());
+		     data1= data1 + " " + data2;
+		     System.out.println("String型 = " + data1);
+		    Date date2;
+			try {
+				System.out.println("データ登録 ");
+					date2 =  new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(data1);
+					//質問更新処理
+					questionService.create(question, form.getTitle(), form.getQuestionDetail(),date2);
+			} catch (ParseException e) {
+					e.printStackTrace();
+			}
+			
+		}
+		return "redirect:/question/2";
 	}
 
 

@@ -1,0 +1,571 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #fff;
+  margin: auto;
+  height: 100%;
+}
+.title {
+  color: #fff;
+  text-align: center;
+  font-size: 50px;
+
+}
+.content {
+  margin: auto;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #808080;
+  width: 600px;
+  height: 400px;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.main {
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 450px;
+  height: 250px;
+}
+.tab {
+  display: none;
+}
+.tab.active {
+  display: block;
+}
+.form {
+  font-size: 12px;
+  padding: 20px;
+}
+.form input {
+  margin: auto;
+  width: 300px;
+  height: 25px;
+  margin-bottom: 10px;
+}
+
+.submit {
+  background-color: #008b8b;
+  color:#fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
+}
+.btn li {
+  list-style: none;
+  display: inline-block;
+}
+.btn a {
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 15px;
+  height: 35px;
+  width: 130px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.regist {
+  background-color: #808080;
+  color: #fff;
+}
+.login {
+  background-color: #90ee90;
+  color:#fff;
+}
+
+
+.test {
+  width: 100%;
+}
+.head-menu {
+    background-color: #90ee90;
+    height: 50px;
+    box-shadow: 0px 4px 3px -3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0px 4px 3px -3px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0px 4px 3px -3px rgba(0,0,0,0.6);
+}
+.head-menu p {
+  font-size: 20px;
+}
+.menu-title {
+  color: #fff;
+  padding: 10px 0px 0px 10px;
+}
+.user img {
+  background-color: #fff;
+  border-radius: 100px;
+  position: absolute;
+  right: 55px;
+  top: 8px;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+}
+.chat {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
+}
+.side-menu {
+  width: 150px;
+  float: left;
+}
+.gnav-menu {
+  height: 100vh;
+  border-right: 1px solid #000;
+}
+.gnav-menu a {
+  display: block;
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #000;
+}
+.gnav-menu a:hover {
+  color: #000;
+}
+.gnav-menu li:hover {
+  font-weight: bold;
+}
+
+.service {
+  font-size: 20px;
+  text-align: center;
+  padding: 20px 0px;
+}
+.edit-form {
+  padding: 10px;
+  text-align: center;
+}
+.input-form {
+  margin-bottom: 20px;
+}
+
+.username, .email, .password, .project-name,
+.choice, .question, .scedule-name, .scedule-type {
+  background-color: #eee;
+  border: none;
+  height: 25px;
+  width: 250px;
+  border-radius: 8px;
+}
+.date, .start-time, .end-time, 
+.start-date, .end-date {
+  background-color: #eee;
+  border: none;
+  height: 25px;
+  width: 100px;
+  border-radius: 8px;
+}
+
+
+.update {
+  background-color: #008b8b;
+  color:#fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  height: 40px;
+  width: 150px;
+  margin-top: 20px;
+}
+.delete {
+  background-color: #90ee90;
+  color:#fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  height: 40px;
+  width: 150px;
+  margin-top: 20px;
+}
+.font {
+  text-align: center;
+  padding: 20px 0px;
+}
+
+.project-create {
+  max-width: 500px;
+  display: inline-block;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.input-project {
+  margin: 20px 0px;
+}
+.create-form {
+  font-size: 12px;
+  padding: 20px;
+  text-align: center;
+
+}
+.create-form input {
+  width: 300px;
+  height: 25px;
+  margin-bottom: 10px;
+}
+.create {
+  background-color: #90ee90;
+  color:#fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  height: 30px;
+  margin-top: 20px;
+}
+.add {
+  text-align: center;
+  margin-top: 20px;
+}
+.add p {
+  font-size: 12px;
+}
+.add input {
+  margin: 10px;
+}
+.add-date {
+  font-size: 11px;
+  text-align: right;
+}
+/* 追加した部分 */
+.inputList {
+  list-style: none;
+}
+
+
+.question-data, .text {
+  background-color: #eee;
+  border: none;
+  height: 80px;
+  width: 250px;
+  border-radius: 8px;
+}
+.icon {
+  position: relative;
+  left: -35px;
+  width: 30px;
+  height: 30px;
+  background: #90ee90;
+  border-radius: 50%;
+  margin: auto;
+  margin-bottom: 10px;
+}
+.icon::before, .icon--plus::after {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-top: 3px solid #fff;
+  transform: translateX(-50%);
+}
+.icon--plus:after {
+  top: 7px;
+  left: 0px;
+  transform: rotate(90deg);
+}
+.micon {
+  position: relative;
+  left: 0px;
+  top: -40px;
+  width: 30px;
+  height: 30px;
+  background: #90ee90;
+  border-radius: 50%;
+  margin: auto;
+  margin-bottom: 10px;
+  display: none;
+}
+.micon::before {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-top: 3px solid #fff;
+  transform: translateX(-50%);
+}
+.icon--minus:after {
+  top: 7px;
+  left: 0px;
+  transform: rotate(90deg);
+}
+.scedule-type {
+  margin: 10px;
+}
+.project {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.project-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid #000;
+  width: 200px;
+  height: 250px;
+  text-align: center;
+  background-color: #fff;
+  margin: 0px 20px;
+}
+.project-box p {
+  text-align: center;
+}
+.project-box a {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: -999px;
+}
+
+.new-create a {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: -999px;
+}
+.new-create {
+  position: relative;
+  border: 1px solid #000;
+  width: 200px;
+  height: 250px;
+  text-align: center;
+  background-color: #fff;
+  margin: 0px 20px;
+}
+.new-create p {
+  padding-top: 90px;
+}
+
+.icon2 {
+  position: relative;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid #000;
+  margin: auto;
+  margin-bottom: 10px;
+}
+.icon2::before, .icon--plus2::after {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-top: 3px solid #000;
+  transform: translateX(-50%);
+}
+.icon--plus2:after {
+  top: 7px;
+  left: 0px;
+  transform: rotate(90deg);
+}
+.project-user, .project-date {
+  font-size: 12px;
+}
+.select-img p {
+  display: inline-block;
+  vertical-align: middle;
+}
+.add-scedule img {
+  width: 20px;
+  height: 20px;
+}
+.add-scedule a {
+  text-decoration: none;
+  color: #000;
+  position: absolute;
+  right: 5px;
+}
+.date-and-add {
+  display: flex;
+}
+.date-and-add p {
+  margin: 10px 30px;
+}
+.list-and-add {
+  display: flex;
+  margin: 10px;
+}
+.list-and-add p {
+  margin: 0px 30px;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.question-main {
+  margin: 30px;
+  text-align: center;
+}
+.status {
+  text-align: center;
+  color: #ff0000;
+}
+.question-ttl {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+.choice-list {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+.add-question img {
+  width: 20px;
+  height: 20px;
+}
+.add-question a {
+  text-decoration: none;
+  color: #000;
+  position: absolute;
+  right: 5px;
+  margin: 0px 30px;
+}
+.scedule-time {
+  font-size: 12px;
+}
+.scedule-content{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px 0px;
+}
+.scedule-wrap, .scedule-wrap2 {
+  padding: 10px;
+  margin: auto;
+}
+.scedule-category {
+  background-color: #efe;
+  text-align: center;
+  border-radius: 10px;
+}
+.scedule-edit-button, .scedule-delete-button {
+  text-decoration: none;
+  color: #333333;
+}
+#nav{
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  transition: .5s transform ease-in-out;
+  transform: translateX( 250px );
+  -webkit-overflow-scrolling: touch;
+}
+#nav-inner{
+  height: 100%;
+  overflow-y: auto;
+}
+#nav-btn{
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 11;
+  width: 40px;
+  height: 40px;
+  transition: .5s transform ease-in-out;
+  transform: translateX( 0 );
+}
+
+//メニューオープン時
+.nav-open{
+  position: fixed;
+  left: 0;
+}
+.nav-open:after{
+  content:'';
+  display: block;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.6);
+}
+.nav-open #nav{
+  transform: translateX( 0 );
+}
+.nav-open #nav-btn{
+ transform: translateX( -250px );
+}
+
+/*アンケートページ ラジオボタン*/
+input[type=radio] {
+  display: none;
+}
+input[type=radio] + label span {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type=radio] + label span {
+  background-color: #292321;
+}
+
+input[type=radio]:checked + label span {
+  background-color: #90ee90;
+}
+
+input[type=radio] + label span,
+input[type=radio]:checked + label span {
+  transition: background-color 0.3s linear;
+}
+
