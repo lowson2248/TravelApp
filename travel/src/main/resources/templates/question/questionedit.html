@@ -39,18 +39,12 @@
           <p><input type="date" th:value="${#dates.format(question.limitTime, 'yyyy-MM-dd')}" name="limitTime1" class="date" /></p>
           <p><input type="time" name="limitTime2" class="date" th:value="${#dates.format(question.getLimitTime(), 'HH:mm')}"/></p>
     <hr>
-        <p>選択肢</p>
-   <!-- <div th:each="c : ${question.choiceList}">
-          <p><input type="text" class="question" name="choiceList"  th:value="${c.choiceText}" /></p>
-         </div --> 
-         
+        <p>選択肢</p>    
       <ul id="choiceUl" >
         <li class="inputList" th:each="c : ${question.choiceList}" >
           <input type="text" class="choice" name="choiceList" th:value="${c.choiceText}" />
         </li>
-
       </ul>
-      
        
         <div class="icon icon--plus" id="qadd">
           <span class="icon__mark"></span>

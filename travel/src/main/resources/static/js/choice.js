@@ -1,7 +1,7 @@
 $(function () {
 
   var counter = $('.inputList').length;
-  if ($('.inputList').length < 3) {
+  if (counter < 3) {
       $('.micon').fadeOut();
     };
 

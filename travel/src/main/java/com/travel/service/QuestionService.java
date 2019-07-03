@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travel.model.Question;
+import com.travel.repository.AnswerRepository;
+import com.travel.repository.ChoiceRepository;
 import com.travel.repository.QuestionRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,13 @@ public class QuestionService {
 
 	@Autowired
 	QuestionRepository questionRepository;
+	
+	@Autowired
+	ChoiceRepository choiceRepository;
+	
+	@Autowired
+	AnswerRepository answerRepository;
+	
 	
 	public List<Question> findAll() {
 		return questionRepository.findAll();
@@ -43,6 +52,13 @@ public class QuestionService {
 		
 		questionRepository.saveAndFlush(question);
 		System.out.println("save完了 " );
+	}
+	
+	public void delete(int questionId) {
+		Question question = questionRepository.findByquestionId(questionId);
+		answerRepository.deleteByQuestion(question);
+		choiceRepository.deleteByQuestion(question);
+		questionRepository.deleteById(questionId);
 	}
 
 }

@@ -68,11 +68,12 @@ public class QuestionController {
 	}
 	
 	//アンケート一覧画面
-	@GetMapping("/question/{userid}")
+	@GetMapping("/question/base{userid}")
 	public ModelAndView question(ModelAndView mav,@PathVariable("userid") int userId) {
 		System.out.println("Questionベース画面");
 		List<Question> question = questionService.findAll();
 		this.userId = userId;
+		//回答済みか調べてその結果を返す
 		
 		mav.addObject("questionList",question);
 		mav.addObject("userId",userId);
@@ -83,28 +84,37 @@ public class QuestionController {
 
 	
 	//回答後処理
-	@PostMapping("/answer")
-	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav) {
-		//ystem.out.println("回答処理:選択肢:"+form.getChoiceId()+":userId:"+userId);
-		
+	@PostMapping("/question/answer{userid}")
+	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("userid") int userId) {
+				
 		if(!result.hasErrors()) {
 			System.out.println("回答生成");
 			Answer answer = new Answer();
 			Choice choice = choiceService.findById(form.getChoiceId());
 			
 			answer.setChoice(choice);
-			//answer.setUser(userService.findByUserId(userId));
+			answer.setUser(userService.findByUserId(userId));
 			answer.setQuestion(choice.getQuestion());
 			answerService.save(answer);
 		}
-		return "redirect:/question/";
+		return "redirect:/question/base"+userId;
+	}
+	
+	//回答削除処理
+	@GetMapping("/question/delete{questionId}")
+	public String questionDelete( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("questionId") int questionId) {
+				
+		System.out.println("回答削除");
+		questionService.delete(questionId);
+			
+		return "redirect:/question/base"+2;
 	}
 	
 	//アンケート編集画面
-	@GetMapping("/question/edit")
-	public ModelAndView questionEdit(ModelAndView mav) { 
+	@GetMapping("/question/edit{questionid}")
+	public ModelAndView questionEdit(ModelAndView mav,@PathVariable("questionid") int questionId) { 
 		System.out.println("Question編集画面");
-		Question question = questionService.findById(2);
+		Question question = questionService.findById(questionId);
 		mav.addObject("userId",userId);
 		mav.addObject("question",question);
 		mav.setViewName("question/questionedit");
