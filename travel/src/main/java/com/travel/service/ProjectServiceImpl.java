@@ -26,13 +26,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	UserRepository userRepository;
 	
-	@Override
-	public List<Project> getProjectByUserId(Integer user_id) {
-		// TODO 自動生成されたメソッド・スタブ	
-		List<Project> projects = memberRepositry.findByMemberId_userId(user_id);
-		return projects;
-	}
-	
 	
 	/* プロジェクトを一つだけ取得 */
 	@Override
@@ -87,7 +80,13 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void deleteMember(Integer project_id) {
-		memberRepositry.deleteById(project_id);	
+		memberRepositry.deleteById(project_id);		
+	}
+
+	@Override
+	public List<Project> getProjectByUserId(Integer user_id) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}	
 
 }
