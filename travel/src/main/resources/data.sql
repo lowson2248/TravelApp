@@ -39,4 +39,3 @@ INSERT IGNORE INTO `users` (`user_id`,`account_name`,`password`,`mailAddress`)
 VALUES
 
 (1,'travel','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel@tcmobile.jp');
-

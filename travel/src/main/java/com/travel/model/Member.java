@@ -43,11 +43,8 @@ public class Member {
 	//権限の指定
 	@Column(name = "auth_id", nullable=false)
 	private Integer authId;//FK
-	
-	//project_idとuser_idの複合主キー
-	public void setMemberId(Integer projectId,Integer userId) {
-//		this.memberId = new MemberId(projectId,userId);
 
-	}
+	//project_idとuser_idの複合主キー
+
 }
 
