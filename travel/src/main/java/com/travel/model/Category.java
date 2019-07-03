@@ -25,9 +25,4 @@ public class Category {
 	//カテゴリー名
 	@Column(name = "category_name", length = 50, nullable=false)
 	private String categoryName;
-	
-	//スケジュールとの紐づけ
-	@JsonIgnore
-	@OneToOne(mappedBy = "category")
-	private Schedule schedule;
 }
