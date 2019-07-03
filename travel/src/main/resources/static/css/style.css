@@ -253,10 +253,14 @@ body {
 .add input {
   margin: 10px;
 }
+<<<<<<< HEAD
 .add-date {
   font-size: 11px;
   text-align: right;
 }
+=======
+
+>>>>>>> rsasaki/scedule
 /* ’Ç‰Á‚µ‚½•”•ª */
 .inputList {
   list-style: none;
@@ -333,16 +337,20 @@ body {
   justify-content: center;
 }
 .project-box {
+<<<<<<< HEAD
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+=======
+>>>>>>> rsasaki/scedule
   position: relative;
   border: 1px solid #000;
   width: 200px;
   height: 250px;
   text-align: center;
   background-color: #fff;
+<<<<<<< HEAD
   margin: 0px 20px;
 }
 .project-box p {
@@ -358,6 +366,9 @@ body {
   text-indent: -999px;
 }
 
+=======
+}
+>>>>>>> rsasaki/scedule
 .new-create a {
   position: absolute;
   display: block;
@@ -407,9 +418,12 @@ body {
   left: 0px;
   transform: rotate(90deg);
 }
+<<<<<<< HEAD
 .project-user, .project-date {
   font-size: 12px;
 }
+=======
+>>>>>>> rsasaki/scedule
 .select-img p {
   display: inline-block;
   vertical-align: middle;
@@ -433,6 +447,10 @@ body {
 .list-and-add {
   display: flex;
   margin: 10px;
+<<<<<<< HEAD
+=======
+  border-bottom: 1px solid #000;
+>>>>>>> rsasaki/scedule
 }
 .list-and-add p {
   margin: 0px 30px;
@@ -456,10 +474,18 @@ section {
   text-align: center;
   margin-top: 10px;
 }
+<<<<<<< HEAD
 .choice-list {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #eee;
+=======
+.choice-list li {
+  list-style: none;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #000;
+>>>>>>> rsasaki/scedule
 }
 .add-question img {
   width: 20px;
@@ -491,7 +517,11 @@ section {
 }
 .scedule-edit-button, .scedule-delete-button {
   text-decoration: none;
+<<<<<<< HEAD
   color: #333333;
+=======
+  color: #000;
+>>>>>>> rsasaki/scedule
 }
 #nav{
   position: fixed;

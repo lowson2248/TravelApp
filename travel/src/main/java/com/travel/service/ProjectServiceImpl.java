@@ -26,13 +26,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	UserRepository userRepository;
 	
-	@Override
-	public List<Project> getProjectByUserId(Integer user_id) {
-		// TODO 自動生成されたメソッド・スタブ	
-		List<Project> projects = memberRepositry.findByMemberId_userId(user_id);
-		return projects;
-	}
-	
 	
 	/* プロジェクトを一つだけ取得 */
 	@Override
@@ -44,10 +37,11 @@ public class ProjectServiceImpl implements ProjectService {
 	 *  プロジェクト新規作成 
 	 */
 	@Override
-	public void createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
+	public int createProject(String projectName,Date startDate,Date lastDate,String mailAddress) {
 
 		//現在時間取得（作成日のため）
 		Date now = new Date();
+		
 		//現在ログインしているユーザを取得する必要がある。
 		//プロジェクト作成処理
 		Project project = new Project();
@@ -60,14 +54,17 @@ public class ProjectServiceImpl implements ProjectService {
 		project.setLastDate(lastDate);
 		project.setCreateDate(now);
 		projectRepositry.saveAndFlush(project);
-		
+
 		//メンバーへのデータ挿入
 		Member member = new Member();
-		member.setMemberId(project.getProjectId(), user.getUserId());
+		member.setProject(project);
+		member.setUser(user);
 		member.setAuthId(1);
 		memberRepositry.saveAndFlush(member);
 
+		return project.getProjectId();
 	}
+	
 
 	@Override
 	public Project updateProject(Project project) {
@@ -75,14 +72,23 @@ public class ProjectServiceImpl implements ProjectService {
 		return null;
 	}
 
+	/*
+	 *  プロジェクト削除
+	 */
 	@Override
 	public void deleteProject(Integer project_id) {
-		// TODO 自動生成されたメソッド・スタブ	
+		projectRepositry.deleteById(project_id);	
 	}
 
 	@Override
 	public void deleteMember(Integer project_id) {
-		// TODO 自動生成されたメソッド・スタブ	
+		memberRepositry.deleteById(project_id);		
+	}
+
+	@Override
+	public List<Project> getProjectByUserId(Integer user_id) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}	
 	
 	public Project findById(int id){

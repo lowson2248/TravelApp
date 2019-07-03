@@ -4,6 +4,50 @@
     <meta charset="utf-8">
     <title>スケジュール一覧</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/schedule.css" />
+    <link rel='stylesheet' th:href="@{/webjars/fullcalendar/3.5.1/dist/fullcalendar.css}" />
+	<script th:src="@{/webjars/jquery/2.0.3/jquery.min.js}"></script>
+	<script th:src="@{/webjars/moment/2.19.1/min/moment.min.js}"></script>
+	<script th:src="@{/webjars/fullcalendar/3.5.1/dist/fullcalendar.js}"></script>
+	<script type="text/javascript">
+	  
+		$(document).ready(function() {
+			$('#calendar').fullCalendar({
+				customButtons : {
+					myCustomButton : {
+						text : '課題追加',
+						click : function() {
+							location.href = "/schedule/add";
+						}
+					}
+				},
+				buttonIcons : {
+					prev: 'left-single-arrow',
+					next: 'right-single-arrow'
+				},
+				eventSources : [ {
+					url : '/api/event/all'
+				} ],
+				eventClick : function(info) {
+					$.ajax({
+						url : "/schedule/detail" + info.id,
+						type : "GET",
+					}).done(function(responseData) {
+						location.href = "/schedule/detail" + info.id;
+					}).fail(function() {
+						console.log("errorばーか");
+					})
+				},
+				header : {
+					left : 'prev, title, next',
+					right : 'myCustomButton'
+				},
+				lang : 'ja',
+				defaultView : 'agendaDay',
+				height : 680
+			});
+		});
+	</script>
 </head>
 <body>
 <header>
@@ -11,16 +55,18 @@
     <p class="menu-title">旅行計画アプリ</p>
     <a class="user" href=""><img src="../img/user.png"></a>
   </div>
-  <div class="side-menu">
+  <div class="side-menu" style="display: inline">
     <nav class="gnav">
       <ul class="gnav-menu">
-        <li><a href="">スケジュール一覧</a></li>
-        <li><a href="">スケジュール詳細</a></li>
+        <li><a href="/schedule/top">スケジュール一覧</a></li>
+        <li><a href="/schedule/detail">スケジュール詳細</a></li>
         <li><a href="">アンケート一覧</a></li>
         <li><a href="/project/edit">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
       </ul>
     </nav>
   </div>
+  <div class="calender-flame"  style="width: 1100px; float: right; margin-right: 5px; margin-top: 10px"><div id='calendar'></div></div>
 </header>
+</body>
 </html>
