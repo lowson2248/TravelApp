@@ -33,4 +33,8 @@ public class UserServiceImp implements UserService{
 			userRepository.saveAndFlush(user);
 		}
 	}
+	
+	public User findByUserId(int id) {
+		return userRepository.findByUserId(id);
+	}
 }

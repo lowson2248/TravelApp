@@ -26,7 +26,7 @@ public class Answer {
 	private Integer answerId;
 	
 	//質問ID 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "question_id", nullable=false)
 	private Question question;//FK
 	

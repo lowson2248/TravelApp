@@ -59,8 +59,8 @@ public class Project {
 	
 	//chatとの紐づけ
 	@JsonIgnore
-	@OneToOne(mappedBy = "project")
-	private Chat chat;
+	@OneToMany(mappedBy = "project")
+	private List<Chat> chatList;
 	
 	//scheduleとの紐づけ
 	@JsonIgnore
