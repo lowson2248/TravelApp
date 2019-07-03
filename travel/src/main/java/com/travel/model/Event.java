@@ -2,7 +2,15 @@ package com.travel.model;
 
 public class Event {
 
-    private String title;
+	private Integer id;
+	
+    public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	private String title;
  
     //カレンダーの開始日付
     private String start;

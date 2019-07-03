@@ -6,5 +6,6 @@ import com.travel.model.Project;
 import com.travel.model.Schedule;
 
 public interface ScheduleService {
-	public List<Schedule> find(Integer projectId);
+	public List<Schedule> findAllSchadule(Integer projectId);
+	public Schedule findOne(Integer scheduleId);
 }

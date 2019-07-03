@@ -11,4 +11,5 @@ import com.travel.model.Schedule;
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer>{
 
 	public List<Schedule> findByProject(Project project);
+	
 }

@@ -29,9 +29,7 @@ public class Member {
 	
 	//project_idとuser_idの複合主キー
 	@Data
-	@AllArgsConstructor
 	public class MemberId implements Serializable {
-		
 	    @JoinColumn(name = "project_id", nullable=false)
 		private Integer projectId;//複合主キー FK
 	    @JoinColumn(name = "user_id", nullable=false)

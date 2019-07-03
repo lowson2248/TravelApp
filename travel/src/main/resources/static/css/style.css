@@ -111,15 +111,24 @@ body {
   background-color: #fff;
   border-radius: 100px;
   position: absolute;
-  right: 5px;
+  right: 55px;
+  top: 8px;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+}
+.chat {
+  position: absolute;
+  right: 20px;
   top: 5px;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
 }
 .side-menu {
   width: 150px;
   float: left;
-
 }
 .gnav-menu {
   height: 100vh;
@@ -150,6 +159,9 @@ body {
   padding: 10px;
   text-align: center;
 }
+.input-form {
+  margin-bottom: 20px;
+}
 
 .username, .email, .password, .project-name,
 .choice, .question, .scedule-name, .scedule-type {
@@ -159,7 +171,8 @@ body {
   width: 250px;
   border-radius: 8px;
 }
-.date, .start-time, .end-time {
+.date, .start-time, .end-time, 
+.start-date, .end-date {
   background-color: #eee;
   border: none;
   height: 25px;
@@ -196,13 +209,17 @@ body {
 }
 
 .project-create {
+  max-width: 500px;
   display: inline-block;
-  text-align: center;
+  margin: auto;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+}
+.input-project {
+  margin: 20px 0px;
 }
 .create-form {
   font-size: 12px;
@@ -236,6 +253,13 @@ body {
 .add input {
   margin: 10px;
 }
+
+/* 追加した部分 */
+.inputList {
+  list-style: none;
+}
+
+
 .question-data, .text {
   background-color: #eee;
   border: none;
@@ -243,7 +267,6 @@ body {
   width: 250px;
   border-radius: 8px;
 }
-
 .icon {
   position: relative;
   left: -35px;
@@ -280,6 +303,7 @@ body {
   border-radius: 50%;
   margin: auto;
   margin-bottom: 10px;
+  display: none;
 }
 .micon::before {
   position: absolute;
@@ -297,11 +321,21 @@ body {
   left: 0px;
   transform: rotate(90deg);
 }
-
+.scedule-type {
+  margin: 10px;
+}
 .project {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.project-box {
+  position: relative;
+  border: 1px solid #000;
+  width: 200px;
+  height: 250px;
+  text-align: center;
+  background-color: #fff;
 }
 .new-create a {
   position: absolute;
@@ -315,17 +349,17 @@ body {
 .new-create {
   position: relative;
   border: 1px solid #000;
-  width: 25%;
-  height: 200px;
+  width: 200px;
+  height: 250px;
   text-align: center;
   background-color: #fff;
 }
 .new-create p {
-  padding-top: 60px;
+  padding-top: 90px;
 }
 .icon2 {
   position: relative;
-  top: 20px;
+  top: 10px;
   width: 30px;
   height: 30px;
   background: #fff;
@@ -349,4 +383,137 @@ body {
   top: 7px;
   left: 0px;
   transform: rotate(90deg);
+}
+.select-img p {
+  display: inline-block;
+  vertical-align: middle;
+}
+.add-scedule img {
+  width: 20px;
+  height: 20px;
+}
+.add-scedule a {
+  text-decoration: none;
+  color: #000;
+  position: absolute;
+  right: 5px;
+}
+.date-and-add {
+  display: flex;
+}
+.date-and-add p {
+  margin: 10px 30px;
+}
+.list-and-add {
+  display: flex;
+  margin: 10px;
+  border-bottom: 1px solid #000;
+}
+.list-and-add p {
+  margin: 0px 30px;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.question-main {
+  margin: 30px;
+  text-align: center;
+}
+.status {
+  text-align: center;
+  color: #ff0000;
+}
+.question-ttl {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+.choice-list li {
+  list-style: none;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #000;
+}
+.add-question img {
+  width: 20px;
+  height: 20px;
+}
+.add-question a {
+  text-decoration: none;
+  color: #000;
+  position: absolute;
+  right: 5px;
+  margin: 0px 30px;
+}
+.scedule-time {
+  font-size: 12px;
+}
+.scedule-content{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px 0px;
+}
+.scedule-wrap, .scedule-wrap2 {
+  padding: 10px;
+  margin: auto;
+}
+.scedule-category {
+  background-color: #efe;
+  text-align: center;
+  border-radius: 10px;
+}
+.scedule-edit-button, .scedule-delete-button {
+  text-decoration: none;
+  color: #000;
+}
+#nav{
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  transition: .5s transform ease-in-out;
+  transform: translateX( 250px );
+  -webkit-overflow-scrolling: touch;
+}
+#nav-inner{
+  height: 100%;
+  overflow-y: auto;
+}
+#nav-btn{
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 11;
+  width: 40px;
+  height: 40px;
+  transition: .5s transform ease-in-out;
+  transform: translateX( 0 );
+}
+
+//メニューオープン時
+.nav-open{
+  position: fixed;
+  left: 0;
+}
+.nav-open:after{
+  content:'';
+  display: block;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.6);
+}
+.nav-open #nav{
+  transform: translateX( 0 );
+}
+.nav-open #nav-btn{
+ transform: translateX( -250px );
 }

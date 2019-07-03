@@ -25,6 +25,11 @@
         <a href="/project/createProject"></a>
       </div>
       
+	    <div class="new-create" th:if="projectList!=null" th:each="project : ${projectList}">
+	      <p th:text="${project.getProjectName()}"></p>
+	      <p>期間 <span th:text="${project.getStartDate()}"></span>~<span th:text="${project.getLastDate()}"></span></p>
+	    </div>
+      
     </div>
   </div>
 </html>

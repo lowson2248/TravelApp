@@ -17,7 +17,7 @@
 					myCustomButton : {
 						text : '課題追加',
 						click : function() {
-							location.href = "/schedule/add";
+							location.href = "/schedule/add/";
 						}
 					}
 				},
@@ -28,15 +28,14 @@
 				eventSources : [ {
 					url : '/api/event/all'
 				} ],
-				eventClick : function() {
+				eventClick : function(info) {
 					$.ajax({
-						url : "/schedule/edit",
+						url : "/schedule/detail" + info.id,
 						type : "GET",
 					}).done(function(responseData) {
-						console.log(responseData)
-						location.href = "/schedule/edit"
+						location.href = "/schedule/detail" + info.id;
 					}).fail(function() {
-						console.log("aaa");
+						console.log("errorばーか");
 					})
 				},
 				header : {
@@ -45,8 +44,7 @@
 				},
 				lang : 'ja',
 				defaultView : 'agendaDay',
-				height : 680,
-				timeZone: 'Asia/Tokyo'
+				height : 680
 			});
 		});
 	</script>

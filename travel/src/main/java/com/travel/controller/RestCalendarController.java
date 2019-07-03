@@ -31,16 +31,6 @@ public class RestCalendarController {
         String jsonMsg = null;
         try {
             List<Event> events = new ArrayList<Event>();
-//            Event event = new Event();
-//            event.setTitle("first event");
-//            event.setStart("2019-07-01");
-//            events.add(event);
-//
-//            event = new Event();
-//            event.setTitle("second event");
-//            event.setStart("2019-07-01T04:30:00");
-//            event.setEnd("2019-07-01T05:30:00");
-//            events.add(event);
             
             List<Schedule> scheduleList = projectService.getOneProject(2).getScheduleList();
             scheduleList.forEach(schedule -> {
@@ -48,6 +38,7 @@ public class RestCalendarController {
             	SimpleDateFormat tokyoSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
                 tokyoSdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
+                event.setId(schedule.getScId());
             	event.setTitle(schedule.getScName());
             	event.setStart(tokyoSdf.format(schedule.getStartTime()));
             	event.setEnd(tokyoSdf.format(schedule.getLastTime()));
