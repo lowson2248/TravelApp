@@ -85,12 +85,12 @@ public class ProjectController {
 		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
 		System.out.println("プロジェクトID："+projectId);
 		mav.addObject("projectForm",projectForm);
-		return new ModelAndView("redirect:/project/"+projectId+"/schedule")  ;
+		return new ModelAndView("redirect:/project"+projectId+"/schedule")  ;
 	}
 	
 	
 	//プロジェクト編集画面表示処理
-	@GetMapping(value = {"/project={project_id}/edit"})
+	@GetMapping(value = {"/project{project_id}/edit"})
 	public ModelAndView showEditProject(ModelAndView mav) {
 		mav.setViewName("project/projectEdit");//projectEdit.htmlは未実装
 		return mav;
@@ -99,7 +99,7 @@ public class ProjectController {
 	/*
 	 *プロジェクト削除処理 
 	 */
-	@DeleteMapping(value = {"/project={project_id}/edit"})
+	@DeleteMapping(value = {"/project{project_id}/edit"})
 	public ModelAndView deleteProject(ModelAndView mav,@PathVariable int project_id) {
 		projectServise.deleteProject(project_id);
 		//projectServise.deleteMember(project_id);
