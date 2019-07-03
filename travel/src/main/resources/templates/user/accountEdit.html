@@ -10,8 +10,9 @@
 <div class="test">
   <div class="head-menu">
     <p class="menu-title">設定</p>
-    <a class="user" href=""><img src="../img/user.png"></a>
+    <a class="user" th:href="@{/userEdit}"><img src="../img/user.png"></a>
   </div>
+  <!--  
   <div class="side-menu">
     <nav class="gnav">
       <ul class="gnav-menu">
@@ -23,18 +24,19 @@
       </ul>
     </nav>
   </div>
+  -->
 </header>
   <div class="account-edit">
     <p class="service">アカウント設定</p>
-    <form action="post" class="edit-form">
+    <form th:action="@{/userEdit}" method="post" th:object="${userEditForm}" class="edit-form">
         <p>ユーザー名変更</p>
-          <p><input type="text"  class="username" name="username" /></p>
+          <p><input type="text"  class="username" name="username" th:field="*{username}" /></p>
         <p>メールアドレス変更</p>
-          <p><input type="text" class="email" name="email" /></p>
+          <p><input type="text" class="email" name="email" th:field="*{mailAddress}" /></p>
         <p>パスワード変更</p>
-          <p><input type="password" class="password" name="password" /></p>
-        <p>パスワード変更</p>
-          <p><input type="password" class="password" name="password" /></p>
+          <p><input type="password" class="password" name="password" th:field="*{password}" /></p>
+        <!--p>パスワード変更</p-->
+          <!--p><input type="password" class="password" name="password" /></p-->
         <p><input type="submit" class="update" value="アカウント更新" /></p>
         <p><input type="submit" class="delete" value="アカウント削除" /></p>
     </form>

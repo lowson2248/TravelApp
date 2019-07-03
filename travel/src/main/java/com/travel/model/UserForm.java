@@ -11,7 +11,7 @@ import lombok.Data;
 public class UserForm implements Serializable{
 
 	@NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 30)
     private String username;
     @NotNull
     @Size(min = 1, max = 100)

@@ -81,7 +81,6 @@ public class ProjectController {
 		System.out.println("プロジェクト制作者 : " + userDetails.getUsername());
 		
 		//プロジェクトを作成
-
 		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
 		System.out.println("プロジェクトID："+projectId);
 		mav.addObject("projectForm",projectForm);
