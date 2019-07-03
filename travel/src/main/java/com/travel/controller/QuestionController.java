@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.travel.model.Answer;
 import com.travel.model.AnswerForm;
 import com.travel.model.Choice;
+import com.travel.model.Project;
+import com.travel.model.ProjectForm;
 import com.travel.model.Question;
+import com.travel.model.QuestionNewForm;
 import com.travel.service.AnswerService;
 import com.travel.service.ChoiceService;
 import com.travel.service.QuestionService;
@@ -24,7 +28,7 @@ import com.travel.service.UserService;
 
 
 @Controller
-@RequestMapping("/question/{userid}")
+@RequestMapping("/question")
 public class QuestionController {
 	
 	@Autowired
@@ -45,8 +49,13 @@ public class QuestionController {
 		return new AnswerForm();
 	}
 	
+	@ModelAttribute
+	public QuestionNewForm questionNewForm() {
+		return new QuestionNewForm();
+	}
+	
 	//アンケート一覧画面
-	@GetMapping
+	@RequestMapping(value="/{userid}",method=RequestMethod.GET)
 	public ModelAndView question(ModelAndView mav,@PathVariable("userid") int userId) {
 		System.out.println("Questionベース画面");
 		List<Question> question = questionService.findAll();
@@ -60,7 +69,7 @@ public class QuestionController {
 	
 	//回答後処理
 	@PostMapping("/answer")
-	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("userid") int userId) {
+	public String questionans(@Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("userid") int userId) {
 		System.out.println("回答処理:選択肢:"+form.getChoiceId()+":userId:"+userId);
 		
 		if(!result.hasErrors()) {
@@ -76,5 +85,20 @@ public class QuestionController {
 		return "redirect:/question/"+userId;
 	}
 
-
+    //アンケート作成画面
+    @RequestMapping(value="/create",method=RequestMethod.GET)
+    public ModelAndView showCreateQuestion(ModelAndView mav) {
+        mav.setViewName("questionAdd");
+        return mav;
+    }
+    
+    @PostMapping("/create/{projectid}")
+    public String createQuestions( @Validated QuestionNewForm questionNewForm, BindingResult result, ModelAndView mav, @PathVariable("projectid") int projectId) {
+    	System.out.println("アンケート名 : " + questionNewForm.getTitle());
+    	System.out.println("タイトル名 : " + questionNewForm.getLastDate());
+    	System.out.println("プロジェクトID : " + projectId);
+    	System.out.println("タイトル名 : " + questionNewForm.getQuestionDetails());
+    	questionService.saveQuestion(questionNewForm.getTitle(), questionNewForm.getLastDate(), projectId, questionNewForm.getQuestionDetails());
+    	return "redirect:/question/" + projectId;
+    }
 }
