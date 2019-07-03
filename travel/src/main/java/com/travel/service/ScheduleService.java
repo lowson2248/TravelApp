@@ -8,4 +8,5 @@ import com.travel.model.Schedule;
 public interface ScheduleService {
 	public List<Schedule> findAllSchadule(Integer projectId);
 	public Schedule findOne(Integer scheduleId);
+	public void update(Schedule schedule);
 }

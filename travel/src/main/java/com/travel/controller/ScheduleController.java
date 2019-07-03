@@ -61,8 +61,8 @@ public class ScheduleController {
 		return mav;
 	}
 	
-	@GetMapping("/schedule/edit")
-	public ModelAndView showSceduleEdit(ModelAndView mav) {
+	@GetMapping("/schedule/edit{id}")
+	public ModelAndView showSceduleEdit(ModelAndView mav, @PathVariable("id") int id) {
 		System.out.println("aaa");
 		mav.setViewName("schedule/scheduleEdit");
 		return mav;
