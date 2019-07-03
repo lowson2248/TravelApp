@@ -1,6 +1,7 @@
 package com.travel.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -24,5 +25,5 @@ public class QuestionNewForm {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date lastDate;
 	//選択肢
-	private String choice;
+	private List<String> choice;
 }

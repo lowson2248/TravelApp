@@ -253,7 +253,14 @@ body {
 .add input {
   margin: 10px;
 }
+<<<<<<< HEAD
+.add-date {
+  font-size: 11px;
+  text-align: right;
+}
+=======
 
+>>>>>>> rsasaki/scedule
 /* 追加した部分 */
 .inputList {
   list-style: none;
@@ -330,13 +337,38 @@ body {
   justify-content: center;
 }
 .project-box {
+<<<<<<< HEAD
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+=======
+>>>>>>> rsasaki/scedule
   position: relative;
   border: 1px solid #000;
   width: 200px;
   height: 250px;
   text-align: center;
   background-color: #fff;
+<<<<<<< HEAD
+  margin: 0px 20px;
 }
+.project-box p {
+  text-align: center;
+}
+.project-box a {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: -999px;
+}
+
+=======
+}
+>>>>>>> rsasaki/scedule
 .new-create a {
   position: absolute;
   display: block;
@@ -353,6 +385,7 @@ body {
   height: 250px;
   text-align: center;
   background-color: #fff;
+  margin: 0px 20px;
 }
 .new-create p {
   padding-top: 90px;
@@ -385,6 +418,12 @@ body {
   left: 0px;
   transform: rotate(90deg);
 }
+<<<<<<< HEAD
+.project-user, .project-date {
+  font-size: 12px;
+}
+=======
+>>>>>>> rsasaki/scedule
 .select-img p {
   display: inline-block;
   vertical-align: middle;
@@ -408,7 +447,10 @@ body {
 .list-and-add {
   display: flex;
   margin: 10px;
+<<<<<<< HEAD
+=======
   border-bottom: 1px solid #000;
+>>>>>>> rsasaki/scedule
 }
 .list-and-add p {
   margin: 0px 30px;
@@ -432,11 +474,18 @@ section {
   text-align: center;
   margin-top: 10px;
 }
+<<<<<<< HEAD
+.choice-list {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+=======
 .choice-list li {
   list-style: none;
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #000;
+>>>>>>> rsasaki/scedule
 }
 .add-question img {
   width: 20px;
@@ -468,7 +517,11 @@ section {
 }
 .scedule-edit-button, .scedule-delete-button {
   text-decoration: none;
+<<<<<<< HEAD
+  color: #333333;
+=======
   color: #000;
+>>>>>>> rsasaki/scedule
 }
 #nav{
   position: fixed;
@@ -518,3 +571,31 @@ section {
 .nav-open #nav-btn{
  transform: translateX( -250px );
 }
+
+/*アンケートページ ラジオボタン*/
+input[type=radio] {
+  display: none;
+}
+input[type=radio] + label span {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type=radio] + label span {
+  background-color: #292321;
+}
+
+input[type=radio]:checked + label span {
+  background-color: #90ee90;
+}
+
+input[type=radio] + label span,
+input[type=radio]:checked + label span {
+  transition: background-color 0.3s linear;
+}
+
