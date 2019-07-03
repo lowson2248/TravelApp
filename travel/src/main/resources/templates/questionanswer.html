@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>アンケート解答</title>
+
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div id="main-content" class="container">
+<p>Test Question Answer</p>
+
+<form th:action="@{/question/answer}" th:object="${answerForm}" method="post">
+    <p>Question: ○○</p>
+    <p>選択肢: <input type="text" th:field="*{choiceId}" /></p>
+    <input type="submit" value="Answer" />
+
+</form>
+
+
+ <a href="/question">遷移</a>
+
+</div>
+</body>
+</html>

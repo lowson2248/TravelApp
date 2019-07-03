@@ -84,5 +84,13 @@ public class ProjectServiceImpl implements ProjectService {
 	public void deleteMember(Integer project_id) {
 		// TODO 自動生成されたメソッド・スタブ	
 	}	
+	
+	public Project findById(int id){
+		return projectRepositry.findByProjectId(id);
+	}
+	
+	public void save(Project project) {
+		projectRepositry.saveAndFlush(project);
+	}
 
 }

@@ -65,6 +65,6 @@ public class User {
 	
 	//chatとの紐づけ
 	@JsonIgnore
-	@ManyToMany(mappedBy ="userList")
+	@OneToMany(mappedBy ="user")
 	private List<Chat> chatList;
 }

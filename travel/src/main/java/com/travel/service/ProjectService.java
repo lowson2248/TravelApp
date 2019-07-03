@@ -20,6 +20,8 @@ public interface ProjectService {
 	public Project updateProject(Project project);
 	public void deleteProject(Integer project_id);
 	public void deleteMember(Integer project_id);
+	public Project findById(int id);
+	public void save(Project project);
 	
 	
 	/*public void saveProject(Project project, Member member);
