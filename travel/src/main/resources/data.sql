@@ -8,12 +8,12 @@ VALUES(1,'2111-01-01 12:10:10','test',1),(2,'2111-01-01 12:10','test',2),(3,'211
 INSERT IGNORE INTO `projects` (`project_id`,`created_date`,`last_date`,`project_name`,`start_date`,`user_id`)
 VALUES(1,'2019-11-12','2019-12-11','test','2019-12-14',1),
 (2,'2019-12-12','2020-01-11','test1','2019-01-14',1),
-(3,'2019-11-12','2019-12-11','test2','2019-12-14',2)
+(3,'2019-11-12','2019-12-11','test2','2019-12-14',1)
 ;
 
 
-INSERT IGNORE INTO `members` (`project_id`,`user_id`,`auth_id`)
-VALUES(3,1,1),(2,1,1),(2,1,3);
+INSERT IGNORE INTO `members` (`member_id`,`project_id`,`user_id`,`auth_id`)
+VALUES(1,1,1,1),(2,2,1,1),(3,3,1,1);
 
 INSERT IGNORE INTO `answers` (`answer_id`,`question_id`,`user_id`,choice_id)
 VALUES(1,1,1,1),(2,1,2,1),(3,1,3,2);
@@ -38,6 +38,3 @@ VALUES
 INSERT IGNORE INTO `users` (`user_id`,`account_name`,`password`,`mailAddress`)
 VALUES
 (1,'travel','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel@tcmobile.jp');
-
-
-

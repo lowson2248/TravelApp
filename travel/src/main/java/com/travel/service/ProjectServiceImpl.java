@@ -41,6 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 		//現在時間取得（作成日のため）
 		Date now = new Date();
+		
 		//現在ログインしているユーザを取得する必要がある。
 		//プロジェクト作成処理
 		Project project = new Project();
@@ -56,11 +57,13 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		//メンバーへのデータ挿入
 		Member member = new Member();
-		member.setMemberId(project.getProjectId(), user.getUserId());
+		member.setProject(project);
+		member.setUser(user);
 		member.setAuthId(1);
 		memberRepositry.saveAndFlush(member);
-
+		
 	}
+	
 
 	@Override
 	public Project updateProject(Project project) {

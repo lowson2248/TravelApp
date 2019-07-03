@@ -1,6 +1,7 @@
 package com.travel.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -51,14 +52,18 @@ public class ProjectController {
 	@GetMapping("/project/select")
 	public ModelAndView showProjectSelect(ModelAndView mav,@AuthenticationPrincipal UserDetails userDetails) {
 		
+		
 		/*ユーザが参加しているプロジェクトの表示*/
-		User user = userRepository.findByMailAddress(userDetails.getUsername());
-		List<Member> memberList = memberRopository.findByMemberId_UserId(user.getUserId());
-	
-		mav.addObject("memberList",memberList);
+		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
+		List<Member>memberList = memberRopository.findByUser(loginUser);
+		mav.addObject("joinList",memberList);
+		
+		/*遷移先は本来なら作成したプロジェクトのスケジュール画面！*/
 		mav.setViewName("project/projectSelect");
 		return mav;
 	}
+	
+	
 	
 	//プロジェクト新規登録画面表示処理
 	@GetMapping(value = {"/project/createProject"})
@@ -67,6 +72,8 @@ public class ProjectController {
 		mav.setViewName("project/projectCreate");
 		return mav;
 	}
+	
+	
 	
 	//プロジェクト新規登録処理
 	@PostMapping(value = {"/project/create"})
@@ -81,7 +88,12 @@ public class ProjectController {
 		//プロジェクトを作成
 		projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
 		
-		mav.addObject("projectForm",projectForm);
+		/*ユーザが参加しているプロジェクトの表示*/
+		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
+		List<Member>memberList = memberRopository.findByUser(loginUser);
+		
+		mav.addObject("joinList",memberList);
+		/*遷移先は本来なら作成したプロジェクトのスケジュール画面！*/
 		mav.setViewName("/project/projectSelect");
 		return mav;
 	}
