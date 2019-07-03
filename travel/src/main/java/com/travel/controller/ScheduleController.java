@@ -33,7 +33,7 @@ public class ScheduleController {
 		return new ModelAndView("redirect:/schedule/top");
 	}
 	
-	@GetMapping("/schedule/top")
+	@GetMapping("project{projectId}/schedule")
 	public ModelAndView showSceduleTop(ModelAndView mav) {
 		mav.setViewName("schedule/schedule");
 		return mav;
