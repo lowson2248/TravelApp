@@ -253,8 +253,10 @@ body {
 .add input {
   margin: 10px;
 }
-
-/* 追加した部分 */
+.add-date {
+  font-size: 11px;
+  text-align: right;
+}
 .inputList {
   list-style: none;
 }
@@ -330,6 +332,10 @@ body {
   justify-content: center;
 }
 .project-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
   border: 1px solid #000;
   width: 200px;
@@ -337,6 +343,19 @@ body {
   text-align: center;
   background-color: #fff;
 }
+.project-box p {
+  text-align: center;
+}
+.project-box a {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: -999px;
+}
+
 .new-create a {
   position: absolute;
   display: block;
@@ -353,6 +372,7 @@ body {
   height: 250px;
   text-align: center;
   background-color: #fff;
+  margin: 0px 20px;
 }
 .new-create p {
   padding-top: 90px;
@@ -385,6 +405,11 @@ body {
   left: 0px;
   transform: rotate(90deg);
 }
+
+.project-user, .project-date {
+  font-size: 12px;
+}
+
 .select-img p {
   display: inline-block;
   vertical-align: middle;
@@ -409,6 +434,7 @@ body {
   display: flex;
   margin: 10px;
   border-bottom: 1px solid #000;
+
 }
 .list-and-add p {
   margin: 0px 30px;
@@ -432,11 +458,11 @@ section {
   text-align: center;
   margin-top: 10px;
 }
-.choice-list li {
-  list-style: none;
+
+.choice-list {
   text-align: left;
   padding: 10px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #eee;
 }
 .add-question img {
   width: 20px;
@@ -468,7 +494,7 @@ section {
 }
 .scedule-edit-button, .scedule-delete-button {
   text-decoration: none;
-  color: #000;
+  color: #333333;
 }
 #nav{
   position: fixed;
@@ -496,7 +522,6 @@ section {
   transform: translateX( 0 );
 }
 
-//メニューオープン時
 .nav-open{
   position: fixed;
   left: 0;
@@ -518,3 +543,30 @@ section {
 .nav-open #nav-btn{
  transform: translateX( -250px );
 }
+
+input[type=radio] {
+  display: none;
+}
+input[type=radio] + label span {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type=radio] + label span {
+  background-color: #292321;
+}
+
+input[type=radio]:checked + label span {
+  background-color: #90ee90;
+}
+
+input[type=radio] + label span,
+input[type=radio]:checked + label span {
+  transition: background-color 0.3s linear;
+}
+

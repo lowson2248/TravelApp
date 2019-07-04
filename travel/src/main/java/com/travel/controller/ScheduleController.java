@@ -33,36 +33,39 @@ public class ScheduleController {
 		return new ModelAndView("redirect:/schedule/top");
 	}
 	
-	@GetMapping("/schedule/top")
-	public ModelAndView showSceduleTop(ModelAndView mav) {
+	@GetMapping("project{projectId}/schedule")
+	public ModelAndView showSceduleTop(ModelAndView mav, @PathVariable("projectId") int projectId) {
 		mav.setViewName("schedule/schedule");
+		mav.addObject("projectId", projectId);
 		return mav;
 	}
 	
-	@GetMapping("/schedule/detail")
-	public ModelAndView showSceduleDetail(ModelAndView mav) {
+	@GetMapping("project{projectId}/schedule/detail")
+	public ModelAndView showSceduleDetail(ModelAndView mav,@PathVariable("projectId") int projectId) {
 		mav.addObject("scheduleDetail", scheduleService.findAllSchadule(1));
 		mav.setViewName("schedule/scheduleDetail");
+		mav.addObject("projectId", projectId);
 		return mav;
 	}
 	
-	@GetMapping("/schedule/detail{id}")
-	public ModelAndView showOneSceduleDetail(ModelAndView mav, @PathVariable("id") int id) {
+	@GetMapping("project{projectId}/schedule/detail{id}")
+	public ModelAndView showOneSceduleDetail(ModelAndView mav, @PathVariable("projectId") int projectId,@PathVariable("id") int id) {
 		mav.addObject("scheduleDetail", scheduleService.findOne(id));
 		mav.setViewName("schedule/scheduleDetail");
+		mav.addObject("projectId", projectId);
 		return mav;
 	}
 	
 	
-	@GetMapping("/schedule/add")
-	public ModelAndView showSceduleAdd(ModelAndView mav) {
+	@GetMapping("project{projectId}/schedule/add")
+	public ModelAndView showSceduleAdd(ModelAndView mav, @PathVariable("projectId") int projectId) {
 		mav.setViewName("schedule/scheduleAdd");
+		mav.addObject("projectId", projectId);
 		return mav;
 	}
-	
-	@GetMapping("/schedule/edit{id}")
-	public ModelAndView showSceduleEdit(ModelAndView mav, @PathVariable("id") int id) {
-		System.out.println("aaaa");
+
+	@GetMapping("project{projectId}/schedule/edit{id}")
+	public ModelAndView showSceduleEdit(ModelAndView mav, @PathVariable("projectId") int projectId,@PathVariable("id") int id) {
 		ScheduleForm beforeEditForm = new ScheduleForm();
 		Schedule selectSchedule = scheduleService.findOne(id);
 		String sday = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getStartTime());
@@ -78,20 +81,17 @@ public class ScheduleController {
 		beforeEditForm.setText(selectSchedule.getDetails());
 		beforeEditForm.setTitle(selectSchedule.getScName());
 		
+		mav.addObject("projectId", projectId);
 		mav.addObject("editSchedule", beforeEditForm);
 		mav.setViewName("schedule/scheduleEdit");
 		System.out.println(id);
 		return mav;
 	}
 	
-	@PostMapping(value="/schedule/add") 
+	@PostMapping(value="project{projectId}/schedule/add") 
 		public ModelAndView scheduleAddCreate(ModelAndView mav, @Validated ScheduleForm addForm ,BindingResult bindingresult ) {
 		System.out.println(addForm.getTitle());
 		System.out.println(addForm.getCateId());
-		System.out.println(addForm.getStartDay());
-		System.out.println(addForm.getStart());
-		System.out.println(addForm.getEndDay());
-		System.out.println(addForm.getEnd());
 		mav.setViewName("schedule/schedule");
 		scheduleService.create(addForm);
 		System.out.println("saveato");

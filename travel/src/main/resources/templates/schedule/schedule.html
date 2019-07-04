@@ -3,15 +3,17 @@
 <head>
     <meta charset="utf-8">
     <title>スケジュール一覧</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="../css/schedule.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/schedule.css}" />
     <link rel='stylesheet' th:href="@{/webjars/fullcalendar/3.5.1/dist/fullcalendar.css}" />
-	<script src="../js/jQuery-3.3.1.min.js"></script>
+
+	<script th:src="@{/js/jQuery-3.3.1.min.js}"></script>
 	<script th:src="@{/webjars/moment/2.19.1/min/moment.min.js}"></script>
 	<script th:src="@{/webjars/fullcalendar/3.5.1/dist/fullcalendar.js}"></script>
-	<script type="text/javascript">
-	  
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
 		$(document).ready(function() {
+			let projectId = /*[[${projectId}]]*/0;
 			$('#calendar').fullCalendar({
 				customButtons : {
 					myCustomButton : {
@@ -26,14 +28,15 @@
 					next: 'right-single-arrow'
 				},
 				eventSources : [ {
-					url : '/api/event/all'
+					url : '/api/event/all' + projectId
 				} ],
 				eventClick : function(info) {
+					let url = "/project" + projectId + "/schedule/detail" + info.id;
 					$.ajax({
-						url : "/schedule/detail" + info.id,
+						url : url,
 						type : "GET",
 					}).done(function(responseData) {
-						location.href = "/schedule/detail" + info.id;
+						location.href = url;
 					}).fail(function() {
 						console.log("errorばーか");
 					})
@@ -47,20 +50,21 @@
 				height : 680
 			});
 		});
+	/*]]>*/
 	</script>
 </head>
 <body>
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href=""><img src="../img/user.png"></a>
+    <a class="user" href=""><img th:src="@{/img/user.png}"></a>
   </div>
   <div class="side-menu" style="display: inline">
     <nav class="gnav">
       <ul class="gnav-menu">
-        <li><a href="/schedule/top">スケジュール一覧</a></li>
-        <li><a href="/schedule/detail">スケジュール詳細</a></li>
-        <li><a href="">アンケート一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
+        <li><a href="/question/2">アンケート一覧</a></li>
         <li><a href="/project/edit">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
       </ul>
