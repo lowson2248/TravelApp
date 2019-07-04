@@ -24,11 +24,10 @@ $(function () {
     };
   });
 
-
   //要素の削除
   $(document).on('click', '#qdel', () => {
     //最後の要素を削除
-    $('#choiceUl li').last().remove();
+    $('#choice'+$('.inputList').length).parent().remove();
     //選択肢が3つ未満の場合、削除ボタンを消す
     if ($('.inputList').length < 3) {
       $('.micon').fadeOut();

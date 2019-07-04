@@ -7,19 +7,17 @@
 </head>
 <div class="project-create">
   <p class="font">プロジェクト新規作成</p>
-  <!-- <form action="post" class="create-form">-->
-  
-<form th:action="@{/project/create}" th:object="${projectForm}" class="create-form" method="post">
+  <form th:action="@{/project/createProject}" th:object="${projectForm}" method="post" class="create-form">
       <p>プロジェクト名</p>
-        <p><input type="text" class="project-name" name="projectName" placeholder="Enter Project Name..." th:field="*{projectName}"/></p>
+        <p class="input-project"><input type="text" class="project-name" name="project-name" placeholder="Enter Project Name..." th:field="*{projectName}" /></p>
   <hr>
-      <p>日程</p>
+      <p class="input-project">日程</p>
       <p>始まり</p>
-        <p><input type="date" class="date" name="startDate" th:field="*{startDate}"/></p>
+        <p class="input-project"><input type="date" class="date" name="date" placeholder="" th:field="*{startDate}"/></p>
       <p>終わり</p>
-        <p><input type="date" class="date" name="lastDate" th:field="*{lastDate}"/></p>
+        <p class="input-project"><input type="date" class="date" name="date" placeholder="" th:field="*{lastDate}"/></p>
   <hr>
-        <p><input type="submit" class="create" value="プロジェクト作成"/></p>
+        <p><input type="submit" class="create" value="プロジェクト作成"  /></p>
   </form>
 </div>
 

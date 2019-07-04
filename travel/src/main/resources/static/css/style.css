@@ -171,7 +171,7 @@ body {
   width: 250px;
   border-radius: 8px;
 }
-.date, .start-time, .end-time, 
+.date, .start-time, .end-time,
 .start-date, .end-date {
   background-color: #eee;
   border: none;
@@ -257,7 +257,7 @@ body {
   font-size: 11px;
   text-align: right;
 }
-/* ’Ç‰Á‚µ‚½•”•ª */
+/* è¿½åŠ ã—ãŸéƒ¨åˆ† */
 .inputList {
   list-style: none;
 }
@@ -333,6 +333,7 @@ body {
   justify-content: center;
 }
 .project-box {
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -433,6 +434,7 @@ body {
 .list-and-add {
   display: flex;
   margin: 10px;
+  border-bottom: 1px solid #000;
 }
 .list-and-add p {
   margin: 0px 30px;
@@ -456,7 +458,6 @@ section {
   text-align: center;
   margin-top: 10px;
 }
-
 .choice-list {
   text-align: left;
   padding: 10px;
@@ -520,7 +521,7 @@ section {
   transform: translateX( 0 );
 }
 
-//ƒƒjƒ…[ƒI[ƒvƒ“
+//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚ªãƒ¼ãƒ—ãƒ³æ™‚
 .nav-open{
   position: fixed;
   left: 0;
@@ -543,7 +544,7 @@ section {
  transform: translateX( -250px );
 }
 
-/*ƒAƒ“ƒP[ƒgƒy[ƒW ƒ‰ƒWƒIƒ{ƒ^ƒ“*/
+/*ã‚¢ãƒ³ã‚±ãƒ¼ãƒˆãƒšãƒ¼ã‚¸ ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³*/
 input[type=radio] {
   display: none;
 }
@@ -569,4 +570,3 @@ input[type=radio] + label span,
 input[type=radio]:checked + label span {
   transition: background-color 0.3s linear;
 }
-
