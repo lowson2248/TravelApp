@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.travel.model.Project;
+import com.travel.model.ProjectEditForm;
 import com.travel.model.User;
 import com.travel.service.LoginUserDetails;
 import com.travel.model.Member;
@@ -51,6 +53,11 @@ public class ProjectController {
 	@ModelAttribute
 	public ProjectForm create() {
 		return new ProjectForm();
+	}
+	
+	@ModelAttribute
+	public ProjectEditForm updateForm() {
+		return new ProjectEditForm();
 	}
 	
 	LoginUserDetails userDetail;
@@ -111,6 +118,15 @@ public class ProjectController {
 	public ModelAndView showEditProject(ModelAndView mav) {
 		mav.setViewName("project/projectEdit");//projectEdit.htmlは未実装
 		return mav;
+	}
+	
+	/*
+	 * プロジェクト編集処理
+	 */
+	@PutMapping(value = {"/project{project_id}/edit"})
+	public ModelAndView editProject(@PathVariable("project_id") int projectId,@Validated ProjectEditForm projectEditForm,BindingResult result) {
+		projectService.updateProject(projectId,projectEditForm.getProjectName(),projectEditForm.getStartDate(),projectEditForm.getLastDate());
+		return new ModelAndView("redirect:/project"+projectId+"/schedule");
 	}
 	
 	/*

@@ -17,7 +17,11 @@ public interface ProjectService {
 	 */
 	public int createProject(String projectName,Date startDate,Date lastDate,String mailAddress);
 
-	public Project updateProject(Project project);
+	/*
+	 * プロジェクト編集
+	 */
+	public void updateProject(int projectId,String projectName,Date startDate,Date lastDate);
+	
 	public void deleteProject(Integer project_id);
 	public void deleteMember(Integer project_id);
 	public Project findById(int id);

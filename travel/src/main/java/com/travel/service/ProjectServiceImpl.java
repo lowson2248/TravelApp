@@ -65,11 +65,16 @@ public class ProjectServiceImpl implements ProjectService {
 		return project.getProjectId();
 	}
 	
-
+	/*
+	 * プロジェクト編集
+	 */
 	@Override
-	public Project updateProject(Project project) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	public void updateProject(int projectId, String projectName, Date startDate, Date lastDate) {
+		Project project = projectRepositry.findByProjectId(projectId);
+		project.setProjectName(projectName);
+		project.setStartDate(startDate);
+		project.setLastDate(lastDate);
+		projectRepositry.saveAndFlush(project);
 	}
 
 	/*
@@ -99,4 +104,5 @@ public class ProjectServiceImpl implements ProjectService {
 		projectRepositry.saveAndFlush(project);
 	}
 
+	
 }
