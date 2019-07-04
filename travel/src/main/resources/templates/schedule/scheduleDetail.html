@@ -29,7 +29,7 @@
 </header>
   <div class="date-and-add">
     <p class="today"></p>
-    <p class="add-scedule"><a href="sceduleAdd.html"><img th:src="@{/img/scedule.png}">予定追加</a></p>
+    <p class="add-scedule"><a th:href="@{'/project' + ${projectId} + '/schedule/add'}"><img th:src="@{/img/scedule.png}">予定追加</a></p>
   </div>
   <div class="scedule-content" th:each="detail : ${scheduleDetail}" th:object="${scheduleDetail}">
     <div class="scedule-wrap">
@@ -43,7 +43,7 @@
       <p class="scedule-category" th:text="${detail.category.categoryName}">カテゴリ</p>
       <p class="scedule-text" th:text="${detail.details}">プロジェクト詳細文</p>
       <p class="textarea"></p>
-      <p><a class="scedule-edit-button" th:href="@{'edit' + ${detail.scId}}">編集</a></p>
+      <p><a class="scedule-edit-button" th:href="@{'/project' + ${projectId} + '/schedule/edit' + ${detail.scId}}">編集</a></p>
       <p><a class="scedule-delete-button" href="">削除</a></p>
     </div>
   </div>-->
@@ -56,46 +56,47 @@
 <head>
     <meta charset="utf-8">
     <title>スケジュール詳細</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="js/header.js"></script>
-    <script src="js/sceduledatail.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all" />
+    <script th:src="@{/js/jQuery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/sceduledatail.js}"></script>
 </head>
 <body>
-<div id="header"></div>
+<div id="header">
+<div class="head-menu">
+    <p class="menu-title">旅行計画アプリ</p>
+    <a class="user" href=""><img th:src="@{/img/user.png}"></a>
+  </div>
+  <div class="side-menu" style="display: inline">
+    <nav class="gnav">
+      <ul class="gnav-menu">
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
+        <li><a href="/question/2">アンケート一覧</a></li>
+        <li><a href="/project/edit">プロジェクト編集</a></li>
+        <li><a href="/logout">ログアウト</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
   <div class="date-and-add">
     <p class="today"></p>
-    <p class="add-scedule"><a href="sceduleAdd.html"><img src="images/scedule.png">予定追加</a></p>
+    <p class="add-scedule"><a th:href="@{'/project' + ${projectId} + '/schedule/add'}"><img th:src="@{/images/scedule.png}">予定追加</a></p>
   </div>
+  <!-- th:eachで繰り返し表示 -->
   <div class="scedule-content" th:each="detail : ${scheduleDetail}" th:object="${scheduleDetail}">
     <div class="scedule-wrap">
-      <p class="name th:text="${detail.scName}"">スケジュール名</p>
-      <img src="@{/images/noimage.png}">
+      <p class="name" th:text="${detail.scName}">スケジュール名</p>
+      <img th:src="@{/images/noimage.png}">
     </div>
     <div class="scedule-wrap2">
-     <!-- <p class="scedule-time">0:00~12:00</p>-->
       <p class="scedule-time" th:text="${detail.startTime}">0:00</p>
       <p class="scedule-time">~</p>
       <p class="scedule-time" th:text="${detail.lastTime}">12:00</p>
       <p class="scedule-category" th:text="${detail.category.categoryName}">カテゴリ</p>
       <p class="scedule-text" th:text="${detail.details}">プロジェクト詳細文</p>
       <p class="textarea"></p>
-      <p><a class="scedule-edit-button" href="sceduleEdit.html" th:href="@{'edit' + ${detail.scId}}">編集</a></p>
-      <p><a class="scedule-delete-button" href="">削除</a></p>
-    </div>
-  </div>
-  <!-- th:eachで繰り返し表示 -->
-  <div class="scedule-content">
-    <div class="scedule-wrap">
-      <p class="name">スケジュール名</p>
-      <img src="images/noimage.png">
-    </div>
-    <div class="scedule-wrap2">
-      <p class="scedule-time">0:00~12:00</p>
-      <p class="scedule-category">カテゴリ</p>
-      <p class="scedule-text">プロジェクト詳細文</p>
-      <p class="textarea"></p>
-      <p><a class="scedule-edit-button" href="sceduleEdit.html">編集</a></p>
+      <p><a class="scedule-edit-button"  th:href="@{'edit' + ${detail.scId}}">編集</a></p>
       <p><a class="scedule-delete-button" href="">削除</a></p>
     </div>
   </div>

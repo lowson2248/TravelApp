@@ -14,12 +14,15 @@
 	/*<![CDATA[*/
 		$(document).ready(function() {
 			let projectId = /*[[${projectId}]]*/0;
+			let startDay = /*[[${startDate}]]*/null;
+			let lastDay = /*[[${endDate}]]*/null;
+			
 			$('#calendar').fullCalendar({
 				customButtons : {
 					myCustomButton : {
 						text : '課題追加',
 						click : function() {
-							location.href = "/schedule/add";
+							location.href = "/project" + projectId + "/schedule/add";
 						}
 					}
 				},
@@ -45,6 +48,11 @@
 					left : 'prev, title, next',
 					right : 'myCustomButton'
 				},
+				defaultDate: startDay,
+				validRange: {
+			      start: startDay,
+			      end: lastDay
+			    },
 				lang : 'ja',
 				defaultView : 'agendaDay',
 				height : 680

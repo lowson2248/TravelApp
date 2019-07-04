@@ -8,6 +8,6 @@ import com.travel.model.ScheduleForm;
 public interface ScheduleService {
 	public List<Schedule> findAllSchadule(Integer projectId);
 	public Schedule findOne(Integer scheduleId);
-	public void update(ScheduleForm scheduleForm, Schedule schedule);
-	public Schedule create(ScheduleForm addForm); 
+	public void update(ScheduleForm scheduleForm, Schedule schedule, Integer projectId);
+	public Schedule create(ScheduleForm addForm, Integer projectId); 
 }

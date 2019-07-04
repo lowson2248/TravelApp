@@ -38,15 +38,12 @@ public class SchesuleServiceImp implements ScheduleService{
 	}
 
 	@Override
-	public void update(ScheduleForm scheduleForm, Schedule schedule) {
-		//String startTime = scheduleForm.getStartDay() + " " + scheduleForm.getStart();
-		//String endTime = scheduleForm.getEndDay() + " " + scheduleForm.getEnd();
-		
-		//System.out.println(startTime);
+
+	public void update(ScheduleForm scheduleForm, Schedule schedule, Integer projectId) {
 		Category category = categoryRepository.findById(scheduleForm.getCateId()).get();
-		Project project = projectRepository.findById(1).get();
-		schedule.setScName(scheduleForm.getTitle());
+		Project project = projectRepository.findById(projectId).get();
 		
+		schedule.setScName(scheduleForm.getTitle());
 		String Start=scheduleForm.getStartDay()+scheduleForm.getStart();
 		SimpleDateFormat startFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
 		startFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -58,6 +55,7 @@ public class SchesuleServiceImp implements ScheduleService{
 			e.printStackTrace();
 		}
 		schedule.setStartTime(startTime);
+
 		String Last=scheduleForm.getEndDay()+scheduleForm.getEnd();
 		SimpleDateFormat lastFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
 		lastFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -72,13 +70,14 @@ public class SchesuleServiceImp implements ScheduleService{
 		schedule.setCategory(category);
 		schedule.setDetails(scheduleForm.getText());
 		schedule.setProject(project);
-		
+
+		scheduleRepository.saveAndFlush(schedule);
 	}
 	//スケジュール新規登録データ保存
 	@Override
-	public Schedule create(ScheduleForm addForm) {
+	public Schedule create(ScheduleForm addForm, Integer projectId) {
 		Category category = categoryRepository.findById(addForm.getCateId()).get();
-		Project project = projectRepository.findById(1).get();
+		Project project = projectRepository.findById(projectId).get();
 		Schedule schedule = new Schedule();
 		schedule.setScName(addForm.getTitle());
 		String Start=addForm.getStartDay()+addForm.getStart();
