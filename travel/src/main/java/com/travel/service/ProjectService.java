@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.travel.model.Member;
 import com.travel.model.Project;
+import com.travel.model.ProjectEditForm;
 import com.travel.model.User;
 
 public interface ProjectService {
@@ -17,7 +18,10 @@ public interface ProjectService {
 	 */
 	public int createProject(String projectName,Date startDate,Date lastDate,String mailAddress);
 
-	public Project updateProject(Project project);
+	/*
+	 * プロジェクト編集
+	 */
+	public int updateProject(Project project,String projectName,Date startDate,Date lastDate);
 	public void deleteProject(Integer project_id);
 	public void deleteMember(Integer project_id);
 	public Project findById(int id);

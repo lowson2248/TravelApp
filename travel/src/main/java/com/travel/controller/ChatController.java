@@ -14,4 +14,16 @@ import com.travel.service.ChatService;
 public class ChatController {
 	@Autowired
 	ChatService chatService;
+/*
+
+	@GetMapping("/")
+	public ModelAndView chat(ModelAndView mav) {
+		//chatテーブル取得、
+		List<Chat> chatList = chatService.findAll();
+		System.out.println("chatList():"+"テキスト:"+chatList.get(0).getText());
+		mav.addObject("chatList",chatList);
+		mav.setViewName("question/index");
+		return mav;
+	}
+*/
 }

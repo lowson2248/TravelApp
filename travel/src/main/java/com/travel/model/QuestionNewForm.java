@@ -16,14 +16,14 @@ public class QuestionNewForm {
 	private String title;
 	//アンケート詳細
 	private String questionDetails;
-	//回答期限（始め）
+	//日付
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date startDate;
-	//回答期限（終わり）
+	private Date limitTime1;
+	//時間
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date lastDate;
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date limitTime2;
 	//選択肢
-	private List<String> choice;
+	private List<String> choiceList;
 }

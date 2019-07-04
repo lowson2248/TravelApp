@@ -5,13 +5,14 @@
     <title>プロジェクト選択</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
     <script src="../js/jQuery-3.3.1.min.js"></script>
+    <script th:src="@{/js/header.js}"></script>
 </head>
 <body>
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href="accountEdit.html"><img src="images/user.png"></a>
-    <a class="chat" href=""><img src="images/chat.png"></a>
+    <a class="user" href="/userEdit"><img src="../img/user.png"></a>
+    <!--<a class="chat" href=""><img src="../img/chat.png"></a>-->
   </div>
 </header>
   <div class="project-select">
@@ -24,7 +25,7 @@
         </div>
         <a href="/project/create"></a>
       </div>
-      <div class="project-box" th:if="joinList!=null" th:each="joinProject : ${joinList}" onclick="window.alert('おためしだよ')">
+      <div class="project-box" th:if="joinList!=null" th:each="joinProject : ${joinList}">
         <p th:text="${joinProject.getProject().getProjectName()}">プロジェクト名</p>
         <p class="project-date">プロジェクト日付</p>
         <p><span th:text="${#dates.format(joinProject.getProject().getStartDate(),'yyyy/MM/dd')}"></span> ~ <span th:text="${#dates.format(joinProject.getProject().getLastDate(),'yyyy/MM/dd')}"></span></p>

@@ -16,8 +16,8 @@
       <ul class="gnav-menu">
         <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
-        <li><a href="">アンケート一覧</a></li>
-        <li><a href="/project/edit">プロジェクト編集</a></li>
+        <li><a href="/question/2">アンケート一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/edit'}">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
       </ul>
     </nav>
@@ -117,8 +117,9 @@
       <hr>
           <p>イメージ画像</p>
             <div class="select-img">
-            <img th:src="@{/img/noimage.png}" id="pre-img" style="width:200;height:200px;" />
-            <p><input type="file" id="myfile" class="project-img"></p>
+            <img th:src="@{/images/noimage.png}" id="pre-img" style="width:200;height:200px;" />
+
+            <p><input type="file" id="myfile"  name="picture" class="project-img"></p>
             <p><input type="reset" class="reset" value="削除"></p>
           </div>
       <hr>

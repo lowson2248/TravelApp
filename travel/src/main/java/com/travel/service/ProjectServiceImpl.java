@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.travel.model.Member;
 import com.travel.model.Project;
+import com.travel.model.ProjectEditForm;
 import com.travel.model.User;
 import com.travel.repository.MemberRepositry;
 import com.travel.repository.ProjectRepository;
@@ -65,11 +66,20 @@ public class ProjectServiceImpl implements ProjectService {
 		return project.getProjectId();
 	}
 	
-
+	/*
+	 * プロジェクト編集
+	 */
 	@Override
-	public Project updateProject(Project project) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	public int updateProject(Project project,String projectName,Date startDate,Date lastDate) {
+		
+		//project更新
+		project.setProjectName(projectName);
+		project.setStartDate(startDate);
+		project.setLastDate(lastDate);
+		
+		//更新したプロジェクトを保存
+		projectRepositry.saveAndFlush(project);
+		return  project.getProjectId();
 	}
 
 	/*
@@ -99,4 +109,5 @@ public class ProjectServiceImpl implements ProjectService {
 		projectRepositry.saveAndFlush(project);
 	}
 
+	
 }

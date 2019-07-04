@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>新規アンケート追加</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" media="all" />
+    <script type="text/javascript" src="../../../js/jQuery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../../js/choice.js"></script>
+</head>
+<body>
+<header>
+  <div class="head-menu">
+    <p class="menu-title">旅行計画アプリ</p>
+    <a class="user" href=""><img src="../../../img/user.png"></a>
+  </div>
+  <div class="side-menu">
+    <nav class="gnav">
+      <ul class="gnav-menu">
+        <li><a href="">スケジュール一覧</a></li>
+        <li><a href="">スケジュール詳細</a></li>
+        <li><a href="">アンケート一覧</a></li>
+        <li><a href="">プロジェクト編集</a></li>
+        <li><a href="">ログアウト</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="question-add">
+  <p class="font">アンケート新規追加</p>
+    <hr>
+    <form  th:action="@{/question/create{project_id}(project_id=${projectId})}" th:object="${questionNewForm}"method="post" class="add">
+        <p>アンケート名</p>
+          <p><input type="text" class="question" name="title" placeholder="" /></p>
+    <hr>
+        <p>アンケート詳細</p>
+          <p><input type="text" class="question-data" name="questionDetails" placeholder="" /></p>
+    <hr>
+        <p>回答期限</p>
+          <p><input type="date" name="limitTime1" class="date"></p>
+          <p><input type="time" name="limitTime2" class="date"></p>
+        <p>まで</p>
+    <hr>
+        <p>選択肢</p>
+      <ul id="choiceUl" >
+        <li class="inputList" >
+          <input type="text" class="choice" name="choiceList"  />
+        </li>
+         <li class="inputList" >
+          <input type="text" class="choice" name="choiceList"  />
+        </li>
+      </ul>
+        <div class="icon icon--plus" id="qadd">
+          <span class="icon__mark"></span>
+        </div>
+        <div class="micon icon--minus" id="qdel">
+          <span class="icon__mark"></span>
+        </div>
+    <hr>
+        <p><input type="submit" class="create" value="新規作成" /></p>
+
+    </form>
+
+</div>
+</html>

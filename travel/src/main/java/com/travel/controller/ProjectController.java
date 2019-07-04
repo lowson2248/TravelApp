@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.travel.model.Project;
+import com.travel.model.ProjectEditForm;
 import com.travel.model.User;
 import com.travel.service.LoginUserDetails;
 import com.travel.model.Member;
@@ -53,6 +55,11 @@ public class ProjectController {
 		return new ProjectForm();
 	}
 	
+	@ModelAttribute
+	public ProjectEditForm updateForm() {
+		return new ProjectEditForm();
+	}
+	
 	LoginUserDetails userDetail;
 	ProjectService projectService;
 	
@@ -69,10 +76,10 @@ public class ProjectController {
 		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
 		List<Member> memberList = memberRopository.findByUser(loginUser);
 
-		//Viewに認識されるようにする
-		mav.addObject("joinList",memberList);		
-		/*遷移先は本来なら作成したプロジェクトのスケジュール画面！*/
 		mav.setViewName("project/projectSelect");
+		
+		//Viewに認識されるようにする
+		mav.addObject("joinList",memberList);	
 		return mav;
 	}
 	
@@ -81,8 +88,8 @@ public class ProjectController {
 	//プロジェクト新規登録画面表示処理
 	@GetMapping(value = {"/project/create"})
 	public ModelAndView showProjectCreate(ModelAndView mav) {
-		mav.addObject("projectForm",create());
 		mav.setViewName("project/projectCreate");
+		mav.addObject("projectForm",create());
 		return mav;
 	}
 	
@@ -92,26 +99,40 @@ public class ProjectController {
 	@PostMapping(value = {"/project/createProject"})
 	public ModelAndView saveProject(@ModelAttribute("project") @Validated ProjectForm projectForm, BindingResult result,@AuthenticationPrincipal UserDetails userDetails, ModelAndView mav) {	
 		
-		/*テスト出力*/
-		System.out.println("プロジェクト名 : " + projectForm.getProjectName());
-		System.out.println("プロジェクト開始日 : " + projectForm.getStartDate());
-		System.out.println("プロジェクト終了日 : " + projectForm.getLastDate());
-		System.out.println("プロジェクト制作者 : " + userDetails.getUsername());
-		
 		//プロジェクトを作成
 		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
-		System.out.println("プロジェクトID："+projectId);
-		mav.addObject("projectForm",projectForm);
 		mav.setViewName("redirect:/project"+projectId+"/schedule");
-		
+		mav.addObject("projectForm",projectForm);
 		return mav;
 	}
 	
 	
 	//プロジェクト編集画面表示処理
 	@GetMapping(value = {"/project{project_id}/edit"})
-	public ModelAndView showEditProject(ModelAndView mav) {
-		mav.setViewName("project/projectEdit");//projectEditは未実装
+	public ModelAndView showEditProject(ModelAndView mav,@PathVariable("project_id") int projectId) {
+		Project project = projectRepository.findByProjectId(projectId);
+		mav.setViewName("project/projectEdit");
+		mav.addObject("project",project);
+		mav.addObject("project_id",projectId);
+		return mav;
+	}
+	
+	/*
+	 * プロジェクト編集処理
+	 */
+	@PostMapping(value = {"/project{project_id}/edit"})
+	public ModelAndView editProject(@PathVariable("project_id") int projectId,@ModelAttribute("project") @Validated ProjectEditForm projectEditForm,BindingResult result,ModelAndView mav) {		
+		//更新したいプロジェクトを取得
+		Project project = projectRepository.findByProjectId(projectId);	
+		
+		//プロジェクトを更新
+		projectId = projectServise.updateProject(project,projectEditForm.getProjectName(), projectEditForm.getStartDate(), projectEditForm.getLastDate());
+		
+		/*View認識用処理*/
+		mav.setViewName("redirect:/project"+projectId+"/schedule");
+		mav.addObject("project_id",projectId);
+		mav.addObject("projectName",project.getProjectName());
+		
 		return mav;
 	}
 	
@@ -120,8 +141,11 @@ public class ProjectController {
 	 */
 	@DeleteMapping(value = {"/project{project_id}/edit"})
 	public ModelAndView deleteProject(ModelAndView mav,@PathVariable int project_id) {
+		System.out.println("controllerの削除に飛んだよ");
+		projectServise.deleteMember(project_id);
+		System.out.println("membersテーブルから消したよ");
 		projectServise.deleteProject(project_id);
-		//projectServise.deleteMember(project_id);
+		System.out.println("projectsテーブルから消したよ");
 		return new ModelAndView("redirect:/project/select");
 	}
 }
