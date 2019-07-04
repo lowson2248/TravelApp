@@ -1,6 +1,5 @@
 $(function () {
 
-
   var counter = $('.inputList').length;
   if (counter < 3) {
       $('.micon').fadeOut();
@@ -35,8 +34,4 @@ $(function () {
       $('.micon').fadeOut();
     };
   });
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 });

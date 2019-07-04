@@ -103,7 +103,7 @@ public class QuestionController {
 	public ModelAndView question(ModelAndView mav,@PathVariable("project_id") int projectId,@AuthenticationPrincipal UserDetails userDetails) {
 		int auth = memberService.findByUserDetailsAndProjectId(userDetails,projectId).getAuthId();
 		System.out.println("Questionベース画面：権限："+auth);
-		List<Question> question = questionService.findAll();
+		List<Question> question = questionService.findByProjectId(projectId);
 		//回答済みか調べてその結果を返す
 		mav.addObject("questionList",question);
 		mav.addObject("projectId",projectId);
@@ -136,10 +136,11 @@ public class QuestionController {
 	@GetMapping("/delete{questionId}")
 	public String questionDelete( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("questionId") int questionId) {
 				
+		int projectId = questionService.findById(questionId).getProject().getProjectId();
 		System.out.println("回答削除");
 		questionService.delete(questionId);
 			
-		return "redirect:/question/base"+2;
+		return "redirect:/question/base"+projectId;
 	}
 	
 	//アンケート編集画面
@@ -188,7 +189,7 @@ public class QuestionController {
 			}
 			
 		}
-		return "redirect:/question/base"+2;
+		return "redirect:/question/base"+4;
 	}
 
     //アンケート作成画面
@@ -201,16 +202,35 @@ public class QuestionController {
     
     @PostMapping("/create{project_id}")
     public String createQuestions( @Validated QuestionNewForm questionNewForm, BindingResult result, ModelAndView mav, @PathVariable("project_id") int projectId) {
-    	//System.out.println("タイトル : " + questionNewForm.getTitle());
-    	//System.out.println("最終締め切り日 : " + questionNewForm.getLastDate());
-    	//System.out.println("プロジェクトID : " + projectId);
-    	//System.out.println("詳細説明 : " + questionNewForm.getQuestionDetails());
+    	if(!result.hasErrors()) {
     	String title = questionNewForm.getTitle();
-    	Date lastDate = questionNewForm.getLastDate();
+    	Date lastDate = questionNewForm.getLimitTime1();
+    	Date timeDate = questionNewForm.getLimitTime2();
     	String titleDetails = questionNewForm.getQuestionDetails();	
-    	List<String> choice = questionNewForm.getChoice();
+    	List<String> choice = questionNewForm.getChoiceList();
     	
-    	questionService.saveQuestion(title, lastDate, projectId, titleDetails, choice);
+		
+		//日時更新
+		String data1 = new SimpleDateFormat("yyyy-MM-dd").format(questionNewForm.getLimitTime1());
+		String data2 = new SimpleDateFormat("HH:mm").format(questionNewForm.getLimitTime2());
+	    data1= data1 + " " + data2;
+	    System.out.println("String型 = " + data1);
+	    Date date2;
+		try {
+			System.out.println("データ登録 ");
+			date2 =  new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(data1);
+			//質問更新処理
+			System.out.println("タイトル : " + questionNewForm.getTitle());
+	    	System.out.println("最終締め切り日 : " + date2);
+	    	System.out.println("プロジェクトID : " + projectId);
+	    	System.out.println("詳細説明 : " + questionNewForm.getQuestionDetails());
+				
+			questionService.saveQuestion(title, date2, projectId, titleDetails, choice);
+		} catch (ParseException e) {
+				e.printStackTrace();
+		}
+    	}
+    	
     	return "redirect:/question/base" + projectId;
     }
 }

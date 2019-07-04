@@ -65,7 +65,6 @@ public class ProjectController {
 	@GetMapping("/project/select")
 	public ModelAndView showProjectSelect(ModelAndView mav,@AuthenticationPrincipal UserDetails userDetails) {
 		
-		//MemberRepositoryByMember(userRepository.findByUserName(userDetails.getUsername()).getUserId(),ProjectId);
 		/*ユーザが参加しているプロジェクトの表示*/
 		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
 		List<Member>memberList = memberRopository.findByUser(loginUser);

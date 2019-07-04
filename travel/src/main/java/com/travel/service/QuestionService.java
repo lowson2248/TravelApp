@@ -37,6 +37,8 @@ public class QuestionService {
 	@Autowired
 	ProjectRepository projectRepository;
 	
+	@Autowired
+	ChoiceService choiceService;
 
 	
 	public List<Question> findAll() {
@@ -49,6 +51,11 @@ public class QuestionService {
 	
 	public Question findById(int id) {
 		return questionRepository.findByquestionId(id);
+	}
+	
+	public List<Question> findByProjectId(int  projectId){
+		Project project = projectRepository.findByProjectId(projectId);
+		return questionRepository.findByProject(project);
 	}
 	
 	public void create(Question question, String title, String questionDetail, Date limitTime) {
@@ -80,16 +87,22 @@ public class QuestionService {
 		questionModel.setAnswerFin(false);
 		questionModel.setQuestionDetail(titleDetails);
 		questionModel.setLimitTime(limitTime);
+		questionModel.setAnswerFin(true);
 		questionRepository.saveAndFlush(questionModel);
 		
 		Question question = questionRepository.findByquestionId(questionModel.getQuestionId());
-		for(int i=0; i<choices.size(); i++) {
-			Choice choiceModel = new Choice();
-			String choice = choices.get(i);
-			choiceModel.setChoiceText(choice);
-			choiceModel.setQuestion(question);
-			choiceRepository.saveAndFlush(choiceModel);
-		}
+		System.out.println("質問save完了：ID："+questionModel.getQuestionId());
+		int i = 0;
+		for(String choiceText :choices) choiceService.create(choiceText,question);
+
+//		for(int i=0; i<choices.size(); i++) {
+//			Choice choiceModel = new Choice();
+//			String choice = choices.get(i);
+//			choiceModel.setChoiceText(choice);
+//			choiceModel.setQuestion(questionModel);
+//			choiceRepository.saveAndFlush(choiceModel);
+//		}
+		System.out.println("save完了");
 	}
 
 }
