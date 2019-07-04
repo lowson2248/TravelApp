@@ -18,9 +18,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 	/* プロジェクト検索(ユーザID) */
 	public List<Project> findAll();
 	public List<Project> findByUser(User user);
-	
-	/* プロジェクト検索(プロジェクトID) */
-	//public List<Project> findProjectById(int projectId);
-
 	public Project findByProjectId(int projectId);
 }

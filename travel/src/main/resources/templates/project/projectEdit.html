@@ -5,7 +5,8 @@
     <title>プロジェクト編集</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="js/header.js"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/member.js}"></script>
     <script src="js/member.js"></script>
 </head>
 <body>
@@ -13,11 +14,11 @@
 <div class="question-edit">
         <p class="font">プロジェクト編集</p>
         <hr>
-        <form th:action="@{/project__${projectId}__/edit}" method="post" th:object="${projectEditForm}" class="add">
-          <p>プロジェクト名</p>
+        <form th:action="@{/project__${project_id}__/edit}" method="post" th:object="${projectEditForm}" class="add">
+          <p>プロジェクト名 <span th:text="${project_id}"></span></p>
           <p><input type="text" name="question" class="question" placeholder="" th:field="*{projectName}" /></p>
         <hr>
-          <p>日程  <!--<input type="date" class="date" name="date" placeholder="" /--></p>
+          <p>日程 </p>
           <p>開始 <input type="date" class="start-date" name="start-time" placeholder="" th:field="*{startDate}"/></p>
           <p>終了 <input type="date" class="end-date" name="end-time" placeholder="" th:field="*{lastDate}"/></p>
         <hr>
