@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>プロジェクト編集</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" th:href="@{/css/style.css}" media="all" />
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script th:src="@{/js/member.js}"></script>
     <script src="js/member.js"></script>
@@ -17,8 +17,8 @@
   <div class="side-menu">
     <nav class="gnav">
       <ul class="gnav-menu">
-        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
-        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
+        <li><a th:href="@{'/project' + ${project_id} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${project_id} + '/schedule/detail'}">スケジュール詳細</a></li>
         <li><a href="/question/2">アンケート一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/edit'}">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
