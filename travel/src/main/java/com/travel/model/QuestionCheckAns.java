@@ -1,10 +1,7 @@
 package com.travel.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,19 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "questions")
-public class Question {
+public class QuestionCheckAns {
 	//質問ID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,9 +59,5 @@ public class Question {
 	
 	//解答済みか確認
 	private boolean checkAnswer;
-	
-	public boolean getCheckAnswer() {
-		return this.checkAnswer;
-	}
-
+		
 }

@@ -30,8 +30,9 @@ import com.travel.model.Choice;
 import com.travel.model.Project;
 import com.travel.model.ProjectForm;
 import com.travel.model.Question;
-
+import com.travel.model.QuestionCheckAns;
 import com.travel.model.QuestionEditForm;
+import com.travel.repository.AnswerRepository;
 import com.travel.repository.ChoiceRepository;
 import com.travel.repository.MemberRepository;
 import com.travel.repository.ProjectRepository;
@@ -78,6 +79,9 @@ public class QuestionController {
 	UserRepository userRepository;
 	
 	@Autowired
+	AnswerRepository answerRepository;
+	
+	@Autowired
 	MemberService memberService;
 	
 	private int userId;
@@ -102,8 +106,17 @@ public class QuestionController {
 	@GetMapping("/base{project_id}")
 	public ModelAndView question(ModelAndView mav,@PathVariable("project_id") int projectId,@AuthenticationPrincipal UserDetails userDetails) {
 		int auth = memberService.findByUserDetailsAndProjectId(userDetails,projectId).getAuthId();
-		System.out.println("Questionベース画面：権限："+auth);
 		List<Question> question = questionService.findAll();
+		for(int i=0; i<question.size(); i++) {
+			if(answerRepository.findByQuestionAndUser(questionRepository.findByquestionId(question.get(i).getQuestionId()),userRepository.findByMailAddress(userDetails.getUsername())) != null) {
+				question.get(i).setCheckAnswer(false);
+			}else {
+				question.get(i).setCheckAnswer(true);
+			}
+			System.out.println("チェック" + question.get(i).getCheckAnswer());
+		}
+		
+		System.out.println("Questionベース画面：権限："+auth);
 		//回答済みか調べてその結果を返す
 		mav.addObject("questionList",question);
 		mav.addObject("projectId",projectId);
