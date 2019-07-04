@@ -133,10 +133,18 @@ public class ProjectController {
 		System.out.println(projectEditForm.getLastDate());
 		System.out.println("===================");
 		
-		//プロジェクトを作成
-		//int projectId = projectServise.updateProject(projectEditForm, project);
+		//プロジェクトを更新
+		projectServise.updateProject(project,projectEditForm.getProjectName(), projectEditForm.getStartDate(), projectEditForm.getLastDate());
 		System.out.println("プロジェクトID："+projectId);
-		//mav.addObject("projectForm",projectForm);
+		
+		Project editedProject = projectRepository.findByProjectId(projectId);
+		System.out.println("==========更新チェック=========");
+		System.out.println(projectId);
+		System.out.println(editedProject.getProjectName());
+		System.out.println(editedProject.getStartDate());
+		System.out.println(editedProject.getLastDate());
+		System.out.println("===================");
+		
 		mav.setViewName("redirect:/project"+projectId+"/schedule");
 		
 		return mav;
