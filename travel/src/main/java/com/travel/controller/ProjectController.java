@@ -117,7 +117,8 @@ public class ProjectController {
 	
 	//プロジェクト編集画面表示処理
 	@GetMapping(value = {"/project{project_id}/edit"})
-	public ModelAndView showEditProject(ModelAndView mav) {
+	public ModelAndView showEditProject(ModelAndView mav,@PathVariable("project_id") int projectId) {
+		mav.addObject(projectId);
 		mav.setViewName("project/projectEdit");//projectEditは未実装
 		return mav;
 	}
@@ -125,9 +126,16 @@ public class ProjectController {
 	/*
 	 * プロジェクト編集処理
 	 */
-	@PutMapping(value = {"/project{project_id}/edit"})
-	public ModelAndView editProject(@PathVariable("project_id") int projectId,@Validated ProjectEditForm projectEditForm,BindingResult result) {
+	@PostMapping(value = {"/project{project_id}/edit"})
+	public ModelAndView editProject(@PathVariable("projectI_d") int projectId,@Validated ProjectEditForm projectEditForm,BindingResult result) {
+		System.out.println("===================");
+		System.out.println(projectId);
+		System.out.println(projectEditForm.getProjectName());
+		System.out.println(projectEditForm.getStartDate());
+		System.out.println(projectEditForm.getLastDate());
+		System.out.println("===================");
 		projectService.updateProject(projectId,projectEditForm.getProjectName(),projectEditForm.getStartDate(),projectEditForm.getLastDate());
+		
 		return new ModelAndView("redirect:/project"+projectId+"/schedule");
 	}
 	

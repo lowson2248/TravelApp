@@ -13,15 +13,15 @@
 <div class="question-edit">
         <p class="font">プロジェクト編集</p>
         <hr>
-        <form action="post" class="add">
+        <form th:action="@{/project__${projectId}__/edit}" method="post" th:object="${projectEditForm}" class="add">
           <p>プロジェクト名</p>
-          <p><input type="text" name="question" class="question" placeholder="" /></p>
+          <p><input type="text" name="question" class="question" placeholder="" th:field="*{projectName}" /></p>
         <hr>
-          <p>日程  <input type="date" class="date" name="date" placeholder="" /></p>
-          <p>開始 <input type="date" class="start-date" name="start-time" placeholder="" /></p>
-          <p>終了 <input type="date" class="end-date" name="end-time" placeholder="" /></p>
+          <p>日程  <!--<input type="date" class="date" name="date" placeholder="" /--></p>
+          <p>開始 <input type="date" class="start-date" name="start-time" placeholder="" th:field="*{startDate}"/></p>
+          <p>終了 <input type="date" class="end-date" name="end-time" placeholder="" th:field="*{lastDate}"/></p>
         <hr>
-          <p>メンバー</p>
+          <!--<p>メンバー</p>
           <ul id="memberUl">
             <li class="inputList" id="1">
               <input type="text" class="email" id="member1" name="member" />
@@ -31,7 +31,7 @@
                 <option value="">ユーザー</option>
               </select>
             </li>
-          </ul>
+          </ul>  -->
           <div class="icon icon--plus" id="qadd">
             <span class="icon__mark"></span>
           </div>
