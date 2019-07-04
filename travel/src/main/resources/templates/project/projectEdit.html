@@ -2,29 +2,46 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>スケジュール一覧</title>
+    <title>プロジェクト編集</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/member.js"></script>
 </head>
 <body>
-<header>
-  <div class="head-menu">
-    <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href=""><img src="../img/user.png"></a>
-  </div>
-  <div class="side-menu">
-    <nav class="gnav">
-      <ul class="gnav-menu">
-        <li><a href="">スケジュール一覧</a></li>
-        <li><a href="">スケジュール詳細</a></li>
-        <li><a href="">アンケート一覧</a></li>
-        <li><a href="/project/edit">プロジェクト編集</a></li>
-        <li><a href="/logout">ログアウト</a></li>
-      </ul>
-    </nav>
-  </div>
-  
-  <div class="wrapper">
-  	
-  </div>
-</header>
+<div id="header"></div>
+<div class="question-edit">
+        <p class="font">プロジェクト編集</p>
+        <hr>
+        <form action="post" class="add">
+          <p>プロジェクト名</p>
+          <p><input type="text" name="question" class="question" placeholder="" /></p>
+        <hr>
+          <p>日程  <input type="date" class="date" name="date" placeholder="" /></p>
+          <p>開始 <input type="date" class="start-date" name="start-time" placeholder="" /></p>
+          <p>終了 <input type="date" class="end-date" name="end-time" placeholder="" /></p>
+        <hr>
+          <p>メンバー</p>
+          <ul id="memberUl">
+            <li class="inputList" id="1">
+              <input type="text" class="email" id="member1" name="member" />
+              <select name="membRole" id="role1" name="role">
+                <option value="master">管理者</option>
+                <option value="sub">サブ</option>
+                <option value="">ユーザー</option>
+              </select>
+            </li>
+          </ul>
+          <div class="icon icon--plus" id="qadd">
+            <span class="icon__mark"></span>
+          </div>
+          <div class="micon icon--minus" id="qdel">
+            <span class="icon__mark"></span>
+          </div>
+          <hr>
+          <p><input type="submit" class="create" value="更新" /></p>
+    
+        </form>
+    
+      </div>
 </html>

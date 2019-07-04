@@ -1,5 +1,6 @@
 package com.travel.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,11 +95,16 @@ public class QuestionController {
     
     @PostMapping("/create/{projectid}")
     public String createQuestions( @Validated QuestionNewForm questionNewForm, BindingResult result, ModelAndView mav, @PathVariable("projectid") int projectId) {
-    	System.out.println("アンケート名 : " + questionNewForm.getTitle());
-    	System.out.println("タイトル名 : " + questionNewForm.getLastDate());
-    	System.out.println("プロジェクトID : " + projectId);
-    	System.out.println("タイトル名 : " + questionNewForm.getQuestionDetails());
-    	questionService.saveQuestion(questionNewForm.getTitle(), questionNewForm.getLastDate(), projectId, questionNewForm.getQuestionDetails());
+    	//System.out.println("タイトル : " + questionNewForm.getTitle());
+    	//System.out.println("最終締め切り日 : " + questionNewForm.getLastDate());
+    	//System.out.println("プロジェクトID : " + projectId);
+    	//System.out.println("詳細説明 : " + questionNewForm.getQuestionDetails());
+    	String title = questionNewForm.getTitle();
+    	Date lastDate = questionNewForm.getLastDate();
+    	String titleDetails = questionNewForm.getQuestionDetails();	
+    	List<String> choice = questionNewForm.getChoice();
+    	
+    	questionService.saveQuestion(title, lastDate, projectId, titleDetails, choice);
     	return "redirect:/question/" + projectId;
     }
 }

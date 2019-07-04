@@ -4,53 +4,30 @@
     <meta charset="utf-8">
     <title>ログイン</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
-</head>
-<body>
-<div class="content">
-  <p class="title">旅行計画アプリ</p>
-  <div class="main">
-    <div class="btn">
-      <a class="regist" th:href="@{/regist/registEmail}">登録</a>
-      <a class="login" href="@{/login}">ログイン</a>
-    </div>
-      <p>メールアドレスとパスワードを入力してください！！</p>
-      <form class="form" method="POST" th:action="@{/login}">
-          <p class="email">Email</p>
-            <p class="email"><input type="text" name="email" placeholder="Email Address" /></p>
-          <p class="password">Password</p>
-            <p class="password"><input type="password" name="password" placeholder="Password" /></p>
-          <p><input type="submit" class="submit" value="ログイン" /></p>
-      </form>
-  </div>
-</div>
-</body>
-
-<!-- <head>
-    <meta charset="utf-8">
-    <title>ログイン</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
-    <script src="../js/jQuery-3.3.1.min.js"></script>
-    <script src="../js/tab.js"></script>
+    <script src="js/jQuery-3.3.1.min.js"></script>
+    <script src="js/tab.js"></script>
 </head>
 <body>
 <div class="content">
   <p class="title">旅行計画アプリ</p>
   <div class="main">
     <ul class="btn">
-      <li class="active"><a class="regist" href="tab1">登録</a></li>
+      <li class="active"><a class="regist" href="#tab1">登録</a></li>
       <li><a class="login" href="#tab2">ログイン</a></li>
     </ul>
+    
     <div class="tab active" id="tab1" >
       <p>新規登録にはメールアドレスを登録してください</p>
-        <form action="post" class="form">
+        <form method="post" class="form" th:action="@{/regist/mail/send}">
             <p>Email</p>
               <p><input type="text" name="email" placeholder="Email Address" /></p>
             <p><input type="submit"  class="submit" value="送信" /></p>
         </form>
     </div>
+    
     <div class="tab" id="tab2">
         <p>メールアドレスとパスワードを入力してください！！</p>
-      <form class="form" action="post">
+      <form  class="form" method="post" th:action="@{/login}">
           <p>Email</p>
             <p><input type="text" name="email" placeholder="Email Address" /></p>
           <p>Password</p>
@@ -58,8 +35,8 @@
           <p><input type="submit" class="submit" value="ログイン" /></p>
       </form>
     </div>
+    
   </div>
 </div>
 </body>
 </html>
- -->
