@@ -257,7 +257,6 @@ body {
   font-size: 11px;
   text-align: right;
 }
-/* 追加した部分 */
 .inputList {
   list-style: none;
 }
@@ -344,7 +343,6 @@ body {
   height: 250px;
   text-align: center;
   background-color: #fff;
-  margin: 0px 20px;
 }
 .project-box p {
   text-align: center;
@@ -408,9 +406,11 @@ body {
   left: 0px;
   transform: rotate(90deg);
 }
+
 .project-user, .project-date {
   font-size: 12px;
 }
+
 .select-img p {
   display: inline-block;
   vertical-align: middle;
@@ -458,6 +458,7 @@ section {
   text-align: center;
   margin-top: 10px;
 }
+
 .choice-list {
   text-align: left;
   padding: 10px;
@@ -521,7 +522,6 @@ section {
   transform: translateX( 0 );
 }
 
-//メニューオープン時
 .nav-open{
   position: fixed;
   left: 0;
@@ -544,7 +544,6 @@ section {
  transform: translateX( -250px );
 }
 
-/*アンケートページ ラジオボタン*/
 input[type=radio] {
   display: none;
 }

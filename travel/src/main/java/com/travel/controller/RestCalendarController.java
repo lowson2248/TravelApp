@@ -8,6 +8,7 @@ import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,13 +27,13 @@ public class RestCalendarController {
 	@Autowired
 	ProjectService projectService;
 	
-	@GetMapping(value = "/all")
-    public String getEvents() {
+	@GetMapping("/all{projectId}")
+    public String getEvents(@PathVariable("projectId") int projectId) {
         String jsonMsg = null;
         try {
             List<Event> events = new ArrayList<Event>();
             
-            List<Schedule> scheduleList = projectService.getOneProject(2).getScheduleList();
+            List<Schedule> scheduleList = projectService.getOneProject(projectId).getScheduleList();
             scheduleList.forEach(schedule -> {
             	Event event = new Event();
             	SimpleDateFormat tokyoSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
