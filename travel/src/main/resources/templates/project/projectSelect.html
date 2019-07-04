@@ -4,19 +4,19 @@
     <meta charset="utf-8">
     <title>プロジェクト選択</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <script src="../js/jQuery-3.3.1.min.js"></script>
 </head>
 <body>
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" th:href="@{/userEdit}"><img src="../img/user.png"></a>
+    <a class="user" href="accountEdit.html"><img src="images/user.png"></a>
+    <a class="chat" href=""><img src="images/chat.png"></a>
   </div>
 </header>
   <div class="project-select">
     <p class="font">プロジェクト選択</p>
-    
     <div class="project">
-    
       <div class="new-create">
         <p>新規追加</p>
         <div class="icon2 icon--plus2">
@@ -24,13 +24,13 @@
         </div>
         <a href="/project/create"></a>
       </div>
-      
-      <div class="new-create" th:if="joinList!=null" th:each="joinProject : ${joinList}" onclick="window.alert('おためしだよ')">
-      	  <p th:text="タイトル + ${joinProject.getProject().getProjectName()}"></p>
-	      <p th:text="制作者 + ${joinProject.getProject().getUser().getAccountName()}"></p>
-	      <p>期間 <span th:text="おためし"></span>~<span th:text="おためし"></span></p>
-	  </div>
-      
+      <div class="project-box" th:if="joinList!=null" th:each="joinProject : ${joinList}" onclick="window.alert('おためしだよ')">
+        <p th:text=”${joinProject.getProject().getProjectName()}”>プロジェクト名</p>
+        <p class="project-date">プロジェクト日付</p>
+        <p><span th:text="${joinProject.getProject().getStartDate()}"></span> ~ <span th:text="${joinProject.getProject().getLastDate()}"></span></p>
+        <p class="project-user">作成者：<span th:text="${joinProject.getProject().getUser().getAccountName()}"></span></p>
+        <a href="project.html"></a>
+      </div>
     </div>
   </div>
 </html>

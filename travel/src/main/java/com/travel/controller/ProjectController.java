@@ -65,12 +65,12 @@ public class ProjectController {
 	@GetMapping("/project/select")
 	public ModelAndView showProjectSelect(ModelAndView mav,@AuthenticationPrincipal UserDetails userDetails) {
 		
-		
 		/*ユーザが参加しているプロジェクトの表示*/
 		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
-		List<Member>memberList = memberRopository.findByUser(loginUser);
-		mav.addObject("joinList",memberList);
-		
+		List<Member> memberList = memberRopository.findByUser(loginUser);
+
+		//Viewに認識されるようにする
+		mav.addObject("joinList",memberList);		
 		/*遷移先は本来なら作成したプロジェクトのスケジュール画面！*/
 		mav.setViewName("project/projectSelect");
 		return mav;
@@ -102,14 +102,14 @@ public class ProjectController {
 		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
 		System.out.println("プロジェクトID："+projectId);
 		mav.addObject("projectForm",projectForm);
-		return new ModelAndView("redirect:/project"+projectId+"/schedule")  ;
+		return new ModelAndView("redirect:/project"+projectId+"/schedule") ;
 	}
 	
 	
 	//プロジェクト編集画面表示処理
 	@GetMapping(value = {"/project{project_id}/edit"})
 	public ModelAndView showEditProject(ModelAndView mav) {
-		mav.setViewName("project/projectEdit");//projectEdit.htmlは未実装
+		mav.setViewName("project/projectEdit");//projectEditは未実装
 		return mav;
 	}
 	

@@ -257,7 +257,7 @@ body {
   font-size: 11px;
   text-align: right;
 }
-/* ’Ç‰Á‚µ‚½•”•ª */
+/* è¿½åŠ ã—ãŸéƒ¨åˆ† */
 .inputList {
   list-style: none;
 }
@@ -337,7 +337,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   position: relative;
   border: 1px solid #000;
   width: 200px;
@@ -457,7 +456,6 @@ section {
   text-align: center;
   margin-top: 10px;
 }
-
 .choice-list {
   text-align: left;
   padding: 10px;
@@ -521,7 +519,7 @@ section {
   transform: translateX( 0 );
 }
 
-//ƒƒjƒ…[ƒI[ƒvƒ“
+//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚ªãƒ¼ãƒ—ãƒ³æ™‚
 .nav-open{
   position: fixed;
   left: 0;
@@ -544,7 +542,7 @@ section {
  transform: translateX( -250px );
 }
 
-/*ƒAƒ“ƒP[ƒgƒy[ƒW ƒ‰ƒWƒIƒ{ƒ^ƒ“*/
+/*ã‚¢ãƒ³ã‚±ãƒ¼ãƒˆãƒšãƒ¼ã‚¸ ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³*/
 input[type=radio] {
   display: none;
 }
