@@ -22,6 +22,6 @@ public class ProjectEditForm extends ProjectForm {
 	
 	
 	@NotNull
-	private String testString;
+	private String addMemberAddress;
 	
 }
