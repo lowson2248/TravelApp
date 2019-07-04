@@ -97,7 +97,7 @@
       <p class="scedule-text" th:text="${detail.details}">プロジェクト詳細文</p>
       <p class="textarea"></p>
       <p><a class="scedule-edit-button"  th:href="@{'edit' + ${detail.scId}}">編集</a></p>
-      <p><a class="scedule-delete-button" href="">削除</a></p>
+      <p><a class="scedule-delete-button" th:href="@{'delete' + ${detail.scId}}">削除</a></p>
     </div>
   </div>
 </html>
