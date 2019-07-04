@@ -1,9 +1,7 @@
 package com.travel.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -78,18 +76,20 @@ public class ScheduleController {
 		mav.addObject("projectId", projectId);
 		return mav;
 	}
-	
+
 	@GetMapping("project{projectId}/schedule/edit{id}")
 	public ModelAndView showSceduleEdit(ModelAndView mav, @PathVariable("projectId") int projectId,@PathVariable("id") int id) {
 		
 		ScheduleForm beforeEditForm = new ScheduleForm();
 		Schedule selectSchedule = scheduleService.findOne(id);
-		String day = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getStartTime());
+		String sday = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getStartTime());
 		String startTime = new SimpleDateFormat("HH:mm").format(selectSchedule.getStartTime());
+		String eday = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getLastTime());
 		String endTime = new SimpleDateFormat("HH:mm").format(selectSchedule.getLastTime());
-		
+		System.out.println(sday);
 		beforeEditForm.setCateId(selectSchedule.getCategory().getCategoryId());
-		beforeEditForm.setDay(day);
+		beforeEditForm.setStartDay(sday);
+		beforeEditForm.setEndDay(eday);
 		beforeEditForm.setStart(startTime);
 		beforeEditForm.setEnd(endTime);
 		beforeEditForm.setText(selectSchedule.getDetails());
@@ -99,19 +99,13 @@ public class ScheduleController {
 //		mav.addObject("id",id);
 		mav.addObject("editSchedule", beforeEditForm);
 		mav.setViewName("schedule/scheduleEdit");
-		
+		System.out.println(id);
 		return mav;
 	}
 	
 	@PostMapping(value="project{projectId}/schedule/add") 
 		public ModelAndView scheduleAddCreate(ModelAndView mav, @Validated ScheduleForm addForm ,BindingResult bindingresult, @PathVariable("projectId") int projectId) {
-		System.out.println(addForm.getTitle());
-		System.out.println(addForm.getCateId());
-//		System.out.println(addForm.getDay());
-//		System.out.println(addForm.getStart());
-		
 		mav.setViewName("redirect:/project" + projectId + "/schedule");
-		
 		scheduleService.create(addForm,projectId);
 		return mav;
 	}
@@ -119,6 +113,7 @@ public class ScheduleController {
 	@PostMapping(value="project{projectId}/schedule/edit{id}") 
 	public ModelAndView scheduleEdit(ModelAndView mav, @Validated ScheduleForm editForm ,BindingResult bindingresult, @PathVariable("id") int id,@PathVariable("projectId") int projectId) {	
 		Schedule schedule = new Schedule();
+		System.out.println(id);
 		schedule.setScId(id);
 		scheduleService.update(editForm,schedule,projectId);
 		mav.setViewName("redirect:/project" + projectId + "/schedule");
