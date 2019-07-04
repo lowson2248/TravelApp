@@ -35,7 +35,7 @@
   <div th:each="question : ${questionList}" class="question-main">
   <!--   回答可能な場合 -->
    <div>
-  <form method="post" th:action="@{/question/answer{userid}(userid=${userId})}" th:object="${answerForm}">
+  <form method="post" th:action="@{/question/answer{project_id}(project_id=${projectId})}" th:object="${answerForm}">
     <div th:switch="${question.checkAnswer}">
       <p class="status" th:case="false">未回答</p>
       <p class="status"th:case="true">回答済</p>
@@ -44,13 +44,20 @@
     <h2 th:text="${question.title}" class="question-ttl">アンケート名</h2>
     <p th:text="${question.limitTime}" class="add-date"></p>
     <p th:text="${question.questionDetail}" class="question-data">アンケート詳細</p>
-         
+    <div th:if=${question.answerFin==true&&question.checkAnswer==false}>
+     <div th:each="c : ${question.choiceList}">
+        <input type="radio" name="choiceId" th:value="${c.choiceId}" th:text="${c.choiceText}" />
+      </div>
+    </div>
+                  
+      <div th:unless=${question.answerFin==true&&question.checkAnswer==false}>
       <p th:each="c : ${question.choiceList}"class="choice-list">
-        <input th:text="${c.choiceText}" th:value="${c.choiceId}" type="radio" id="radio01" name="choiceId" />
-        <label for="radio01"></label>
+        <label th:text="${c.choiceText}" />
+       </label>
       </p>
+      </div>
 
-    <p><input type="submit" class="create" th:if=${question.answerFin==true&&question.choiceList==false} value="回答" /></p>
+    <p><input type="submit" class="create" th:if=${question.answerFin==true&&question.checkAnswer==false} value="回答" /></p>
     <!-- 権限アリなら表示 -->
 
     <p><a class="scedule-edit-button" th:href="@{/question/edit{questionid}(questionid=${question.questionId})}" th:if="${member==1}">編集</a>

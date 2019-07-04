@@ -35,10 +35,10 @@ public class AnswerService {
 		System.out.println("チェックQuestionID："+q.getQuestionId());
 		for(Choice cc : q.getChoiceList())System.out.println("ChoiceID:"+cc.getChoiceId());
 		//,userRepository.findByMailAddress(userDetails.getUsername())
-		if(CollectionUtils.isEmpty(answerRepository.findByQuestion(q))) {
+		if(CollectionUtils.isEmpty(answerRepository.findByQuestionAndUser(q,userRepository.findByMailAddress(userDetails.getUsername())))) {
 			System.out.println("true");
 			return true;
-		}
+		}else
 		System.out.println("false");
 		return false;
 	}

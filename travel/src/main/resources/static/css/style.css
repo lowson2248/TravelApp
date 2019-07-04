@@ -257,7 +257,7 @@ body {
   font-size: 11px;
   text-align: right;
 }
-/* 追加した部分 */
+/* 霑ｽ蜉�縺励◆驛ｨ蛻� */
 .inputList {
   list-style: none;
 }
@@ -521,7 +521,7 @@ section {
   transform: translateX( 0 );
 }
 
-//メニューオープン時
+//繝｡繝九Η繝ｼ繧ｪ繝ｼ繝励Φ譎�
 .nav-open{
   position: fixed;
   left: 0;
@@ -544,9 +544,9 @@ section {
  transform: translateX( -250px );
 }
 
-/*アンケートページ ラジオボタン*/
+/*繧｢繝ｳ繧ｱ繝ｼ繝医�壹�ｼ繧ｸ 繝ｩ繧ｸ繧ｪ繝懊ち繝ｳ*/
 input[type=radio] {
-  display: none;
+ /* display: none;*/
 }
 input[type=radio] + label span {
   display: inline-block;
