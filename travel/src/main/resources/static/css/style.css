@@ -171,7 +171,7 @@ body {
   width: 250px;
   border-radius: 8px;
 }
-.date, .start-time, .end-time, 
+.date, .start-time, .end-time,
 .start-date, .end-date {
   background-color: #eee;
   border: none;
@@ -253,13 +253,11 @@ body {
 .add input {
   margin: 10px;
 }
-
 .add-date {
   font-size: 11px;
   text-align: right;
 }
-
-/* ’Ç‰Á‚µ‚½•”•ª */
+/* ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .inputList {
   list-style: none;
 }
@@ -410,11 +408,9 @@ body {
   left: 0px;
   transform: rotate(90deg);
 }
-
 .project-user, .project-date {
   font-size: 12px;
 }
-
 .select-img p {
   display: inline-block;
   vertical-align: middle;
@@ -526,7 +522,7 @@ section {
   transform: translateX( 0 );
 }
 
-//ƒƒjƒ…[ƒI[ƒvƒ“
+//ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½Iï¿½[ï¿½vï¿½ï¿½ï¿½ï¿½
 .nav-open{
   position: fixed;
   left: 0;
@@ -549,7 +545,7 @@ section {
  transform: translateX( -250px );
 }
 
-/*ƒAƒ“ƒP[ƒgƒy[ƒW ƒ‰ƒWƒIƒ{ƒ^ƒ“*/
+/*ï¿½Aï¿½ï¿½ï¿½Pï¿½[ï¿½gï¿½yï¿½[ï¿½W ï¿½ï¿½ï¿½Wï¿½Iï¿½{ï¿½^ï¿½ï¿½*/
 input[type=radio] {
   display: none;
 }
@@ -575,4 +571,3 @@ input[type=radio] + label span,
 input[type=radio]:checked + label span {
   transition: background-color 0.3s linear;
 }
-
