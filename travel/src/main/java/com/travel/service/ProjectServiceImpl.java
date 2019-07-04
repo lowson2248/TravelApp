@@ -71,18 +71,13 @@ public class ProjectServiceImpl implements ProjectService {
 	 */
 	@Override
 	public int updateProject(Project project,String projectName,Date startDate,Date lastDate) {
-		System.out.println("プロジェクトID" + projectName + "のプロジェクトを");
-		System.out.println("プロジェクト名" + projectName);
-		System.out.println("はじ" + startDate);
-		System.out.println("おわ" + lastDate);
-		System.out.println("で更新");
 		
-		
+		//project更新
 		project.setProjectName(projectName);
 		project.setStartDate(startDate);
 		project.setLastDate(lastDate);
 		
-		
+		//更新したプロジェクトを保存
 		projectRepositry.saveAndFlush(project);
 		return  project.getProjectId();
 	}
