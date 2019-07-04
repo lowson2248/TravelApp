@@ -49,7 +49,7 @@
           <p><input type="time" class="end-time" name="end" placeholder="" /></p>
     <hr>
         <p>イメージ画像</p>
-          <p><input type="file" class="project-img"></p>
+          <p><input type="file" class="project-img" name="picture" accept="image/png, image/jpeg, image/jpg"></p>
           <p><input type="reset" class="reset" value="削除"></p>
     <hr>
         <p>テキスト</p>
@@ -93,7 +93,7 @@
 <div class="scedule-add">
   <p class="font">スケジュール新規追加</p>
     <hr>
-    <form th:action="@{'/project' + ${projectId} + '/schedule/add'}" class="add"  method="post"  th:object="${ScheduleForm}">
+    <form th:action="@{'/project' + ${projectId} + '/schedule/add'}" class="add"  method="post" enctype="multipart/form-data" th:object="${ScheduleForm}">
         <p>予定名</p>
           <p><input type="text" class="scedule-name" name="title" placeholder="" /></p>
     <hr>
@@ -122,7 +122,7 @@
         <p>イメージ画像</p>
           <div class="select-img">
             <img th:src="@{/images/noimage.png}" id="pre-img" style="width:200;height:200px;" />
-            <p><input type="file" id="myfile" class="project-img"></p>
+            <p><input type="file" id="myfile"   name="picture" class="project-img"></p>
             <p><input type="reset" class="reset" value="削除"></p>
           </div>
     <hr>
