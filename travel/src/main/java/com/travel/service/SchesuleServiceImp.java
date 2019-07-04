@@ -53,7 +53,7 @@ public class SchesuleServiceImp implements ScheduleService{
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		schedule.setStartTime(startTime);
+		
 		String Last=scheduleForm.getDay()+scheduleForm.getEnd();
 		SimpleDateFormat lastFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
 		lastFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -64,6 +64,7 @@ public class SchesuleServiceImp implements ScheduleService{
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+        schedule.setStartTime(startTime);
 		schedule.setLastTime(lastTime);		
 		schedule.setCategory(category);
 		schedule.setDetails(scheduleForm.getText());
@@ -103,5 +104,10 @@ public class SchesuleServiceImp implements ScheduleService{
 		schedule.setDetails(addForm.getText());
 		schedule.setProject(project);
 		return scheduleRepository.saveAndFlush(schedule);
+	}
+
+	@Override
+	public void delete(Integer scheduleId) {
+		scheduleRepository.deleteById(scheduleId);
 	}
 }

@@ -57,7 +57,7 @@ public class ScheduleController {
 	
 	@GetMapping("project{projectId}/schedule/detail")
 	public ModelAndView showSceduleDetail(ModelAndView mav,@PathVariable("projectId") int projectId) {
-		mav.addObject("scheduleDetail", scheduleService.findAllSchadule(1));
+		mav.addObject("scheduleDetail", scheduleService.findAllSchadule(projectId));
 		mav.setViewName("schedule/scheduleDetail");
 		mav.addObject("projectId", projectId);
 		return mav;
@@ -110,7 +110,7 @@ public class ScheduleController {
 //		System.out.println(addForm.getDay());
 //		System.out.println(addForm.getStart());
 		
-		mav.setViewName("schedule/schedule");
+		mav.setViewName("redirect:/project" + projectId + "/schedule");
 		
 		scheduleService.create(addForm,projectId);
 		return mav;
@@ -121,7 +121,14 @@ public class ScheduleController {
 		Schedule schedule = new Schedule();
 		schedule.setScId(id);
 		scheduleService.update(editForm,schedule,projectId);
-		mav.setViewName("schedule/schedule");
+		mav.setViewName("redirect:/project" + projectId + "/schedule");
+		return mav;
+	}
+	
+	@GetMapping(value="project{projectId}/schedule/delete{id}")
+	public ModelAndView scheduleDelete(ModelAndView mav, @PathVariable("id") int id,@PathVariable("projectId") int projectId) {
+		scheduleService.delete(id);
+		mav.setViewName("redirect:/project" + projectId + "/schedule");
 		return mav;
 	}
 

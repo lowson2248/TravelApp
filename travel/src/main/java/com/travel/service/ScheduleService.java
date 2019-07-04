@@ -10,4 +10,5 @@ public interface ScheduleService {
 	public Schedule findOne(Integer scheduleId);
 	public void update(ScheduleForm scheduleForm, Schedule schedule, Integer projectId);
 	public Schedule create(ScheduleForm addForm, Integer projectId); 
+	public void delete(Integer scheduleId);
 }
