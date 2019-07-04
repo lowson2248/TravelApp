@@ -87,14 +87,15 @@ public class ScheduleController {
 	}
 	
 	@PostMapping(value="project{projectId}/schedule/add") 
-		public ModelAndView scheduleAddCreate(ModelAndView mav, @Validated ScheduleForm addForm ,BindingResult bindingresult ) {
+		public ModelAndView scheduleAddCreate(ModelAndView mav, @Validated ScheduleForm addForm ,BindingResult bindingresult, @PathVariable("projectId") int projectId) {
 		System.out.println(addForm.getTitle());
 		System.out.println(addForm.getCateId());
 //		System.out.println(addForm.getDay());
 //		System.out.println(addForm.getStart());
 		
 		mav.setViewName("schedule/schedule");
-		scheduleService.create(addForm);
+		
+		scheduleService.create(addForm,projectId);
 		return mav;
 	}
 	

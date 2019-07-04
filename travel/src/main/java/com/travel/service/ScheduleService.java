@@ -9,5 +9,5 @@ public interface ScheduleService {
 	public List<Schedule> findAllSchadule(Integer projectId);
 	public Schedule findOne(Integer scheduleId);
 	public void update(ScheduleForm scheduleForm, Schedule schedule);
-	public Schedule create(ScheduleForm addForm); 
+	public Schedule create(ScheduleForm addForm, Integer projectId); 
 }
