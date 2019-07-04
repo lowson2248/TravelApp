@@ -57,4 +57,7 @@ public class Schedule {
 	//スケジュールの詳細
 	@Column(name = "details", length = 200)
 	private String details;//max:200 default:説明なし
+	
+	@Column(name = "image")
+	private String img;
 }
