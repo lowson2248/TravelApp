@@ -30,6 +30,7 @@ public class RestCalendarController {
 	@GetMapping("/all{projectId}")
     public String getEvents(@PathVariable("projectId") int projectId) {
         String jsonMsg = null;
+        String[] colorList = {"#ff7f7f"	,"#ff7fbf","#ff7fff","#bf7fff","#7f7fff","#7fbfff",	"#7fff7f","#7fffbf"};
         try {
             List<Event> events = new ArrayList<Event>();
             
@@ -44,7 +45,8 @@ public class RestCalendarController {
             	event.setStart(tokyoSdf.format(schedule.getStartTime()));
             	event.setEnd(tokyoSdf.format(schedule.getLastTime()));
             	// colorのちのち追加
-//            	event.setBackgroundColor("yellow");
+            	
+            	event.setBackgroundColor(colorList[(schedule.getCategory().getCategoryId() -1 )]);
             	events.add(event);
             });
             
