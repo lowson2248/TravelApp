@@ -21,7 +21,7 @@ public interface ProjectService {
 	/*
 	 * プロジェクト編集
 	 */
-	public int updateProject(Project project, String projectName,Date startDate,Date lastDate);
+	public int updateProject(Project project,String projectName,Date startDate,Date lastDate);
 	public void deleteProject(Integer project_id);
 	public void deleteMember(Integer project_id);
 	public Project findById(int id);
