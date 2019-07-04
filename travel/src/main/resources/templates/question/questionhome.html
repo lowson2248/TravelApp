@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>アンケート一覧</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" media="all" />
 </head>
 <body>
 <header>
@@ -26,7 +26,7 @@
 <div class="question-add">
   <div class="list-and-add">
   <p>アンケート一覧</p>
-  <p class="add-question"><a th:href="@{/question/create{project_id}(project_id=${projectId})}"><img src="images/scedule.png">新規アンケート</a></p>
+  <p class="add-question"><a th:href="@{/question/create{project_id}(project_id=${projectId})}" th:if="${member==1}"><img src="images/scedule.png">新規アンケート</a></p>
   </div>
 </div>
 
@@ -48,8 +48,8 @@
 
     <p><input type="submit" class="create" value="回答" /></p>
     <!-- 権限アリなら表示 -->
-    <p><a class="scedule-edit-button" th:href="@{/question/edit{questionid}(questionid=${question.questionId})}">編集</a>
-    <a class="scedule-delete-button" th:href="@{/question/delete{questionid}(questionid=${question.questionId})}">削除</a></p>
+    <p><a class="scedule-edit-button" th:href="@{/question/edit{questionid}(questionid=${question.questionId})}" th:if="${member==1}">編集</a>
+    <a class="scedule-delete-button" th:href="@{/question/delete{questionid}(questionid=${question.questionId})}" th:if="${member==1}">削除</a></p>
     <!--  ここまで -->
     </form>
     </div>
@@ -67,7 +67,7 @@
         <label for="radio01"></label>
       </p>
       <!--  権限アリなら表示 -->
-      <p><a class="scedule-delete-button" th:href="@{/question/delete{questionid}(questionid=${question.questionId})}">削除</a></p>
+      <p><a class="scedule-delete-button" th:href="@{/question/delete{questionid}(questionid=${question.questionId})}" th:if="${member==1}">削除</a></p>
       <!-- ここまで -->
     </div>
       </div>

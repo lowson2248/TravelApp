@@ -11,6 +11,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -31,11 +33,15 @@ import com.travel.model.Question;
 
 import com.travel.model.QuestionEditForm;
 import com.travel.repository.ChoiceRepository;
+import com.travel.repository.MemberRepository;
+import com.travel.repository.ProjectRepository;
 import com.travel.repository.QuestionRepository;
+import com.travel.repository.UserRepository;
 import com.travel.model.QuestionNewForm;
 
 import com.travel.service.AnswerService;
 import com.travel.service.ChoiceService;
+import com.travel.service.MemberService;
 import com.travel.service.QuestionService;
 import com.travel.service.UserService;
 
@@ -62,6 +68,18 @@ public class QuestionController {
 	@Autowired
 	ChoiceRepository choiceRepository;
 	
+	@Autowired
+	MemberRepository memberRepository;
+	
+	@Autowired
+	ProjectRepository projectRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	MemberService memberService;
+	
 	private int userId;
 		
 	
@@ -82,13 +100,14 @@ public class QuestionController {
 	
 	//アンケート一覧画面
 	@GetMapping("/base{project_id}")
-	public ModelAndView question(ModelAndView mav,@PathVariable("project_id") int projectId) {
-		System.out.println("Questionベース画面");
+	public ModelAndView question(ModelAndView mav,@PathVariable("project_id") int projectId,@AuthenticationPrincipal UserDetails userDetails) {
+		int auth = memberService.findByUserDetailsAndProjectId(userDetails,projectId).getAuthId();
+		System.out.println("Questionベース画面：権限："+auth);
 		List<Question> question = questionService.findAll();
-		this.userId = 2;
 		//回答済みか調べてその結果を返す
 		mav.addObject("questionList",question);
 		mav.addObject("projectId",projectId);
+		mav.addObject("member",auth);
 		mav.setViewName("question/questionhome");
 
 		return mav;
@@ -176,7 +195,7 @@ public class QuestionController {
     @GetMapping("/create{project_id}")
     public ModelAndView showCreateQuestion(ModelAndView mav,@PathVariable("project_id") int projectId) {
     	mav.addObject("projectId", projectId);
-        mav.setViewName("questionAdd");
+        mav.setViewName("question/questionAdd");
         return mav;
     }
     
