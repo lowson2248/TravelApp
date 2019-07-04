@@ -38,12 +38,40 @@ public class SchesuleServiceImp implements ScheduleService{
 	}
 
 	@Override
-	public void update(ScheduleForm scheduleForm, Schedule schedule) {
-		String startTime = scheduleForm.getDay() + " " + scheduleForm.getStart();
-		String endTime = scheduleForm.getDay() + " " + scheduleForm.getEnd();
+
+	public void update(ScheduleForm scheduleForm, Schedule schedule, Integer projectId) {
+		Category category = categoryRepository.findById(scheduleForm.getCateId()).get();
+		Project project = projectRepository.findById(projectId).get();
 		
-		System.out.println(startTime);
 		schedule.setScName(scheduleForm.getTitle());
+		String Start=scheduleForm.getStartDay()+scheduleForm.getStart();
+		SimpleDateFormat startFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
+		startFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date startTime = null;
+		try {
+			startTime = startFormat.parse(Start);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		
+		String Last=scheduleForm.getEndDay()+scheduleForm.getEnd();
+		SimpleDateFormat lastFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
+		lastFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date lastTime = null;
+        try {
+			lastTime = lastFormat.parse(Last);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+        schedule.setStartTime(startTime);
+		schedule.setLastTime(lastTime);		
+		schedule.setCategory(category);
+		schedule.setDetails(scheduleForm.getText());
+		schedule.setProject(project);
+
+		scheduleRepository.saveAndFlush(schedule);
 	}
 	//スケジュール新規登録データ保存
 	@Override
@@ -52,7 +80,7 @@ public class SchesuleServiceImp implements ScheduleService{
 		Project project = projectRepository.findById(projectId).get();
 		Schedule schedule = new Schedule();
 		schedule.setScName(addForm.getTitle());
-		String Start=addForm.getDay()+addForm.getStart();
+		String Start=addForm.getStartDay()+addForm.getStart();
 		SimpleDateFormat startFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
 		startFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date startTime = null;
@@ -63,7 +91,7 @@ public class SchesuleServiceImp implements ScheduleService{
 			e.printStackTrace();
 		}
 		schedule.setStartTime(startTime);
-		String Last=addForm.getDay()+addForm.getEnd();
+		String Last=addForm.getEndDay()+addForm.getEnd();
 		SimpleDateFormat lastFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
 		lastFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date lastTime = null;
@@ -77,6 +105,12 @@ public class SchesuleServiceImp implements ScheduleService{
 		schedule.setCategory(category);
 		schedule.setDetails(addForm.getText());
 		schedule.setProject(project);
+		System.out.println("savemae");
 		return scheduleRepository.saveAndFlush(schedule);
+	}
+
+	@Override
+	public void delete(Integer scheduleId) {
+		scheduleRepository.deleteById(scheduleId);
 	}
 }

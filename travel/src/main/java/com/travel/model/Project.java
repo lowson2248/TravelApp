@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +25,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "projects")
+@Table(name = "projects",uniqueConstraints=@UniqueConstraint(columnNames={"project_id","user_id"}))
 public class Project {
 	//プロジェクトID
 	@Id

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -9,13 +9,13 @@
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href="userEdit.html"><img src="../img/user.png"></a>
+    <a class="user" href="userEdit.html"><img th:src="@{/img/user.png}"></a>
   </div>
   <div class="side-menu">
     <nav class="gnav">
       <ul class="gnav-menu">
-        <li><a href="/schedule/top">スケジュール一覧</a></li>
-        <li><a href="/schedule/detail">スケジュール詳細</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
         <li><a href="">アンケート一覧</a></li>
         <li><a href="/project/edit">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
@@ -26,7 +26,7 @@
   <div class="project-edit">
     <p class="font">スケジュール編集</p>
       <hr>
-      <form th:action="@{/schedule/edit{id}}" class="add"  method="post">
+      <form th:action="@{'/project' + ${projectId} + '/schedule/edit' + ${id}}" class="add"  method="post">
           <p>予定名</p>
             <p><input type="text" class="scedule-name" name="title" th:value="${editSchedule.title}" placeholder="" /></p>
       <hr>
@@ -42,8 +42,9 @@
           </select>
       <hr>
           <p>時間</p>
-            <p><input type="date" class="date" name="day" th:value="${editSchedule.day}" placeholder=""/></p>
+            <p><input type="date" class="date" name="startDay" th:value="${editSchedule.startDay}" placeholder=""/></p>
             <p><input type="time" class="start-time" name="start" th:value="${editSchedule.start}" placeholder="" /></p>
+            <p><input type="date" class="date" name="endDay" th:value="${editSchedule.endDay}" placeholder=""/></p>
             <p><input type="time" class="end-time" name="end" th:value="${editSchedule.end}" placeholder="" /></p>
       <hr>
           <p>イメージ画像</p>
@@ -59,3 +60,77 @@
 
 </body>
 </html>
+ -->
+ 
+ <!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>スケジュール編集</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all" />
+    <script th:src="@{/js/jQuery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/preview.js}"></script>
+</head>
+<body>
+<div id="header">
+
+<div class="head-menu">
+    <p class="menu-title">旅行計画アプリ</p>
+    <a class="user" href=""><img th:src="@{/img/user.png}"></a>
+  </div>
+  <div class="side-menu" style="display: inline">
+    <nav class="gnav">
+      <ul class="gnav-menu">
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
+        <li><a href="/question/2">アンケート一覧</a></li>
+        <li><a href="/project/edit">プロジェクト編集</a></li>
+        <li><a href="/logout">ログアウト</a></li>
+      </ul>
+    </nav>
+  </div>
+
+</div>
+  <div class="project-edit">
+    <p class="font">スケジュール編集</p>
+      <form th:action="@{'/project' +${projectId} + '/schedule/edit' + ${id}}" class="add"  method="post" th:object="${ScheduleForm}">
+          <p>予定名</p>
+            <p><input type="text" class="scedule-name" name="title" th:value="${editSchedule.title}" placeholder="" /></p>
+      <hr>
+          <p>予定種類<p>
+          <select name="cateId" class="scedule-type">
+            <option value="1" th:selected="${editSchedule.cateId} == 1">食事</option>
+            <option value="2" th:selected="${editSchedule.cateId} == 2">移動</option>
+            <option value="3" th:selected="${editSchedule.cateId} == 3">買い物</option>
+            <option value="4" th:selected="${editSchedule.cateId} == 4">準備</option>
+            <option value="5" th:selected="${editSchedule.cateId} == 5">レジャー</option>
+            <option value="6" th:selected="${editSchedule.cateId} == 6">観光</option>
+            <option value="7" th:selected="${editSchedule.cateId} == 7">就寝</option>
+            <option value="8" th:selected="${editSchedule.cateId} == 8">その他</option>
+          </select>
+      <hr>
+          <p>開始日  <input type="date" class="date" name="startDay"  th:value="${editSchedule.startDay}" placeholder="" /></p>
+          <p>開始時間 <input type="time" class="start-time" name="start" th:value="${editSchedule.start}" placeholder="" /></p>
+          <p>終了日<input type="date" class="date" name="endDay" th:value="${editSchedule.endDay}" placeholder=""/></p>
+          <p>終了時間 <input type="time" class="end-time" name="end" th:value="${editSchedule.end}" placeholder="" /></p>
+      <hr>
+          <p>イメージ画像</p>
+            <div class="select-img">
+            <img src="images/noimage.png" id="pre-img" style="width:200;height:200px;" />
+            <p><input type="file" id="myfile" class="project-img"></p>
+            <p><input type="reset" class="reset" value="削除"></p>
+          </div>
+      <hr>
+          <p>テキスト</p>
+            <p><input type="text" class="text" name="text"  th:value="${editSchedule.text}" placeholder=""></p>
+      <hr>
+          <p><input type="submit" class="create" value="更新" /></p>
+      </form>
+  </div>
+
+
+</html>
+ 
+ 
+ 
