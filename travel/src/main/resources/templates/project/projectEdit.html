@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script th:src="@{/js/member.js}"></script>
-    <script src="js/member.js"></script>
 </head>
 <body>
 <header>
@@ -39,8 +38,8 @@
         <hr>
           <p>メンバー</p>
           <ul id="memberUl">
-            <li class="inputList" id="1" name="member">
-              <input type="text" class="email" id="member1" th:field="*{addMemberAddress}"/>
+            <li class="inputList" id="1">
+              <input type="text" class="email" id="member1" name="addMemberList" />
               <!--<select name="membRole" id="role1">
                 <option value="1">管理者</option>
                 <option value="2">サブ</option>

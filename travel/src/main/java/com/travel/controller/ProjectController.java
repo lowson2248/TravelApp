@@ -136,10 +136,11 @@ public class ProjectController {
 		//更新したいプロジェクトを取得
 		Project project = projectRepository.findByProjectId(projectId);
 		//プロジェクトを更新
-		projectId = projectServise.updateProject(project,projectEditForm.getProjectName(), projectEditForm.getStartDate(), projectEditForm.getLastDate(),projectEditForm.getAddMemberAddress());
-		
+		projectId = projectServise.updateProject(project,projectEditForm.getProjectName(), projectEditForm.getStartDate(), projectEditForm.getLastDate(),projectEditForm.getAddMemberList());
 		System.out.println("===============================");
-		System.out.println(projectEditForm.getAddMemberAddress());
+		for(String test : projectEditForm.getAddMemberList()) {
+			System.out.println("追加されたユーザ"+test);
+		}
 		System.out.println("===============================");
 		
 		/*View認識用処理*/

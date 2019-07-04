@@ -37,5 +37,8 @@ VALUES
 
 INSERT IGNORE INTO `users` (`user_id`,`account_name`,`password`,`mailAddress`)
 VALUES
-
-(1,'travel','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel@tcmobile.jp');
+(1,'travel','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel@tcmobile.jp'),
+(2,'travel2','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel2@tcmobile.jp'),
+(3,'travel3','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel3@tcmobile.jp'),
+(4,'travel4','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel4@tcmobile.jp'),
+(5,'travel5','$2a$10$U/0Ud7i39FxjyRJ3F4TyN.IIYCuVZX1rrxHYPoTT35RdWrrDN5m.6','travel5@tcmobile.jp');
