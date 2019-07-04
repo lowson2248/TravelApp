@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja"xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
     <meta charset="utf-8">
     <title>新規アンケート追加</title>
-    <link rel="stylesheet" type="text/css" href="../../../css/style.css" media="all" />
-    <script type="text/javascript" src="../../../js/jQuery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../../js/choice.js"></script>
+    <link rel="stylesheet" type="text/css"  href=",./static/css/style.css" media="all" />
 </head>
 <body>
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href=""><img src="../../../img/user.png"></a>
+    <a class="user" href=""><img src="images/user.png"></a>
   </div>
   <div class="side-menu">
     <nav class="gnav">
@@ -28,27 +26,21 @@
 <div class="question-add">
   <p class="font">アンケート新規追加</p>
     <hr>
-    <form  th:action="@{/question/create/2}" th:object="${questionNewForm}"method="post" class="add">
+    <form action="post" class="add">
         <p>アンケート名</p>
-          <p><input type="text" class="question" name="title" placeholder="" /></p>
+          <p><input type="text" class="question" name="question" placeholder="" /></p>
     <hr>
         <p>アンケート詳細</p>
-          <p><input type="text" class="question-data" name="questionDetails" placeholder="" /></p>
+          <p><input type="text" class="question-data" name="question-data" placeholder="" /></p>
     <hr>
         <p>回答期限</p>
-          <p><input type="date" name="startDate" class="date"></p>
-          <p><input type="date" name="lastDate" class="date"></p>
+          <p><input type="date" name="date" class="date"></p>
+          <p><input type="date" name="date" class="date"></p>
         <p>まで</p>
     <hr>
         <p>選択肢</p>
-          <ul id="choiceUl" >
-        <li class="inputList" >
-          <input type="text" class="choice" name="choice"  />
-        </li>
-         <li class="inputList" >
-          <input type="text" class="choice" name="choice"  />
-        </li>
-      </ul>
+          <p><input type="text" class="choice" name="question" /></p>
+          <p id="choice"><input type="text" class="choice" name="question" /></p>
         <div class="icon icon--plus" id="qadd">
           <span class="icon__mark"></span>
         </div>
@@ -61,4 +53,5 @@
     </form>
 
 </div>
+</body>
 </html>
