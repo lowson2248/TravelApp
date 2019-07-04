@@ -147,8 +147,11 @@ public class ProjectController {
 	 */
 	@DeleteMapping(value = {"/project{project_id}/edit"})
 	public ModelAndView deleteProject(ModelAndView mav,@PathVariable int project_id) {
+		System.out.println("controllerの削除に飛んだよ");
+		projectServise.deleteMember(project_id);
+		System.out.println("membersテーブルから消したよ");
 		projectServise.deleteProject(project_id);
-		//projectServise.deleteMember(project_id);
+		System.out.println("projectsテーブルから消したよ");
 		return new ModelAndView("redirect:/project/select");
 	}
 }
