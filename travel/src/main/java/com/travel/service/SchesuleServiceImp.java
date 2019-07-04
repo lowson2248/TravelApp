@@ -47,9 +47,9 @@ public class SchesuleServiceImp implements ScheduleService{
 	}
 	//スケジュール新規登録データ保存
 	@Override
-	public Schedule create(ScheduleForm addForm) {
+	public Schedule create(ScheduleForm addForm, Integer projectId) {
 		Category category = categoryRepository.findById(addForm.getCateId()).get();
-		Project project = projectRepository.findById(1).get();
+		Project project = projectRepository.findById(projectId).get();
 		Schedule schedule = new Schedule();
 		schedule.setScName(addForm.getTitle());
 		String Start=addForm.getDay()+addForm.getStart();
