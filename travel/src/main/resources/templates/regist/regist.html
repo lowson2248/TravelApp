@@ -13,10 +13,11 @@
       <a class="regist" th:href="@{/regist/registEmail}">登録</a>
       <a class="login" th:href="@{/login}">ログイン</a>
     </div>
+    
       <p>新規登録にはメールアドレスを登録してください</p>
-      <form th:action="@{/regist/mail/send}" class="form" method="post">
+      <form th:action="@{/regist/mail/send}" method="post" class="form">
           <p>Email</p>
-            <p class="email"><input type="text" name="email" placeholder="Email Address" /></p>
+            <p><input type="text" name="email" placeholder="Email Address"/></p>
           <p><input type="submit"  class="submit" value="送信" /></p>
       </form>
   </div>
