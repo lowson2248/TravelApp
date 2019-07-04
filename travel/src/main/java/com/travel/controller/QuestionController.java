@@ -102,6 +102,7 @@ public class QuestionController {
 	@GetMapping("/base{project_id}")
 	public ModelAndView question(ModelAndView mav,@PathVariable("project_id") int projectId,@AuthenticationPrincipal UserDetails userDetails) {
 		int auth = memberService.findByUserDetailsAndProjectId(userDetails,projectId).getAuthId();
+		userId = userRepository.findByMailAddress(userDetails.getUsername()).getUserId();
 		System.out.println("Questionベース画面：権限："+auth);
 		List<Question> question = questionService.findByProjectId(projectId);
 		//回答済みか調べてその結果を返す
@@ -115,9 +116,10 @@ public class QuestionController {
 
 	
 	//回答後処理
-	@PostMapping("/answer{userid}")
-	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("userid") int userId) {
-		System.out.println("回答処理:選択肢:"+form.getChoiceId()+":userId:"+userId);
+	@PostMapping("/answer{project_id}")
+	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav,
+			@PathVariable("project_id") int projectId, @AuthenticationPrincipal UserDetails userDetails) {
+		System.out.println("回答処理");
 
 		if(!result.hasErrors()) {
 			System.out.println("回答生成");
@@ -126,10 +128,12 @@ public class QuestionController {
 			
 			answer.setChoice(choice);
 			answer.setUser(userService.findByUserId(userId));
+			System.out.println("questionチェック前");
 			answer.setQuestion(choice.getQuestion());
+			System.out.println("ちぇくご");
 			answerService.save(answer);
 		}
-		return "redirect:/question/base"+userId;
+		return "redirect:/question/base"+projectId;
 	}
 	
 	//回答削除処理

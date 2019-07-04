@@ -35,7 +35,7 @@
   <div th:each="question : ${questionList}" class="question-main">
   <!--   回答可能な場合 -->
    <div th:if="${question.answerFin}">
-  <form method="post" th:action="@{/question/answer{userid}(userid=${userId})}" th:object="${answerForm}">
+  <form method="post" th:action="@{/question/answer{project_id}(project_id=${projectId})}" th:object="${answerForm}">
     <p class="status">未回答</p>
     <h2 th:text="${question.title}" class="question-ttl">アンケート名</h2>
     <p th:text="${question.limitTime}" class="add-date"></p>
@@ -48,7 +48,7 @@
 
     <p><input type="submit" class="create" value="回答" /></p>
     <!-- 権限アリなら表示 -->
-    <p><a class="scedule-edit-button" th:href="@{/question/edit{questionid}(questionid=${question.questionId})}">編集</a>
+    <p><a class="scedule-edit-button" th:href="@{/question/edit{project_id}(project_id=${question.questionId})}">編集</a>
     <a class="scedule-delete-button" th:href="@{/question/delete{questionid}(questionid=${question.questionId})}">削除</a></p>
     <!--  ここまで -->
     </form>

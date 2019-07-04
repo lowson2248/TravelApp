@@ -36,7 +36,7 @@
           <p><input type="text" th:value="${question.questionDetail}" name="questionDetail" class="question-data" /></p>
     <hr>
         <p>回答期限</p>
-          <p><input type="date" th:value="${#dates.format(question.limitTime, 'yyyy-MM-dd')}" name="limitTime1" class="date" /></p>
+          <p><input type="date" name="limitTime1" th:value="${#dates.format(question.limitTime, 'yyyy-MM-dd')}" class="date" /></p>
           <p><input type="time" name="limitTime2" class="date" th:value="${#dates.format(question.getLimitTime(), 'HH:mm')}"/></p>
     <hr>
         <p>選択肢</p>    

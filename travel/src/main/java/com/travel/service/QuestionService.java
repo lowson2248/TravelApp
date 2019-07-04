@@ -92,7 +92,7 @@ public class QuestionService {
 		
 		Question question = questionRepository.findByquestionId(questionModel.getQuestionId());
 		System.out.println("質問save完了：ID："+questionModel.getQuestionId());
-		int i = 0;
+
 		for(String choiceText :choices) choiceService.create(choiceText,question);
 
 //		for(int i=0; i<choices.size(); i++) {
