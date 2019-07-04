@@ -81,15 +81,14 @@ public class QuestionController {
 	
 	
 	//アンケート一覧画面
-	@GetMapping("/base{userid}")
-	public ModelAndView question(ModelAndView mav,@PathVariable("userid") int userId) {
+	@GetMapping("/base{project_id}")
+	public ModelAndView question(ModelAndView mav,@PathVariable("project_id") int projectId) {
 		System.out.println("Questionベース画面");
 		List<Question> question = questionService.findAll();
-		this.userId = userId;
+		this.userId = 2;
 		//回答済みか調べてその結果を返す
-		
 		mav.addObject("questionList",question);
-		mav.addObject("userId",userId);
+		mav.addObject("projectId",projectId);
 		mav.setViewName("question/questionhome");
 
 		return mav;
@@ -115,7 +114,7 @@ public class QuestionController {
 	}
 	
 	//回答削除処理
-	@GetMapping("/question/delete{questionId}")
+	@GetMapping("/delete{questionId}")
 	public String questionDelete( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("questionId") int questionId) {
 				
 		System.out.println("回答削除");
@@ -125,7 +124,7 @@ public class QuestionController {
 	}
 	
 	//アンケート編集画面
-	@GetMapping("/question/edit{questionid}")
+	@GetMapping("/edit{questionid}")
 	public ModelAndView questionEdit(ModelAndView mav,@PathVariable("questionid") int questionId) { 
 		System.out.println("Question編集画面");
 		Question question = questionService.findById(questionId);
@@ -139,7 +138,7 @@ public class QuestionController {
 	}
 	
 	//編集後処理
-	@PostMapping("/question/editend/{questionid}")
+	@PostMapping("/editend/{questionid}")
 	public String questionEdit( @Validated QuestionEditForm form, BindingResult result, ModelAndView mav,@PathVariable("questionid") int questionId) {
 		System.out.println("回答処理");
 
@@ -170,18 +169,19 @@ public class QuestionController {
 			}
 			
 		}
-		return "redirect:/question/2";
+		return "redirect:/question/base"+2;
 	}
 
     //アンケート作成画面
-    @RequestMapping(value="/create",method=RequestMethod.GET)
-    public ModelAndView showCreateQuestion(ModelAndView mav) {
+    @GetMapping("/create{project_id}")
+    public ModelAndView showCreateQuestion(ModelAndView mav,@PathVariable("project_id") int projectId) {
+    	mav.addObject("projectId", projectId);
         mav.setViewName("questionAdd");
         return mav;
     }
     
-    @PostMapping("/create/{projectid}")
-    public String createQuestions( @Validated QuestionNewForm questionNewForm, BindingResult result, ModelAndView mav, @PathVariable("projectid") int projectId) {
+    @PostMapping("/create{project_id}")
+    public String createQuestions( @Validated QuestionNewForm questionNewForm, BindingResult result, ModelAndView mav, @PathVariable("project_id") int projectId) {
     	//System.out.println("タイトル : " + questionNewForm.getTitle());
     	//System.out.println("最終締め切り日 : " + questionNewForm.getLastDate());
     	//System.out.println("プロジェクトID : " + projectId);
@@ -192,6 +192,6 @@ public class QuestionController {
     	List<String> choice = questionNewForm.getChoice();
     	
     	questionService.saveQuestion(title, lastDate, projectId, titleDetails, choice);
-    	return "redirect:/question/" + projectId;
+    	return "redirect:/question/base" + projectId;
     }
 }

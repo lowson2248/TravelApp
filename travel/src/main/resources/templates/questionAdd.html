@@ -28,7 +28,7 @@
 <div class="question-add">
   <p class="font">アンケート新規追加</p>
     <hr>
-    <form  th:action="@{/question/create/2}" th:object="${questionNewForm}"method="post" class="add">
+    <form  th:action="@{/question/create{project_id}(project_id=${projectId})}" th:object="${questionNewForm}"method="post" class="add">
         <p>アンケート名</p>
           <p><input type="text" class="question" name="title" placeholder="" /></p>
     <hr>
@@ -43,10 +43,10 @@
         <p>選択肢</p>
           <ul id="choiceUl" >
         <li class="inputList" >
-          <input type="text" class="choice" name="choice"  />
+          <input type="text" class="choice" name="choiceList"  />
         </li>
          <li class="inputList" >
-          <input type="text" class="choice" name="choice"  />
+          <input type="text" class="choice" name="choiceList"  />
         </li>
       </ul>
         <div class="icon icon--plus" id="qadd">
