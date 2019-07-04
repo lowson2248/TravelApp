@@ -38,12 +38,37 @@ public class SchesuleServiceImp implements ScheduleService{
 	}
 
 	@Override
-	public void update(ScheduleForm scheduleForm, Schedule schedule) {
-		String startTime = scheduleForm.getDay() + " " + scheduleForm.getStart();
-		String endTime = scheduleForm.getDay() + " " + scheduleForm.getEnd();
+	public void update(ScheduleForm scheduleForm, Schedule schedule, Integer projectId) {
+		Category category = categoryRepository.findById(scheduleForm.getCateId()).get();
+		Project project = projectRepository.findById(projectId).get();
 		
-		System.out.println(startTime);
 		schedule.setScName(scheduleForm.getTitle());
+		String Start=scheduleForm.getDay()+scheduleForm.getStart();
+		SimpleDateFormat startFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
+		startFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date startTime = null;
+		try {
+			startTime = startFormat.parse(Start);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		schedule.setStartTime(startTime);
+		String Last=scheduleForm.getDay()+scheduleForm.getEnd();
+		SimpleDateFormat lastFormat = new SimpleDateFormat("yyyy-MM-ddhh:mm");
+		lastFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date lastTime = null;
+        try {
+			lastTime = lastFormat.parse(Last);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		schedule.setLastTime(lastTime);		
+		schedule.setCategory(category);
+		schedule.setDetails(scheduleForm.getText());
+		schedule.setProject(project);
+		scheduleRepository.saveAndFlush(schedule);
 	}
 	//スケジュール新規登録データ保存
 	@Override

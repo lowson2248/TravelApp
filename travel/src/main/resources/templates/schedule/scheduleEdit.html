@@ -9,13 +9,13 @@
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href="userEdit.html"><img src="../img/user.png"></a>
+    <a class="user" href="userEdit.html"><img th:src="@{/img/user.png}"></a>
   </div>
   <div class="side-menu">
     <nav class="gnav">
       <ul class="gnav-menu">
-        <li><a href="/schedule/top">スケジュール一覧</a></li>
-        <li><a href="/schedule/detail">スケジュール詳細</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
         <li><a href="">アンケート一覧</a></li>
         <li><a href="/project/edit">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
@@ -26,7 +26,7 @@
   <div class="project-edit">
     <p class="font">スケジュール編集</p>
       <hr>
-      <form th:action="@{/schedule/edit{id}}" class="add"  method="post">
+      <form th:action="@{'/project' + ${projectId} + '/schedule/edit' + ${id}}" class="add"  method="post">
           <p>予定名</p>
             <p><input type="text" class="scedule-name" name="title" th:value="${editSchedule.title}" placeholder="" /></p>
       <hr>

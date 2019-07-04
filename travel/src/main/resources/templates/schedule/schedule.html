@@ -14,6 +14,9 @@
 	/*<![CDATA[*/
 		$(document).ready(function() {
 			let projectId = /*[[${projectId}]]*/0;
+			let startDay = /*[[${startDate}]]*/null;
+			let lastDay = /*[[${endDate}]]*/null;
+			
 			$('#calendar').fullCalendar({
 				customButtons : {
 					myCustomButton : {
@@ -45,6 +48,11 @@
 					left : 'prev, title, next',
 					right : 'myCustomButton'
 				},
+				defaultDate: startDay,
+				validRange: {
+			      start: startDay,
+			      end: lastDay
+			    },
 				lang : 'ja',
 				defaultView : 'agendaDay',
 				height : 680
