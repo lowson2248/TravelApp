@@ -1,4 +1,4 @@
-<!--  
+  <!--  
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -62,7 +62,7 @@
     <script th:src="@{/js/sceduledatail.js}"></script>
 </head>
 <body>
-<div id="header">
+<header>
 <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
     <a class="user" href=""><img th:src="@{/img/user.png}"></a>
@@ -78,7 +78,7 @@
       </ul>
     </nav>
   </div>
-</div>
+</header>
   <div class="date-and-add">
     <p class="today"></p>
     <p class="add-scedule"><a th:href="@{'/project' + ${projectId} + '/schedule/add'}"><img th:src="@{/images/scedule.png}">予定追加</a></p>
@@ -97,7 +97,7 @@
       <p class="scedule-text" th:text="${detail.details}">プロジェクト詳細文</p>
       <p class="textarea"></p>
       <p><a class="scedule-edit-button"  th:href="@{'edit' + ${detail.scId}}">編集</a></p>
-      <p><a class="scedule-delete-button" href="">削除</a></p>
+      <p><a class="scedule-delete-button" th:href="@{'delete' + ${detail.scId}}">削除</a></p>
     </div>
   </div>
 </html>
