@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<html lang="ja"xmlns:th="http://www.thymeleaf.org">
+<head>
     <meta charset="utf-8">
     <title>新規アンケート追加</title>
     <link rel="stylesheet" type="text/css" href="../../../css/style.css" media="all" />
     <script type="text/javascript" src="../../../js/jQuery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../../js/choice.js"></script>
-    <script type="text/javascript" src="../../../js/header.js"></script>
 </head>
 <body>
 <header>
   <div class="head-menu">
-    <p class="menu-title">設定</p>
-    <a class="user" href=""><img src="images/user.png"></a>
+    <p class="menu-title">旅行計画アプリ</p>
+    <a class="user" href=""><img src="../../../img/user.png"></a>
   </div>
   <div class="side-menu">
     <nav class="gnav">
@@ -26,41 +25,40 @@
     </nav>
   </div>
 </header>
-  <div class="question-add">
-    <p class="font">アンケート新規追加</p>
+<div class="question-add">
+  <p class="font">アンケート新規追加</p>
     <hr>
-    <form th:action="@{/question/create{project_id}(project_id=${projectId})}" th:object="${questionNewForm}"method="post" class="add">
-      <p>アンケート名</p>
-      <p><input type="text" class="question" name="question" placeholder="" /></p>
-      <hr>
-      <p>アンケート詳細</p>
-      <p><input type="text" class="question-data" name="question-data" placeholder="" /></p>
-      <hr>
-      <p>回答期限</p>
+    <form  th:action="@{/question/create{project_id}(project_id=${projectId})}" th:object="${questionNewForm}"method="post" class="add">
+        <p>アンケート名</p>
+          <p><input type="text" class="question" name="title" placeholder="" /></p>
+    <hr>
+        <p>アンケート詳細</p>
+          <p><input type="text" class="question-data" name="questionDetails" placeholder="" /></p>
+    <hr>
+        <p>回答期限</p>
           <p><input type="date" name="limitTime1" class="date"></p>
           <p><input type="time" name="limitTime2" class="date"></p>
         <p>まで</p>
-      <hr>
-      <p>選択肢</p>
-      <!--
-        ここから先の部分をリストに変えました！
-      -->
-      <ul id="choiceUl">
-        <li class="inputList" id="1">
-          <input type="text" class="choice" id="choice1" name="choiceList" />
+    <hr>
+        <p>選択肢</p>
+      <ul id="choiceUl" >
+        <li class="inputList" >
+          <input type="text" class="choice" name="choiceList"  />
         </li>
-        <li class="inputList" id="2">
-          <input type="text" class="choice" id="choice2" name="choiceList" />
+         <li class="inputList" >
+          <input type="text" class="choice" name="choiceList"  />
         </li>
       </ul>
-      <div class="icon icon--plus" id="qadd">
-        <span class="icon__mark"></span>
-      </div>
-      <div class="icon icon--minus" id="qdel">
-        <span class="icon__mark"></span>
-      </div>
-      <hr>
-      <p><input type="submit" class="create" value="新規作成" /></p>
+        <div class="icon icon--plus" id="qadd">
+          <span class="icon__mark"></span>
+        </div>
+        <div class="micon icon--minus" id="qdel">
+          <span class="icon__mark"></span>
+        </div>
+    <hr>
+        <p><input type="submit" class="create" value="新規作成" /></p>
+
     </form>
 
-  </div></html>
+</div>
+</html>
