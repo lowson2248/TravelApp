@@ -257,7 +257,6 @@ body {
   font-size: 11px;
   text-align: right;
 }
-/* 追加した部分 */
 .inputList {
   list-style: none;
 }
@@ -343,7 +342,6 @@ body {
   height: 250px;
   text-align: center;
   background-color: #fff;
-
 }
 .project-box p {
   text-align: center;
@@ -524,7 +522,6 @@ section {
   transform: translateX( 0 );
 }
 
-//メニューオープン時
 .nav-open{
   position: fixed;
   left: 0;
@@ -547,7 +544,6 @@ section {
  transform: translateX( -250px );
 }
 
-/*アンケートページ ラジオボタン*/
 input[type=radio] {
   display: none;
 }
