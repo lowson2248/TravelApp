@@ -161,6 +161,7 @@ public class QuestionController {
 	@PostMapping("/editend/{questionid}")
 	public String questionEdit( @Validated QuestionEditForm form, BindingResult result, ModelAndView mav,@PathVariable("questionid") int questionId) {
 		System.out.println("回答処理");
+		int projectId = questionService.findById(questionId).getProject().getProjectId();
 
 		if(!result.hasErrors()) {
 			System.out.println("編集処理");
@@ -189,7 +190,7 @@ public class QuestionController {
 			}
 			
 		}
-		return "redirect:/question/base"+4;
+		return "redirect:/question/base"+projectId;
 	}
 
     //アンケート作成画面
