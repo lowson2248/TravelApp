@@ -11,7 +11,9 @@ public class ScheduleForm {
 	@NotNull
 	private int cateId;
 	@NotNull
-	private String day;
+	private String startDay;
+	@NotNull
+	private String endDay;
 	@NotNull
 	private String start;
 	@NotNull

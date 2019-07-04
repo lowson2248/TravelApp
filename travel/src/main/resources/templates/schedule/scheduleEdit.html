@@ -42,8 +42,9 @@
           </select>
       <hr>
           <p>時間</p>
-            <p><input type="date" class="date" name="day" th:value="${editSchedule.day}" placeholder=""/></p>
+            <p><input type="date" class="date" name="startDay" th:value="${editSchedule.startDay}" placeholder=""/></p>
             <p><input type="time" class="start-time" name="start" th:value="${editSchedule.start}" placeholder="" /></p>
+            <p><input type="date" class="date" name="endDay" th:value="${editSchedule.endDay}" placeholder=""/></p>
             <p><input type="time" class="end-time" name="end" th:value="${editSchedule.end}" placeholder="" /></p>
       <hr>
           <p>イメージ画像</p>

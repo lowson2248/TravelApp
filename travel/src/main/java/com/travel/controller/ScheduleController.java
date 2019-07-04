@@ -62,14 +62,17 @@ public class ScheduleController {
 	
 	@GetMapping("/schedule/edit{id}")
 	public ModelAndView showSceduleEdit(ModelAndView mav, @PathVariable("id") int id) {
+		System.out.println("aaaa");
 		ScheduleForm beforeEditForm = new ScheduleForm();
 		Schedule selectSchedule = scheduleService.findOne(id);
-		String day = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getStartTime());
+		String sday = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getStartTime());
 		String startTime = new SimpleDateFormat("HH:mm").format(selectSchedule.getStartTime());
+		String eday = new SimpleDateFormat("yyyy-MM-dd").format(selectSchedule.getLastTime());
 		String endTime = new SimpleDateFormat("HH:mm").format(selectSchedule.getLastTime());
-		
+		System.out.println(sday);
 		beforeEditForm.setCateId(selectSchedule.getCategory().getCategoryId());
-		beforeEditForm.setDay(day);
+		beforeEditForm.setStartDay(sday);
+		beforeEditForm.setEndDay(eday);
 		beforeEditForm.setStart(startTime);
 		beforeEditForm.setEnd(endTime);
 		beforeEditForm.setText(selectSchedule.getDetails());
@@ -77,7 +80,7 @@ public class ScheduleController {
 		
 		mav.addObject("editSchedule", beforeEditForm);
 		mav.setViewName("schedule/scheduleEdit");
-		
+		System.out.println(id);
 		return mav;
 	}
 	
@@ -85,20 +88,23 @@ public class ScheduleController {
 		public ModelAndView scheduleAddCreate(ModelAndView mav, @Validated ScheduleForm addForm ,BindingResult bindingresult ) {
 		System.out.println(addForm.getTitle());
 		System.out.println(addForm.getCateId());
-//		System.out.println(addForm.getDay());
-//		System.out.println(addForm.getStart());
+		System.out.println(addForm.getStartDay());
+		System.out.println(addForm.getStart());
+		System.out.println(addForm.getEndDay());
+		System.out.println(addForm.getEnd());
 		mav.setViewName("schedule/schedule");
 		scheduleService.create(addForm);
+		System.out.println("saveato");
 		return mav;
 	}
 	
 	@PostMapping(value="/schedule/edit{id}") 
-	public ModelAndView scheduleEdit(ModelAndView mav, @Validated ScheduleForm editForm ,BindingResult bindingresult, @PathVariable("id") int id) {	
+	public ModelAndView scheduleEdit(ModelAndView mav, @Validated ScheduleForm editForm ,BindingResult bindingresult, @PathVariable("id") Integer id) {	
 		Schedule schedule = new Schedule();
+		System.out.println(id);
 		schedule.setScId(id);
 		scheduleService.update(editForm,schedule);
-		mav.setViewName("schedule/schedule");
-		return mav;
+		return mav; 
 	}
 
 }
