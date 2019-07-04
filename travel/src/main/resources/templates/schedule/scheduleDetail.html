@@ -3,22 +3,22 @@
 <head>
     <meta charset="utf-8">
     <title>スケジュール詳細</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" th:href="@{../css/style.css}" media="all" />
-    <script src="../js/jQuery-3.3.1.min.js"></script>
-    <script src="../js/scheduleDetail.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" th:href="@{/css/style.css}" media="all" />
+    <script th:src="@{/js/jQuery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/scheduleDetail.js}"></script>
 </head>
 <body>
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href="accountEdit.html"><img src="../img/user.png"></a>
-    <a class="chat" href=""><img src="../img/chat.png"></a>
+    <a class="user" href="accountEdit.html"><img th:src="@{/img/user.png}"></a>
+    <a class="chat" href=""><img th:src="@{/img/chat.png}"></a>
   </div>
   <div class="side-menu">
     <nav class="gnav">
       <ul class="gnav-menu">
-        <li><a href="/schedule/top">スケジュール一覧</a></li>
-        <li><a href="/schedule/detail">スケジュール詳細</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
         <li><a href="">アンケート一覧</a></li>
         <li><a href="">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
@@ -28,12 +28,12 @@
 </header>
   <div class="date-and-add">
     <p class="today"></p>
-    <p class="add-scedule"><a href="sceduleAdd.html"><img src="../img/scedule.png">予定追加</a></p>
+    <p class="add-scedule"><a href="sceduleAdd.html"><img th:src="@{/img/scedule.png}">予定追加</a></p>
   </div>
   <div class="scedule-content" th:each="detail : ${scheduleDetail}" th:object="${scheduleDetail}">
     <div class="scedule-wrap">
       <p class="name" th:text="${detail.scName}">スケジュール名</p>
-      <img src="../img/noimage.png">
+      <img th:src="@{/img/noimage.png}">
     </div>
     <div class="scedule-wrap2">
       <p class="scedule-time" th:text="${detail.startTime}">0:00</p>
