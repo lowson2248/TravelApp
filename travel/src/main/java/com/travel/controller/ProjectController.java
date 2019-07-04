@@ -76,11 +76,10 @@ public class ProjectController {
 		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
 		List<Member> memberList = memberRopository.findByUser(loginUser);
 
+		mav.setViewName("project/projectSelect");
+		
 		//Viewに認識されるようにする
 		mav.addObject("joinList",memberList);	
-		
-		/*遷移先は本来なら作成したプロジェクトのスケジュール画面！*/
-		mav.setViewName("project/projectSelect");
 		return mav;
 	}
 	
@@ -89,8 +88,8 @@ public class ProjectController {
 	//プロジェクト新規登録画面表示処理
 	@GetMapping(value = {"/project/create"})
 	public ModelAndView showProjectCreate(ModelAndView mav) {
-		mav.addObject("projectForm",create());
 		mav.setViewName("project/projectCreate");
+		mav.addObject("projectForm",create());
 		return mav;
 	}
 	
@@ -102,10 +101,8 @@ public class ProjectController {
 		
 		//プロジェクトを作成
 		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
-		System.out.println("プロジェクトID："+projectId);
-		mav.addObject("projectForm",projectForm);
 		mav.setViewName("redirect:/project"+projectId+"/schedule");
-		
+		mav.addObject("projectForm",projectForm);
 		return mav;
 	}
 	
@@ -113,9 +110,10 @@ public class ProjectController {
 	//プロジェクト編集画面表示処理
 	@GetMapping(value = {"/project{project_id}/edit"})
 	public ModelAndView showEditProject(ModelAndView mav,@PathVariable("project_id") int projectId) {
-		System.out.println("プロジェクトID"+projectId);
+		Project project = projectRepository.findByProjectId(projectId);
+		mav.setViewName("project/projectEdit");
+		mav.addObject("project",project);
 		mav.addObject("project_id",projectId);
-		mav.setViewName("project/projectEdit");//projectEditは未実装
 		return mav;
 	}
 	
@@ -123,29 +121,17 @@ public class ProjectController {
 	 * プロジェクト編集処理
 	 */
 	@PostMapping(value = {"/project{project_id}/edit"})
-	public ModelAndView editProject(@PathVariable("project_id") int projectId,@ModelAttribute("project") @Validated ProjectEditForm projectEditForm,BindingResult result,ModelAndView mav) {
-		
+	public ModelAndView editProject(@PathVariable("project_id") int projectId,@ModelAttribute("project") @Validated ProjectEditForm projectEditForm,BindingResult result,ModelAndView mav) {		
+		//更新したいプロジェクトを取得
 		Project project = projectRepository.findByProjectId(projectId);	
-		System.out.println("===================");
-		System.out.println(projectId);
-		System.out.println(projectEditForm.getProjectName());
-		System.out.println(projectEditForm.getStartDate());
-		System.out.println(projectEditForm.getLastDate());
-		System.out.println("===================");
 		
 		//プロジェクトを更新
-		projectServise.updateProject(project,projectEditForm.getProjectName(), projectEditForm.getStartDate(), projectEditForm.getLastDate());
-		System.out.println("プロジェクトID："+projectId);
+		projectId = projectServise.updateProject(project,projectEditForm.getProjectName(), projectEditForm.getStartDate(), projectEditForm.getLastDate());
 		
-		Project editedProject = projectRepository.findByProjectId(projectId);
-		System.out.println("==========更新チェック=========");
-		System.out.println(projectId);
-		System.out.println(editedProject.getProjectName());
-		System.out.println(editedProject.getStartDate());
-		System.out.println(editedProject.getLastDate());
-		System.out.println("===================");
-		
+		/*View認識用処理*/
 		mav.setViewName("redirect:/project"+projectId+"/schedule");
+		mav.addObject("project_id",projectId);
+		mav.addObject("projectName",project.getProjectName());
 		
 		return mav;
 	}

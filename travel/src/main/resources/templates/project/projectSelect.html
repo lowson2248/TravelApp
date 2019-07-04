@@ -25,7 +25,7 @@
         </div>
         <a href="/project/create"></a>
       </div>
-      <div class="project-box" th:if="joinList!=null" th:each="joinProject : ${joinList}" onclick="window.alert('おためしだよ')">
+      <div class="project-box" th:if="joinList!=null" th:each="joinProject : ${joinList}">
         <p th:text="${joinProject.getProject().getProjectName()}">プロジェクト名</p>
         <p class="project-date">プロジェクト日付</p>
         <p><span th:text="${#dates.format(joinProject.getProject().getStartDate(),'yyyy/MM/dd')}"></span> ~ <span th:text="${#dates.format(joinProject.getProject().getLastDate(),'yyyy/MM/dd')}"></span></p>

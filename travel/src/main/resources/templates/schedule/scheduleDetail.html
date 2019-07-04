@@ -21,7 +21,7 @@
         <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
         <li><a href="">アンケート一覧</a></li>
-        <li><a href="">プロジェクト編集</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/edit'}">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
       </ul>
     </nav>
