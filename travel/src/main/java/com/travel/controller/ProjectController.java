@@ -3,6 +3,9 @@ package com.travel.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +14,8 @@ import java.util.List;
 
 import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.travel.model.Project;
@@ -45,10 +50,29 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProjectController {
 
+	@Autowired
 	private final ProjectService projectServise;
+	@Autowired
 	private final ProjectRepository projectRepository;
-	private final UserRepository userRepository;
-	private final MemberRepositry memberRopository;
+	@Autowired
+	private final MemberRepositry memberRepository;
+	@Autowired
+	private final UserRepository userRepository;	
+	
+	/*メール送信用*/
+	private MailSender mailSender;
+    public void MailSender(@Autowired MailSender mailSender,String Address,String projectName) {
+        this.mailSender = mailSender;
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        
+        simpleMailMessage.setTo(Address);
+        simpleMailMessage.setSubject("【返信不可】TravelNavi認証メール");
+		simpleMailMessage.setText(projectName + "に招待されました。");
+        this.mailSender.send(simpleMailMessage);
+    }
+    
+    
+    
 	
 	@ModelAttribute
 	public ProjectForm create() {
@@ -62,6 +86,7 @@ public class ProjectController {
 	
 	LoginUserDetails userDetail;
 	ProjectService projectService;
+
 	
 	@GetMapping("/project")
 	public ModelAndView showProject() {
@@ -74,7 +99,7 @@ public class ProjectController {
 		
 		/*ユーザが参加しているプロジェクトの表示*/
 		User loginUser = userRepository.findByMailAddress(userDetails.getUsername());
-		List<Member> memberList = memberRopository.findByUser(loginUser);
+		List<Member> memberList = memberRepository.findByUser(loginUser);
 
 		mav.setViewName("project/projectSelect");
 		
@@ -86,7 +111,7 @@ public class ProjectController {
 	
 	
 	//プロジェクト新規登録画面表示処理
-	@GetMapping(value = {"/project/create"})
+	@GetMapping(value = {"project/create"})
 	public ModelAndView showProjectCreate(ModelAndView mav) {
 		mav.setViewName("project/projectCreate");
 		mav.addObject("projectForm",create());
@@ -96,7 +121,7 @@ public class ProjectController {
 	
 	
 	//プロジェクト新規登録処理
-	@PostMapping(value = {"/project/createProject"})
+	@PostMapping(value = {"project/createProject"})
 	public ModelAndView saveProject(@ModelAttribute("project") @Validated ProjectForm projectForm, BindingResult result,@AuthenticationPrincipal UserDetails userDetails, ModelAndView mav) {	
 		
 		//プロジェクトを作成
@@ -108,38 +133,45 @@ public class ProjectController {
 	
 	
 	//プロジェクト編集画面表示処理
-	@GetMapping(value = {"/project{project_id}/edit"})
+	@GetMapping(value = {"project{project_id}/edit"})
 	public ModelAndView showEditProject(ModelAndView mav,@PathVariable("project_id") int projectId) {
 		Project project = projectRepository.findByProjectId(projectId);
 		mav.setViewName("project/projectEdit");
 		mav.addObject("project",project);
-		mav.addObject("project_id",projectId);
+		mav.addObject("projectId",projectId);
 		return mav;
 	}
 	
 	/*
 	 * プロジェクト編集処理
 	 */
-	@PostMapping(value = {"/project{project_id}/edit"})
+	@PostMapping(value = {"project{project_id}/edit"})
 	public ModelAndView editProject(@PathVariable("project_id") int projectId,@ModelAttribute("project") @Validated ProjectEditForm projectEditForm,BindingResult result,ModelAndView mav) {		
+		
 		//更新したいプロジェクトを取得
-		Project project = projectRepository.findByProjectId(projectId);	
+		Project project = projectRepository.findByProjectId(projectId);
 		
 		//プロジェクトを更新
 		projectId = projectServise.updateProject(project,projectEditForm.getProjectName(), projectEditForm.getStartDate(), projectEditForm.getLastDate());
 		
+		System.out.println("===============================");
+		System.out.println(projectEditForm.getTestString());
+		System.out.println("===============================");
+		
+		MailSender(mailSender, projectEditForm.getTestString(), project.getProjectName());
+		
 		/*View認識用処理*/
 		mav.setViewName("redirect:/project"+projectId+"/schedule");
-		mav.addObject("project_id",projectId);
+		mav.addObject("projectId",projectId);
 		mav.addObject("projectName",project.getProjectName());
 		
 		return mav;
 	}
-	
+
 	/*
 	 *プロジェクト削除処理 
 	 */
-	@DeleteMapping(value = {"/project{project_id}/edit"})
+	@DeleteMapping(value = {"project{project_id}/edit"})
 	public ModelAndView deleteProject(ModelAndView mav,@PathVariable int project_id) {
 		projectServise.deleteProject(project_id);
 		//projectServise.deleteMember(project_id);
