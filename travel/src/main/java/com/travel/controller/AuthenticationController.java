@@ -38,7 +38,6 @@ public class AuthenticationController {
 	/* メール送信後に遷移 */
 	@PostMapping("/email/send")
 	public String aaa(String email) {
-		System.out.println("aaaaa");
 		return "regist/regist2";
 	}
 	

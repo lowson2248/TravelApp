@@ -31,7 +31,7 @@ public class Schedule {
 	//プロジェクトID
 	@ManyToOne
 	@JoinColumn(name = "project_id",nullable=false)
-	private Project project;//FK
+	private Project project;
 	
 	//スケジュール名
 	@Column(name = "sc_name", length = 100, nullable=false)

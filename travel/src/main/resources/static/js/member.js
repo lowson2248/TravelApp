@@ -7,6 +7,7 @@ $(function () {
       
       $('<input>', {
         class: 'email',
+        name:'addMemberList',
         id: 'member'+($('.inputList').length+1)
       }).appendTo($("<li>", {
         class: 'inputList',
@@ -18,19 +19,22 @@ $(function () {
         id: 'authority'+($('.inputList').length+1)
       }).appendTo($("#"+counter))*/
     
-      $('<select>', {
-    class: 'membRole',
-    id: 'role'+counter,
-    name: 'role'
+    /*$('<select>', {
+	    class: 'membRole',
+	    id: 'role'+counter,
+	    name: 'role'
     }).appendTo('#'+ counter);
+    
     $('#role'+counter).append('<option value="master">管理者</option>');
     $('#role'+counter).append('<option value="sub">サブ</option>');
     $('#role'+counter).append('<option value="memb">ユーザー</option>');
 
-    console.log($('.inputList').length);
-      if ($('.inputList').length >= 3) {
+    console.log($('.inputList').length);*/
+      
+      if ($('.inputList').length >= 2) {
         $('.micon').fadeIn();
       };
+      
     });
   });
 

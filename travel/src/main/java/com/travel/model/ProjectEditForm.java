@@ -18,6 +18,6 @@ public class ProjectEditForm extends ProjectForm {
 
 	/* 追加したいメンバーのメールアドレス */
 	@Valid
-	List<Member> addMemberList = new ArrayList<Member>();
+	private List<String> addMemberList;
 	
 }

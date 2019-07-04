@@ -28,17 +28,6 @@ public class RegistController {
     	
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         
-//        try {
-//        	URLEncoder.encode(to, "UTF-8");
-//        	
-//			simpleMailMessage.setTo(to);
-//	        simpleMailMessage.setSubject("【返信不可】TravelNavi認証メール");
-//			simpleMailMessage.setText(request.getScheme() + "://" + request.getHeader("host") + "/regist/registUser?mail=");
-//	        this.mailSender.send(simpleMailMessage);
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-        
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject("【返信不可】TravelNavi認証メール");
 		simpleMailMessage.setText(request.getScheme() + "://" + request.getHeader("host") + "/regist/registUser?mail=" + to);

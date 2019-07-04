@@ -70,12 +70,25 @@ public class ProjectServiceImpl implements ProjectService {
 	 * プロジェクト編集
 	 */
 	@Override
-	public int updateProject(Project project,String projectName,Date startDate,Date lastDate) {
+	public int updateProject(Project project,String projectName,Date startDate,Date lastDate,List<String> addAddresList) {
 		
 		//project更新
 		project.setProjectName(projectName);
 		project.setStartDate(startDate);
 		project.setLastDate(lastDate);
+		
+		
+		for(String addAddress :  addAddresList) {
+			//member更新
+			if(addAddress != null && userRepository.findByMailAddress(addAddress) != null) {
+				User user = userRepository.findByMailAddress(addAddress);
+				Member member = new Member();
+				member.setProject(project);
+				member.setUser(user);
+				member.setAuthId(3);
+				memberRepositry.saveAndFlush(member);
+			}
+		}
 		
 		//更新したプロジェクトを保存
 		projectRepositry.saveAndFlush(project);
