@@ -176,7 +176,7 @@ public class QuestionController {
     @GetMapping("/create{project_id}")
     public ModelAndView showCreateQuestion(ModelAndView mav,@PathVariable("project_id") int projectId) {
     	mav.addObject("projectId", projectId);
-        mav.setViewName("questionAdd");
+        mav.setViewName("question/questionAdd");
         return mav;
     }
     
