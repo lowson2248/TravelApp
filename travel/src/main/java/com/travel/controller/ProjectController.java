@@ -89,7 +89,7 @@ public class ProjectController {
 	
 	
 	//プロジェクト新規登録処理
-	@PostMapping(value = {"/project/create"})
+	@PostMapping(value = {"/project/createProject"})
 	public ModelAndView saveProject(@ModelAttribute("project") @Validated ProjectForm projectForm, BindingResult result,@AuthenticationPrincipal UserDetails userDetails, ModelAndView mav) {	
 		
 		/*テスト出力*/
@@ -102,7 +102,9 @@ public class ProjectController {
 		int projectId = projectServise.createProject(projectForm.getProjectName(), projectForm.getStartDate(), projectForm.getLastDate(),userDetails.getUsername());
 		System.out.println("プロジェクトID："+projectId);
 		mav.addObject("projectForm",projectForm);
-		return new ModelAndView("redirect:/project"+projectId+"/schedule") ;
+		mav.setViewName("redirect:/project"+projectId+"/schedule");
+		
+		return mav;
 	}
 	
 	

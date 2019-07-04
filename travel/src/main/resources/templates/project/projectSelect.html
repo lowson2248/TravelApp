@@ -25,11 +25,11 @@
         <a href="/project/create"></a>
       </div>
       <div class="project-box" th:if="joinList!=null" th:each="joinProject : ${joinList}" onclick="window.alert('おためしだよ')">
-        <p th:text=”${joinProject.getProject().getProjectName()}”>プロジェクト名</p>
+        <p th:text="${joinProject.getProject().getProjectName()}">プロジェクト名</p>
         <p class="project-date">プロジェクト日付</p>
-        <p><span th:text="${joinProject.getProject().getStartDate()}"></span> ~ <span th:text="${joinProject.getProject().getLastDate()}"></span></p>
+        <p><span th:text="${#dates.format(joinProject.getProject().getStartDate(),'yyyy/MM/dd')}"></span> ~ <span th:text="${#dates.format(joinProject.getProject().getLastDate(),'yyyy/MM/dd')}"></span></p>
         <p class="project-user">作成者：<span th:text="${joinProject.getProject().getUser().getAccountName()}"></span></p>
-        <a href="project.html"></a>
+        <a th:href="@{/project__${joinProject.getProject().getProjectId()}__/schedule}"></a>
       </div>
     </div>
   </div>

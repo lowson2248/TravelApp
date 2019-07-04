@@ -7,7 +7,7 @@
 </head>
 <div class="project-create">
   <p class="font">プロジェクト新規作成</p>
-  <form th:action="@{/project/create}" th:object="${projectForm}" action="post" class="create-form">
+  <form th:action="@{/project/createProject}" th:object="${projectForm}" method="post" class="create-form">
       <p>プロジェクト名</p>
         <p class="input-project"><input type="text" class="project-name" name="project-name" placeholder="Enter Project Name..." th:field="*{projectName}" /></p>
   <hr>
