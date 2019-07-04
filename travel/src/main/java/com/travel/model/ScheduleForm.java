@@ -2,6 +2,8 @@ package com.travel.model;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -18,4 +20,5 @@ public class ScheduleForm {
 	private String end;
 	@NotNull
 	private String text;
+	private MultipartFile picture;
 }
