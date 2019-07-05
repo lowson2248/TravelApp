@@ -181,6 +181,8 @@ public class QuestionController {
 	public ModelAndView questionEdit(ModelAndView mav,@PathVariable("questionid") int questionId) { 
 		System.out.println("Question編集画面");
 		Question question = questionService.findById(questionId);
+		int projectId = question.getProject().getProjectId();
+		mav.addObject("projectId", projectId);
 		mav.addObject("userId",userId);
 		mav.addObject("question",question);
 		mav.setViewName("question/questionedit");
