@@ -257,6 +257,7 @@ body {
   font-size: 11px;
   text-align: right;
 }
+/* 霑ｽ蜉�縺励◆驛ｨ蛻� */
 .inputList {
   list-style: none;
 }
@@ -343,6 +344,7 @@ body {
   height: 250px;
   text-align: center;
   background-color: #fff;
+  margin: 0px 20px;
 }
 .project-box p {
   text-align: center;
@@ -406,11 +408,9 @@ body {
   left: 0px;
   transform: rotate(90deg);
 }
-
 .project-user, .project-date {
   font-size: 12px;
 }
-
 .select-img p {
   display: inline-block;
   vertical-align: middle;
@@ -435,10 +435,6 @@ body {
   display: flex;
   margin: 10px;
   border-bottom: 1px solid #000;
-<<<<<<< HEAD
-
-=======
->>>>>>> 09bf09bcc31319884b8618880c4cafe646df4550
 }
 .list-and-add p {
   margin: 0px 30px;
@@ -462,7 +458,6 @@ section {
   text-align: center;
   margin-top: 10px;
 }
-
 .choice-list {
   text-align: left;
   padding: 10px;
@@ -525,6 +520,8 @@ section {
   transition: .5s transform ease-in-out;
   transform: translateX( 0 );
 }
+
+//繝｡繝九Η繝ｼ繧ｪ繝ｼ繝励Φ譎�
 .nav-open{
   position: fixed;
   left: 0;
@@ -547,6 +544,7 @@ section {
  transform: translateX( -250px );
 }
 
+/*繧｢繝ｳ繧ｱ繝ｼ繝医�壹�ｼ繧ｸ 繝ｩ繧ｸ繧ｪ繝懊ち繝ｳ*/
 input[type=radio] {
  /* display: none;*/
 }
