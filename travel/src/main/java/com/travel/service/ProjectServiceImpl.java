@@ -3,6 +3,8 @@ package com.travel.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProjectServiceImpl implements ProjectService {
 	
 	@Autowired
@@ -104,8 +107,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public void deleteMember(Integer project_id) {
-		memberRepositry.deleteById(project_id);		
+	public void deleteMember(Integer projectId) {
+		Project project = projectRepositry.findByProjectId(projectId);
+		memberRepositry.deleteByProject(project);		
 	}
 
 	@Override

@@ -15,4 +15,7 @@ public interface MemberRepositry extends JpaRepository<Member, Integer> {
 	/*メンバーを検索*/
 	public List<Member> findByUser(User user);
 	public List<Member> findByProject(Project project);
+	
+	
+	public void deleteByProject(Project project);
 }
