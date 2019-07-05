@@ -263,6 +263,12 @@ public class QuestionController {
 		} catch (ParseException e) {
 				e.printStackTrace();
 		}
+    	}else {
+    		System.out.println("タイトル : " + questionNewForm.getTitle());
+
+	    	System.out.println("プロジェクトID : " + projectId);
+	    	System.out.println("詳細説明 : " + questionNewForm.getQuestionDetails());
+    		System.out.println("登録失敗");
     	}
     	
     	return "redirect:/question/base" + projectId;
