@@ -9,16 +9,16 @@
 <header>
   <div class="head-menu">
     <p class="menu-title">旅行計画アプリ</p>
-    <a class="user" href=""><img src="images/user.png"></a>
+    <a class="user" href=""><img th:src="@{/img/user.png}"></a>
   </div>
   <div class="side-menu">
     <nav class="gnav">
       <ul class="gnav-menu">
-        <li><a href="">スケジュール一覧</a></li>
-        <li><a href="">スケジュール詳細</a></li>
-        <li><a href="">アンケート一覧</a></li>
-        <li><a href="">プロジェクト編集</a></li>
-        <li><a href="">ログアウト</a></li>
+       <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
+        <li><a th:href="@{'/question/base' + ${projectId}}">アンケート一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/edit'}">プロジェクト編集</a></li>
+        <li><a href="/logout">ログアウト</a></li>
       </ul>
     </nav>
   </div>
@@ -26,7 +26,7 @@
 <div class="question-add">
   <div class="list-and-add">
   <p>アンケート一覧</p>
-  <p class="add-question"><a th:href="@{/question/create{project_id}(project_id=${projectId})}" th:if="${member==1}"><img src="images/scedule.png">新規アンケート</a></p>
+  <p class="add-question"><a th:href="@{/question/create{project_id}(project_id=${projectId})}" th:if="${member==1}">新規アンケート</a></p>
   </div>
 </div>
 
