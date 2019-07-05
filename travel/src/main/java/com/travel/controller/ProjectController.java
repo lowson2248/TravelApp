@@ -58,6 +58,13 @@ public class ProjectController {
 	private final MemberRepositry memberRepository;
 	@Autowired
 	private final UserRepository userRepository;
+	@Autowired 
+	MailSender mailSender;
+
+	/*メール送信用*/
+	public void MailSender(MailSender mailSender) {
+	    this.mailSender = mailSender;
+	}
 	
 	@ModelAttribute
 	public ProjectForm create() {
@@ -140,9 +147,15 @@ public class ProjectController {
 		System.out.println("===============================");
 		for(String test : projectEditForm.getAddMemberList()) {
 			System.out.println("追加されたユーザ"+test);
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+	        simpleMailMessage.setTo(test);
+	        simpleMailMessage.setSubject("【返信不可】TravelNavi認証メール");
+	        simpleMailMessage.setText(project.getProjectName()+"に招待されました。");
+	        mailSender.send(simpleMailMessage);
 		}
 		System.out.println("===============================");
 		
+
 		/*View認識用処理*/
 		mav.setViewName("redirect:/project"+projectId+"/schedule");
 		mav.addObject("projectId",projectId);
