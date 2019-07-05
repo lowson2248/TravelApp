@@ -143,8 +143,9 @@ public class SchesuleServiceImp implements ScheduleService{
 
 	        // アップロードファイルを置く
 	        File uploadFile = new File(uploadDir.getPath() + File.separator + filename + extension);
-	        File accessFile = new File(File.separator + "uploads" + File.separator + filename + extension);
-	
+//	        File accessFile = new File(File.separator + "uploads" + File.separator + filename + extension);
+	        File accessFile = new File(filename + extension);
+	    	
 	        System.out.println(uploadFile.getPath());
 	        System.out.println(accessFile.getPath());
 	        
