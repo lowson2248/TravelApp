@@ -171,7 +171,7 @@ body {
   width: 250px;
   border-radius: 8px;
 }
-.date, .start-time, .end-time, 
+.date, .start-time, .end-time,
 .start-date, .end-date {
   background-color: #eee;
   border: none;
@@ -332,6 +332,7 @@ body {
   justify-content: center;
 }
 .project-box {
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -434,7 +435,10 @@ body {
   display: flex;
   margin: 10px;
   border-bottom: 1px solid #000;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 09bf09bcc31319884b8618880c4cafe646df4550
 }
 .list-and-add p {
   margin: 0px 30px;
@@ -521,7 +525,6 @@ section {
   transition: .5s transform ease-in-out;
   transform: translateX( 0 );
 }
-
 .nav-open{
   position: fixed;
   left: 0;
@@ -545,7 +548,7 @@ section {
 }
 
 input[type=radio] {
-  display: none;
+ /* display: none;*/
 }
 input[type=radio] + label span {
   display: inline-block;
@@ -569,4 +572,3 @@ input[type=radio] + label span,
 input[type=radio]:checked + label span {
   transition: background-color 0.3s linear;
 }
-
