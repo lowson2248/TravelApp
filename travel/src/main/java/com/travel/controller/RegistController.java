@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RegistController {
@@ -35,5 +37,10 @@ public class RegistController {
         
         //registリダイレクト先（送信後遷移画面）
         return "redirect:/regist/regist2";
+    }
+    @GetMapping("/regist/regist2")
+    public ModelAndView mailSend(ModelAndView mav) {
+    	mav.setViewName("/regist/transition");
+    	return mav;
     }
 }
