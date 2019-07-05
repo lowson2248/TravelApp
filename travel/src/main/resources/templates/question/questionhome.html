@@ -16,7 +16,7 @@
       <ul class="gnav-menu">
        <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
-        <li><a th:href="@{'/question/base' + ${projectId}}">アンケート一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/question'}">アンケート一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/edit'}">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
       </ul>
@@ -26,7 +26,7 @@
 <div class="question-add">
   <div class="list-and-add">
   <p>アンケート一覧</p>
-  <p class="add-question"><a th:href="@{/question/create{project_id}(project_id=${projectId})}" th:if="${member==1}">新規アンケート</a></p>
+  <p class="add-question"><a th:href="@{'/project'+${projectId}+'/question/create'}" th:if="${member==1}">新規アンケート</a></p>
   </div>
 </div>
 
@@ -35,7 +35,7 @@
   <div th:each="question : ${questionList}" class="question-main">
   <!--   回答可能な場合 -->
    <div>
-  <form method="post" th:action="@{/question/answer{project_id}(project_id=${projectId})}" th:object="${answerForm}">
+  <form method="post" th:action="@{'/project' + ${projectId} + '/question/answer'}" th:object="${answerForm}">
     <div th:switch="${question.checkAnswer}">
       <p class="status" th:case="false">未回答</p>
       <p class="status"th:case="true">回答済</p>
@@ -60,8 +60,8 @@
     <p><input type="submit" class="create" th:if=${question.answerFin==true&&question.checkAnswer==false} value="回答" /></p>
     <!-- 権限アリなら表示 -->
 
-    <p><a class="scedule-edit-button" th:href="@{/question/edit{questionid}(questionid=${question.questionId})}" th:if="${member==1}">編集</a>
-    <a class="scedule-delete-button" th:href="@{/question/delete{questionid}(questionid=${question.questionId})}" th:if="${member==1}">削除</a></p>
+    <p><a class="scedule-edit-button" th:href="@{'/project' + ${projectId} + '/question/edit'+ ${question.questionId}}" th:if="${member==1}">編集</a>
+    <a class="scedule-delete-button" th:href="@{'/project' + ${projectId} + '/question/delete' + ${question.questionId}}" th:if="${member==1}">削除</a></p>
 
     <!--  ここまで -->
     </form>

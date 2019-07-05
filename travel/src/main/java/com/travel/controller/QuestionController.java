@@ -50,7 +50,7 @@ import com.travel.service.UserService;
 
 
 @Controller
-@RequestMapping("/question")
+@RequestMapping("project{projectId}/question")
 public class QuestionController {
 	
 	@Autowired
@@ -105,8 +105,8 @@ public class QuestionController {
 	
 	
 	//アンケート一覧画面
-	@GetMapping("/base{project_id}")
-	public ModelAndView question(ModelAndView mav,@PathVariable("project_id") int projectId,@AuthenticationPrincipal UserDetails userDetails) {
+	@GetMapping()
+	public ModelAndView question(ModelAndView mav,@PathVariable("projectId") int projectId,@AuthenticationPrincipal UserDetails userDetails) {
 		int auth = memberService.findByUserDetailsAndProjectId(userDetails,projectId).getAuthId();
 
 		userId = userRepository.findByMailAddress(userDetails.getUsername()).getUserId();
@@ -145,9 +145,9 @@ public class QuestionController {
 
 	
 	//回答後処理
-	@PostMapping("/answer{project_id}")
+	@PostMapping("/answer")
 	public String questionans( @Validated AnswerForm form, BindingResult result, ModelAndView mav,
-			@PathVariable("project_id") int projectId, @AuthenticationPrincipal UserDetails userDetails) {
+			@PathVariable("projectId") int projectId, @AuthenticationPrincipal UserDetails userDetails) {
 		System.out.println("回答処理");
 
 		if(!result.hasErrors()) {
@@ -162,23 +162,23 @@ public class QuestionController {
 			System.out.println("ちぇくご");
 			answerService.save(answer);
 		}
-		return "redirect:/question/base"+projectId;
+		return "redirect:/project"+projectId+"/question";
 	}
 	
 	//回答削除処理
 	@GetMapping("/delete{questionId}")
-	public String questionDelete( @Validated AnswerForm form, BindingResult result, ModelAndView mav,@PathVariable("questionId") int questionId) {
+	public String questionDelete( @Validated AnswerForm form, BindingResult result, ModelAndView mav,
+			@PathVariable("questionId") int questionId,@PathVariable("projectId") int projectId) {
 				
-		int projectId = questionService.findById(questionId).getProject().getProjectId();
 		System.out.println("回答削除");
 		questionService.delete(questionId);
 			
-		return "redirect:/question/base"+projectId;
+		return "redirect:/project"+projectId+"/question";
 	}
 	
 	//アンケート編集画面
-	@GetMapping("/edit{questionid}")
-	public ModelAndView questionEdit(ModelAndView mav,@PathVariable("questionid") int questionId) { 
+	@GetMapping("/edit{questionId}")
+	public ModelAndView questionEdit(ModelAndView mav,@PathVariable("questionId") int questionId) { 
 		System.out.println("Question編集画面");
 		Question question = questionService.findById(questionId);
 		int projectId = question.getProject().getProjectId();
@@ -225,19 +225,19 @@ public class QuestionController {
 			}
 			
 		}
-		return "redirect:/question/base"+projectId;
+		return "redirect:/project"+projectId+"/question";
 	}
 
     //アンケート作成画面
-    @GetMapping("/create{project_id}")
-    public ModelAndView showCreateQuestion(ModelAndView mav,@PathVariable("project_id") int projectId) {
+    @GetMapping("/create")
+    public ModelAndView showCreateQuestion(ModelAndView mav,@PathVariable("projectId") int projectId) {
     	mav.addObject("projectId", projectId);
         mav.setViewName("question/questionAdd");
         return mav;
     }
     
-    @PostMapping("/create{project_id}")
-    public String createQuestions( @Validated QuestionNewForm questionNewForm, BindingResult result, ModelAndView mav, @PathVariable("project_id") int projectId) {
+    @PostMapping("/create")
+    public String createQuestions( @Validated QuestionNewForm questionNewForm, BindingResult result, ModelAndView mav, @PathVariable("projectId") int projectId) {
     	if(!result.hasErrors()) {
     	String title = questionNewForm.getTitle();
     	Date lastDate = questionNewForm.getLimitTime1();
@@ -273,6 +273,6 @@ public class QuestionController {
     		System.out.println("登録失敗");
     	}
     	
-    	return "redirect:/question/base" + projectId;
+    	return "redirect:/project"+projectId+"/question";
     }
 }

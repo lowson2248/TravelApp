@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>アンケート編集</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+     <link rel="stylesheet" type="text/css" href="../../../css/style.css" media="all" />
     <script type="text/javascript" src="../../../js/jQuery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../../js/choice.js"></script>
 </head>
@@ -18,7 +18,7 @@
       <ul class="gnav-menu">
         <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
-        <li><a th:href="@{'/question/base' + ${projectId}}">アンケート一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/question'}">アンケート一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/edit'}">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
       </ul>
@@ -28,7 +28,7 @@
 <div class="question-edit">
   <p class="font">アンケート編集</p>
     <hr>
-    <form method="post" th:action="@{/question/editend/{questionid}(questionid=${question.questionId})}" th:object="${questionEditForm}" class="add">
+    <form method="post" th:action="@{'/project' + ${projectId} + '/question/editend/'+ ${question.questionId}}" th:object="${questionEditForm}" class="add">
         <p>アンケート名</p>
           <p><input type="text" th:value="${question.title}" name="title" class="question" /></p>
     <hr>

@@ -18,7 +18,7 @@
       <ul class="gnav-menu">
         <li><a th:href="@{'/project' + ${projectId} + '/schedule'}">スケジュール一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/schedule/detail'}">スケジュール詳細</a></li>
-        <li><a th:href="@{'/question/base' + ${projectId}}">アンケート一覧</a></li>
+        <li><a th:href="@{'/project' + ${projectId} + '/question'}">アンケート一覧</a></li>
         <li><a th:href="@{'/project' + ${projectId} + '/edit'}">プロジェクト編集</a></li>
         <li><a href="/logout">ログアウト</a></li>
       </ul>
@@ -28,7 +28,7 @@
 <div class="question-add">
   <p class="font">アンケート新規追加</p>
     <hr>
-    <form  th:action="@{/question/create{project_id}(project_id=${projectId})}" th:object="${questionNewForm}"method="post" class="add">
+    <form  th:action="@{'/project'+ ${projectId} +'/question/create'}" th:object="${questionNewForm}"method="post" class="add">
         <p>アンケート名</p>
           <p><input type="text" class="question" name="title" placeholder="" /></p>
     <hr>
