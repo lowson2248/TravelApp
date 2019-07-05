@@ -138,7 +138,7 @@ public class ProjectController {
 	 * プロジェクト編集処理
 	 */
 	@PostMapping(value = {"project{project_id}/edit"})
-	public ModelAndView editProject(@PathVariable("project_id") int projectId,@ModelAttribute("project") @Validated ProjectEditForm projectEditForm,BindingResult result,ModelAndView mav) {		
+	public ModelAndView editProject(HttpServletRequest request,@PathVariable("project_id") int projectId,@ModelAttribute("project") @Validated ProjectEditForm projectEditForm,BindingResult result,ModelAndView mav) {		
 		
 		//更新したいプロジェクトを取得
 		Project project = projectRepository.findByProjectId(projectId);
@@ -149,8 +149,8 @@ public class ProjectController {
 			System.out.println("追加されたユーザ"+test);
 			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 	        simpleMailMessage.setTo(test);
-	        simpleMailMessage.setSubject("【返信不可】TravelNavi認証メール");
-	        simpleMailMessage.setText(project.getProjectName()+"に招待されました。");
+	        simpleMailMessage.setSubject("【返信不可】招待メールが届きました");
+	        simpleMailMessage.setText(project.getProjectName()+"に招待されました。\n" + request.getScheme() + "://" + request.getHeader("host") + "/login");
 	        mailSender.send(simpleMailMessage);
 		}
 		System.out.println("===============================");

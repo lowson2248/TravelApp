@@ -58,6 +58,7 @@ public class ScheduleController {
 		mav.addObject("scheduleDetail", scheduleService.findAllSchadule(projectId));
 		mav.setViewName("schedule/scheduleDetail");
 		mav.addObject("projectId", projectId);
+		
 		return mav;
 	}
 	
